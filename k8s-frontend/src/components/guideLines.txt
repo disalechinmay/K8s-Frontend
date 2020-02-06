@@ -1,0 +1,8 @@
+- Make folders for each page in the /components directory.
+
+/components
+    - HomePage
+        - index.js (To export everything from this directory)
+        - HomePage.js
+        - HomePage.test.js
+        - ... other components
