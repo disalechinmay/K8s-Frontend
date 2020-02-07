@@ -1,0 +1,1 @@
+export { getNamespaces } from "./namespaces";

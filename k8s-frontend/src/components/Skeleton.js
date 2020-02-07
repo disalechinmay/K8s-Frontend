@@ -2,22 +2,37 @@ import React, { Component } from "react";
 import { Form, Container, Navbar, Row, Col } from "react-bootstrap";
 import "../assets/styles/common.css";
 import { NodesPage } from "./NodesPage";
+import LoadingPage from "./LoadingPage";
+import { getNamespaces } from "../services";
 
 class Skeleton extends Component {
-	state = {};
+	state = {
+		sidebarOptionSelected: 0,
+		pageLoading: true,
+		namespacesListSet: false,
+		namespacesList: [],
+		namespaceSelected: "default"
+	};
 
 	constructor(props) {
 		super(props);
-
-		this.state = { sidebarOptionSelected: 0 };
 
 		this.optionRefs = [];
 		for (let iter = 0; iter < 8; iter++)
 			this.optionRefs[iter] = React.createRef();
 
-		console.log(this.optionRefs);
+		getNamespaces().then(result => {
+			let newState = { ...this.state };
+
+			newState.pageLoading = false;
+			newState.namespacesListSet = true;
+			newState.namespacesList = result.payLoad;
+
+			this.setState(newState);
+		});
 	}
 
+	// Updates the state when sidebar options are selected.
 	handleClick(event, clickedOptionIndex) {
 		let newState = { ...this.state };
 
@@ -27,12 +42,19 @@ class Skeleton extends Component {
 
 		newState.sidebarOptionSelected = clickedOptionIndex;
 
-		if (clickedOptionIndex != 0) event.target.classList.add("active");
+		if (clickedOptionIndex !== 0) event.target.classList.add("active");
 
 		this.setState(newState);
 	}
 
+	// Updates the state when namespace selector changes.
+	handleNamespaceChange(event) {
+		this.setState({ ...this.state, namespaceSelected: event.target.value });
+	}
+
 	render() {
+		if (this.state.pageLoading) return <LoadingPage />;
+
 		return (
 			<React.Fragment>
 				<Container className="margin-top-10">
@@ -56,10 +78,34 @@ class Skeleton extends Component {
 											Namespace
 										</Form.Label>
 										<Col sm="8">
-											<Form.Control as="select">
-												<option>default</option>
-												<option>Other namespace</option>
-												<option>Some namespace</option>
+											<Form.Control
+												as="select"
+												defaultValue="default"
+												onChange={event =>
+													this.handleNamespaceChange(
+														event
+													)
+												}
+											>
+												{/* Populates options of namespaces */}
+												{this.state.namespacesListSet &&
+													this.state.namespacesList.map(
+														namespace => {
+															return (
+																<option
+																	value={
+																		namespace
+																	}
+																	key={
+																		namespace +
+																		"_NAMESPACE"
+																	}
+																>
+																	{namespace}
+																</option>
+															);
+														}
+													)}
 											</Form.Control>
 										</Col>
 									</Form.Group>
