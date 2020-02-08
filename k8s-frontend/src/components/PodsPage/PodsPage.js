@@ -1,21 +1,40 @@
 import React, { Component } from "react";
 import { Card, ListGroup, Button, Badge } from "react-bootstrap";
 import SmallLoadingPage from "../SmallLoadingPage";
-import { getNodes } from "../../services";
+import { getPods } from "../../services";
 import "../../assets/styles/common.css";
 
-class NodesPage extends Component {
-	state = { pageLoading: true, nodesListSet: false, nodesList: [] };
+class PodsPage extends Component {
+	state = { pageLoading: true, podsListSet: false, podsList: [] };
 
 	constructor(props) {
 		super(props);
 
-		getNodes().then(result => {
+		getPods(this.props.namespace).then(result => {
 			let newState = { ...this.state };
 
 			newState.pageLoading = false;
-			newState.nodesListSet = true;
-			newState.nodesList = result.payLoad;
+			newState.podsListSet = true;
+			newState.podsList = result.payLoad;
+
+			this.setState(newState);
+		});
+	}
+
+	componentDidUpdate(previousProps) {
+		if (previousProps.namespace != this.props.namespace)
+			this.setState({
+				pageLoading: true,
+				podsListSet: false,
+				podsList: []
+			});
+
+		getPods(this.props.namespace).then(result => {
+			let newState = { ...this.state };
+
+			newState.pageLoading = false;
+			newState.podsListSet = true;
+			newState.podsList = result.payLoad;
 
 			this.setState(newState);
 		});
@@ -24,10 +43,21 @@ class NodesPage extends Component {
 	render() {
 		if (this.state.pageLoading) return <SmallLoadingPage />;
 
+		if (
+			this.state.pageLoading === false &&
+			this.state.podsListSet &&
+			this.state.podsList.length === 0
+		)
+			return (
+				<React.Fragment>
+					No pods present in this namespace.
+				</React.Fragment>
+			);
+
 		return (
 			<React.Fragment>
-				{this.state.nodesListSet &&
-					this.state.nodesList.map((nodeInfo, index) => {
+				{this.state.podsListSet &&
+					this.state.podsList.map((podInfo, index) => {
 						return (
 							<React.Fragment key={index + "_FRAG"}>
 								<Card
@@ -36,69 +66,19 @@ class NodesPage extends Component {
 								>
 									<Card.Header>
 										<span className="text-muted">
-											Node #{index + 1}:
+											Pod #{index + 1}:
 										</span>{" "}
 										<span className="font-weight-bold dancing-font">
-											{nodeInfo.nodeName}
+											{podInfo.podName}
 										</span>
 									</Card.Header>
 
 									<Card.Body>
-										<ListGroup
-											horizontal
-											className="col-lg-12 text-center"
-											size="lg"
-										>
-											<ListGroup.Item>
-												<span className="text-lg font-weight-bold">
-													{nodeInfo.nodeCapacity.cpu}
-												</span>
-												<br />
-												<span className="text-sm text-muted">
-													CPU
-												</span>
-											</ListGroup.Item>
-											<ListGroup.Item>
-												<span className="text-lg font-weight-bold">
-													{
-														nodeInfo.nodeCapacity[
-															"ephemeral-storage"
-														]
-													}
-												</span>
-												<br />
-												<span className="text-sm text-muted">
-													Storage
-												</span>
-											</ListGroup.Item>
-											<ListGroup.Item>
-												<span className="text-lg font-weight-bold">
-													{
-														nodeInfo.nodeCapacity
-															.memory
-													}
-												</span>
-												<br />
-												<span className="text-sm text-muted">
-													Memory
-												</span>
-											</ListGroup.Item>
-											<ListGroup.Item>
-												<span className="text-lg font-weight-bold">
-													{nodeInfo.nodeCapacity.pods}
-												</span>
-												<br />
-												<span className="text-sm text-muted">
-													Pods
-												</span>
-											</ListGroup.Item>
-										</ListGroup>
-										<hr />
 										Labels:
 										<br />
-										{nodeInfo.nodeLabels &&
+										{podInfo.podLabels &&
 											Object.entries(
-												nodeInfo.nodeLabels
+												podInfo.podLabels
 											).map(([key, val], index) => {
 												return (
 													<React.Fragment
@@ -134,9 +114,9 @@ class NodesPage extends Component {
 										<hr />
 										Annotations:
 										<br />
-										{nodeInfo.nodeAnnotations &&
+										{podInfo.podAnnotations &&
 											Object.entries(
-												nodeInfo.nodeAnnotations
+												podInfo.podAnnotations
 											).map(([key, val], index) => {
 												return (
 													<React.Fragment
@@ -179,4 +159,4 @@ class NodesPage extends Component {
 	}
 }
 
-export default NodesPage;
+export default PodsPage;

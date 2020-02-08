@@ -65,4 +65,10 @@ div.content {
 .navbar-title {
 	font-family: "Dancing Script", cursive;
 	font-size: 3em;
+	font-weight: bold;
+}
+
+.dancing-font {
+	font-family: "Dancing Script", cursive;
+	font-size: 1.5em;
 }
