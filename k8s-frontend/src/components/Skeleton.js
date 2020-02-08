@@ -4,6 +4,7 @@ import "../assets/styles/common.css";
 import { NodesPage } from "./NodesPage";
 import LoadingPage from "./LoadingPage";
 import { getNamespaces } from "../services";
+import { PodsPage } from "./PodsPage";
 
 class Skeleton extends Component {
 	state = {
@@ -50,6 +51,11 @@ class Skeleton extends Component {
 	// Updates the state when namespace selector changes.
 	handleNamespaceChange(event) {
 		this.setState({ ...this.state, namespaceSelected: event.target.value });
+	}
+
+	// Refreshes the state. Used for reflecting child component state change.
+	refreshState() {
+		this.setState({ ...this.state });
 	}
 
 	render() {
@@ -115,7 +121,7 @@ class Skeleton extends Component {
 
 						<hr />
 						<Row>
-							<Col className="right-border bottom-border">
+							<Col className="right-border bottom-border shadow p-3 mb-5 bg-white rounded">
 								<div className="sidebar">
 									<a
 										id="nodes_sidebarOption"
@@ -126,7 +132,8 @@ class Skeleton extends Component {
 										}
 										ref={this.optionRefs[0]}
 									>
-										Nodes
+										<span className="fa fa-desktop"></span>
+										&emsp; Nodes
 									</a>
 									<a
 										id="pods_sidebarOption"
@@ -137,7 +144,8 @@ class Skeleton extends Component {
 										}
 										ref={this.optionRefs[1]}
 									>
-										Pods
+										<span className="fa fa-archive"></span>
+										&emsp; Pods
 									</a>
 									<a
 										id="deployments_sidebarOption"
@@ -148,7 +156,8 @@ class Skeleton extends Component {
 										}
 										ref={this.optionRefs[2]}
 									>
-										Deployments
+										<span className="fa fa-cubes"></span>
+										&emsp; Deployments
 									</a>
 									<a
 										id="services_sidebarOption"
@@ -159,7 +168,8 @@ class Skeleton extends Component {
 										}
 										ref={this.optionRefs[3]}
 									>
-										Services
+										<span className="fa fa-random"></span>
+										&emsp; Services
 									</a>
 									<a
 										id="jobs_sidebarOption"
@@ -170,7 +180,8 @@ class Skeleton extends Component {
 										}
 										ref={this.optionRefs[4]}
 									>
-										Jobs
+										<span className="fa fa-tasks"></span>
+										&emsp; Jobs
 									</a>
 									<a
 										id="cronJobs_sidebarOption"
@@ -181,7 +192,8 @@ class Skeleton extends Component {
 										}
 										ref={this.optionRefs[5]}
 									>
-										Cron Jobs
+										<span className="fa fa-clock-o"></span>
+										&emsp; Cron Jobs
 									</a>
 									<a
 										id="configMaps_sidebarOption"
@@ -192,7 +204,8 @@ class Skeleton extends Component {
 										}
 										ref={this.optionRefs[6]}
 									>
-										Config Maps
+										<span className="fa fa-gears"></span>
+										&emsp; Config Maps
 									</a>
 									<a
 										id="secrets_sidebarOption"
@@ -203,13 +216,23 @@ class Skeleton extends Component {
 										}
 										ref={this.optionRefs[7]}
 									>
-										Secrets
+										<span className="fa fa-user-secret"></span>
+										&emsp; Secrets
 									</a>
 								</div>
 							</Col>
 							<Col xs={9} className="margin-top-10">
 								{this.state.sidebarOptionSelected === 1 && (
-									<NodesPage />
+									<NodesPage
+										refreshState={() => this.refreshState()}
+									/>
+								)}
+
+								{this.state.sidebarOptionSelected === 2 && (
+									<PodsPage
+										refreshState={() => this.refreshState()}
+										namespace={this.state.namespaceSelected}
+									/>
 								)}
 							</Col>
 						</Row>
