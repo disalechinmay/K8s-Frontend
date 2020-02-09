@@ -5,6 +5,7 @@ import { NodesPage } from "./NodesPage";
 import LoadingPage from "./LoadingPage";
 import { getNamespaces } from "../services";
 import { PodsPage } from "./PodsPage";
+import { DeploymentsPage } from "./DeploymentsPage";
 
 class Skeleton extends Component {
 	state = {
@@ -121,8 +122,8 @@ class Skeleton extends Component {
 
 						<hr />
 						<Row>
-							<Col className="right-border bottom-border shadow p-3 mb-5 bg-white rounded">
-								<div className="sidebar">
+							<Col>
+								<div className="sidebar shadow p-3 mb-5 bg-white rounded">
 									<a
 										id="nodes_sidebarOption"
 										className="rounded-corners margin-top-10"
@@ -230,6 +231,13 @@ class Skeleton extends Component {
 
 								{this.state.sidebarOptionSelected === 2 && (
 									<PodsPage
+										refreshState={() => this.refreshState()}
+										namespace={this.state.namespaceSelected}
+									/>
+								)}
+
+								{this.state.sidebarOptionSelected === 3 && (
+									<DeploymentsPage
 										refreshState={() => this.refreshState()}
 										namespace={this.state.namespaceSelected}
 									/>
