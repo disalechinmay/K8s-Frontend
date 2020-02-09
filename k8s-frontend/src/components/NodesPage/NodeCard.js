@@ -20,20 +20,17 @@ class NodeCard extends Component {
 					</Card.Header>
 
 					<Card.Body>
-						<ListGroup
-							horizontal
-							className="col-lg-12 text-center"
-							size="lg"
-						>
-							<ListGroup.Item>
-								<span className="text-lg font-weight-bold">
+						<div className="d-flex text-center justify-content-around align-items-center">
+							<span className="col-xs-12">
+								<span className="text-lg font-weight-bold node-spec-no">
 									{this.props.nodeInfo.nodeCapacity.cpu}
 								</span>
 								<br />
 								<span className="text-sm text-muted">CPU</span>
-							</ListGroup.Item>
-							<ListGroup.Item>
-								<span className="text-lg font-weight-bold">
+							</span>
+
+							<span>
+								<span className="text-lg font-weight-bold node-spec-no">
 									{
 										this.props.nodeInfo.nodeCapacity[
 											"ephemeral-storage"
@@ -44,24 +41,26 @@ class NodeCard extends Component {
 								<span className="text-sm text-muted">
 									Storage
 								</span>
-							</ListGroup.Item>
-							<ListGroup.Item>
-								<span className="text-lg font-weight-bold">
+							</span>
+
+							<span>
+								<span className="text-lg font-weight-bold node-spec-no">
 									{this.props.nodeInfo.nodeCapacity.memory}
 								</span>
 								<br />
 								<span className="text-sm text-muted">
 									Memory
 								</span>
-							</ListGroup.Item>
-							<ListGroup.Item>
-								<span className="text-lg font-weight-bold">
+							</span>
+
+							<span>
+								<span className="text-lg font-weight-bold node-spec-no">
 									{this.props.nodeInfo.nodeCapacity.pods}
 								</span>
 								<br />
 								<span className="text-sm text-muted">Pods</span>
-							</ListGroup.Item>
-						</ListGroup>
+							</span>
+						</div>
 						<hr />
 						Labels:&nbsp;
 						<CardLabels

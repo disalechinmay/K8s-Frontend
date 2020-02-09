@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Badge } from "react-bootstrap";
+import { Badge } from "react-bootstrap";
 
 class CardLabels extends Component {
 	render() {
@@ -10,7 +10,7 @@ class CardLabels extends Component {
 						([key, val], index) => {
 							return (
 								<React.Fragment key={index + "_LABEL_FRAG"}>
-									<Button
+									<Badge
 										variant={
 											(this.props.matchedLabels &&
 												this.props.matchedLabels.hasOwnProperty(
@@ -21,7 +21,7 @@ class CardLabels extends Component {
 														key
 													] &&
 												"success") ||
-											"secondary"
+											"light"
 										}
 										size="sm"
 										className="mb-1 text-wrap"
@@ -29,13 +29,13 @@ class CardLabels extends Component {
 									>
 										{key}{" "}
 										<Badge
-											variant="light"
+											variant="dark"
 											key={index + "_LABEL_BADGE"}
 											className="text-wrap"
 										>
 											{val}
 										</Badge>
-									</Button>
+									</Badge>
 									&nbsp;&nbsp;
 								</React.Fragment>
 							);

@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Card } from "react-bootstrap";
+import { Card, Row, Col } from "react-bootstrap";
 import CardLabels from "../CardLabels";
 import CardContainerList from "../CardContainerList";
+import "../../assets/styles/common.css";
 
 class DeploymentCard extends Component {
 	// Returns an obj which contains key-val pairs of matched labels.
@@ -53,28 +54,52 @@ class DeploymentCard extends Component {
 							)}
 						/>
 						<hr />
-						Template:
-						<br />
-						<CardLabels
-							labels={
-								this.props.deploymentInfo
-									.deploymentTemplateLabels
-							}
-							refreshState={() => this.props.refreshState()}
-							matchedLabels={this.matchedLabels(
-								this.props.deploymentInfo.deploymentSelectors,
-								this.props.deploymentInfo
-									.deploymentTemplateLabels
-							)}
-						/>
-						<CardContainerList
-							list={
-								this.props.deploymentInfo
-									.deploymentTemplateContainers
-							}
-							refreshState={() => this.props.refreshState()}
-						/>
-						<br />
+						<Row>
+							<Col className="border-right d-flex align-items-center text-center justify-content-center">
+								<span>
+									<span className="font-weight-bolder replica-no">
+										{this.props.deploymentInfo
+											.deploymentReplicas + "x"}
+									</span>
+									<br />
+									<span className="text-muted">
+										{(this.props.deploymentInfo
+											.deploymentReplicas === 1 &&
+											"Replica") ||
+											"Replicas"}
+									</span>
+								</span>
+							</Col>
+							<Col xs={10}>
+								Template:
+								<br />
+								<CardLabels
+									labels={
+										this.props.deploymentInfo
+											.deploymentTemplateLabels
+									}
+									refreshState={() =>
+										this.props.refreshState()
+									}
+									matchedLabels={this.matchedLabels(
+										this.props.deploymentInfo
+											.deploymentSelectors,
+										this.props.deploymentInfo
+											.deploymentTemplateLabels
+									)}
+								/>
+								<CardContainerList
+									list={
+										this.props.deploymentInfo
+											.deploymentTemplateContainers
+									}
+									refreshState={() =>
+										this.props.refreshState()
+									}
+								/>
+							</Col>
+						</Row>
+						<hr />
 						Labels:&nbsp;
 						<CardLabels
 							labels={this.props.deploymentInfo.deploymentLabels}
