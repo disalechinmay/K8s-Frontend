@@ -1,22 +1,25 @@
 import React, { Component } from "react";
+import { getDeployments } from "../../services";
 import SmallLoadingPage from "../SmallLoadingPage";
-import { getPods } from "../../services";
-import "../../assets/styles/common.css";
-import PodCard from "./PodCard";
+import DeploymentCard from "./DeploymentCard";
 
-class PodsPage extends Component {
-	state = { pageLoading: true, podsListSet: false, podsList: [] };
+class DeploymentsPage extends Component {
+	state = {
+		pageLoading: true,
+		deploymentsListSet: false,
+		deploymentsList: []
+	};
 
 	constructor(props) {
 		super(props);
 
-		// Get list of pods for the selected namespace.
-		getPods(this.props.namespace).then(result => {
+		// Get list of deployments for the selected namespace.
+		getDeployments(this.props.namespace).then(result => {
 			let newState = { ...this.state };
 
 			newState.pageLoading = false;
-			newState.podsListSet = true;
-			newState.podsList = result.payLoad;
+			newState.deploymentsListSet = true;
+			newState.deploymentsList = result.payLoad;
 
 			this.setState(newState);
 		});
@@ -27,16 +30,16 @@ class PodsPage extends Component {
 		if (previousProps.namespace !== this.props.namespace) {
 			this.setState({
 				pageLoading: true,
-				podsListSet: false,
-				podsList: []
+				deploymentsListSet: false,
+				deploymentsList: []
 			});
 
-			getPods(this.props.namespace).then(result => {
+			getDeployments(this.props.namespace).then(result => {
 				let newState = { ...this.state };
 
 				newState.pageLoading = false;
-				newState.podsListSet = true;
-				newState.podsList = result.payLoad;
+				newState.deploymentsListSet = true;
+				newState.deploymentsList = result.payLoad;
 
 				this.setState(newState);
 			});
@@ -48,25 +51,25 @@ class PodsPage extends Component {
 
 		if (
 			this.state.pageLoading === false &&
-			this.state.podsListSet &&
-			this.state.podsList.length === 0
+			this.state.deploymentsListSet &&
+			this.state.deploymentsList.length === 0
 		)
 			return (
 				<React.Fragment>
-					No pods present in this namespace.
+					No deployments present in this namespace.
 				</React.Fragment>
 			);
 
 		return (
 			<React.Fragment>
-				{this.state.podsListSet &&
-					this.state.podsList.map((podInfo, index) => {
+				{this.state.deploymentsListSet &&
+					this.state.deploymentsList.map((deploymentInfo, index) => {
 						return (
 							<React.Fragment key={index + "_FRAG"}>
-								<PodCard
-									key={index + "_POD_CARD"}
+								<DeploymentCard
+									key={index + "_DEPLOYMENT_CARD"}
 									index={index}
-									podInfo={podInfo}
+									deploymentInfo={deploymentInfo}
 									refreshState={() =>
 										this.props.refreshState()
 									}
@@ -79,4 +82,4 @@ class PodsPage extends Component {
 	}
 }
 
-export default PodsPage;
+export default DeploymentsPage;
