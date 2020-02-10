@@ -1,22 +1,23 @@
 {
-  "name": "k8s-frontend",
-  "version": "1.0.0",
-  "description": "A ReactJS frontend for K8s project.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/disalechinmay/K8s-Frontend.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/disalechinmay/K8s-Frontend/issues"
-  },
-  "homepage": "https://github.com/disalechinmay/K8s-Frontend#readme",
-  "dependencies": {
-    "create-react-app": "^3.3.1"
-  }
+	"name": "k8s-frontend",
+	"version": "1.0.0",
+	"description": "A ReactJS frontend for K8s project.",
+	"main": "index.js",
+	"scripts": {
+		"start": "cd k8s-frontend && npm start",
+		"test": "cd k8s-frontend && npm test"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/disalechinmay/K8s-Frontend.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/disalechinmay/K8s-Frontend/issues"
+	},
+	"homepage": "https://github.com/disalechinmay/K8s-Frontend#readme",
+	"dependencies": {
+		"create-react-app": "^3.3.1"
+	}
 }
