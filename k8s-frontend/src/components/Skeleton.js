@@ -19,10 +19,64 @@ class Skeleton extends Component {
 	constructor(props) {
 		super(props);
 
+		// List of buttons which will appear on sidebar.
+		this.sidebarOptions = [
+			{
+				id: "nodes_sidebarOption",
+				href: "#nodes",
+				title: "Nodes",
+				style: "fa fa-desktop"
+			},
+			{
+				id: "pods_sidebarOption",
+				href: "#pods",
+				title: "Pods",
+				style: "fa fa-archive"
+			},
+			{
+				id: "deployments_sidebarOption",
+				href: "#deployments",
+				title: "Deployments",
+				style: "fa fa-cubes"
+			},
+			{
+				id: "services_sidebarOption",
+				href: "#services",
+				title: "Services",
+				style: "fa fa-random"
+			},
+			{
+				id: "jobs_sidebarOption",
+				href: "#jobs",
+				title: "Jobs",
+				style: "fa fa-tasks"
+			},
+			{
+				id: "cronJobs_sidebarOption",
+				href: "#cronJobs",
+				title: "Cron Jobs",
+				style: "fa fa-clock-o"
+			},
+			{
+				id: "configMaps_sidebarOption",
+				href: "#configMaps",
+				title: "Config Maps",
+				style: "fa fa-gears"
+			},
+			{
+				id: "secrets_sidebarOption",
+				href: "#secrets",
+				title: "Secrets",
+				style: "fa fa-user-secret"
+			}
+		];
+
+		// References of sidebar buttons.
 		this.optionRefs = [];
-		for (let iter = 0; iter < 8; iter++)
+		for (let iter = 0; iter < this.sidebarOptions.length; iter++)
 			this.optionRefs[iter] = React.createRef();
 
+		// Fetching list of namespaces from backend.
 		getNamespaces().then(result => {
 			let newState = { ...this.state };
 
@@ -64,7 +118,7 @@ class Skeleton extends Component {
 
 		return (
 			<React.Fragment>
-				<Container className="margin-top-10">
+				<Container className="margin-top-10 align-content-center">
 					<Container>
 						<Navbar>
 							<Navbar.Brand
@@ -86,6 +140,7 @@ class Skeleton extends Component {
 										</Form.Label>
 										<Col sm="8">
 											<Form.Control
+												className="namespace-selector"
 												as="select"
 												defaultValue="default"
 												onChange={event =>
@@ -122,107 +177,64 @@ class Skeleton extends Component {
 
 						<hr />
 						<Row>
-							<Col>
-								<div className="sidebar shadow p-3 mb-5 bg-white rounded">
-									<a
-										id="nodes_sidebarOption"
-										className="rounded-corners margin-top-10"
-										href="#nodes"
-										onClick={event =>
-											this.handleClick(event, 1)
+							<Col xs={12} sm={12} md={12} lg={3}>
+								<Row className="sidebar shadow p-3 mb-5 bg-white rounded">
+									{/* Rendering sidebar buttons */}
+									{this.sidebarOptions.map(
+										(sidebarOption, index) => {
+											return (
+												<Col
+													xs={6}
+													sm={6}
+													md={12}
+													lg={12}
+												>
+													<a
+														key={
+															index +
+															"_SIDEBAR_OPTION"
+														}
+														id={sidebarOption.id}
+														className="rounded-corners margin-top-10"
+														href={
+															sidebarOption.href
+														}
+														onClick={event =>
+															this.handleClick(
+																event,
+																index + 1
+															)
+														}
+														ref={
+															this.optionRefs[
+																index
+															]
+														}
+													>
+														<span
+															className={
+																sidebarOption.style
+															}
+														></span>
+														&emsp;{" "}
+														{sidebarOption.title}
+													</a>
+												</Col>
+											);
 										}
-										ref={this.optionRefs[0]}
-									>
-										<span className="fa fa-desktop"></span>
-										&emsp; Nodes
-									</a>
-									<a
-										id="pods_sidebarOption"
-										className="rounded-corners  margin-top-10"
-										href="#pods"
-										onClick={event =>
-											this.handleClick(event, 2)
-										}
-										ref={this.optionRefs[1]}
-									>
-										<span className="fa fa-archive"></span>
-										&emsp; Pods
-									</a>
-									<a
-										id="deployments_sidebarOption"
-										className="rounded-corners  margin-top-10"
-										href="#deployments"
-										onClick={event =>
-											this.handleClick(event, 3)
-										}
-										ref={this.optionRefs[2]}
-									>
-										<span className="fa fa-cubes"></span>
-										&emsp; Deployments
-									</a>
-									<a
-										id="services_sidebarOption"
-										className="rounded-corners  margin-top-10"
-										href="#services"
-										onClick={event =>
-											this.handleClick(event, 4)
-										}
-										ref={this.optionRefs[3]}
-									>
-										<span className="fa fa-random"></span>
-										&emsp; Services
-									</a>
-									<a
-										id="jobs_sidebarOption"
-										className="rounded-corners  margin-top-10"
-										href="#jobs"
-										onClick={event =>
-											this.handleClick(event, 5)
-										}
-										ref={this.optionRefs[4]}
-									>
-										<span className="fa fa-tasks"></span>
-										&emsp; Jobs
-									</a>
-									<a
-										id="cronJobs_sidebarOption"
-										className="rounded-corners margin-top-10"
-										href="#cronjobs"
-										onClick={event =>
-											this.handleClick(event, 6)
-										}
-										ref={this.optionRefs[5]}
-									>
-										<span className="fa fa-clock-o"></span>
-										&emsp; Cron Jobs
-									</a>
-									<a
-										id="configMaps_sidebarOption"
-										className="rounded-corners margin-top-10"
-										href="#configmaps"
-										onClick={event =>
-											this.handleClick(event, 7)
-										}
-										ref={this.optionRefs[6]}
-									>
-										<span className="fa fa-gears"></span>
-										&emsp; Config Maps
-									</a>
-									<a
-										id="secrets_sidebarOption"
-										className="rounded-corners margin-top-10"
-										href="#secrets"
-										onClick={event =>
-											this.handleClick(event, 8)
-										}
-										ref={this.optionRefs[7]}
-									>
-										<span className="fa fa-user-secret"></span>
-										&emsp; Secrets
-									</a>
-								</div>
+									)}
+								</Row>
 							</Col>
-							<Col xs={9} className="margin-top-10">
+							<Col
+								xs={12}
+								sm={12}
+								md={12}
+								lg={9}
+								className="margin-top-10"
+							>
+								{/* Depending upon sidebarOptionSelected, render respective page. */}
+								{/* IMPROVEMENT: Move to this.sidebarOptions  */}
+
 								{this.state.sidebarOptionSelected === 1 && (
 									<NodesPage
 										refreshState={() => this.refreshState()}

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Card, ListGroup } from "react-bootstrap";
+import { Card, Row, Col } from "react-bootstrap";
 import CardLabels from "../CardLabels";
 
 class NodeCard extends Component {
@@ -20,47 +20,88 @@ class NodeCard extends Component {
 					</Card.Header>
 
 					<Card.Body>
-						<div className="d-flex text-center justify-content-around align-items-center">
-							<span className="col-xs-12">
-								<span className="text-lg font-weight-bold node-spec-no">
-									{this.props.nodeInfo.nodeCapacity.cpu}
+						{/* <div className="d-flex text-center justify-content-around align-items-center"> */}
+						<Row className="text-center align-tems-center">
+							<Col
+								xs={12}
+								sm={12}
+								md={12}
+								lg={3}
+								className=" mb-2"
+							>
+								<span className="col-xs-12">
+									<span className="text-lg font-weight-bold node-spec-no">
+										{this.props.nodeInfo.nodeCapacity.cpu}
+									</span>
+									<br />
+									<span className="text-sm text-muted">
+										CPU
+									</span>
 								</span>
-								<br />
-								<span className="text-sm text-muted">CPU</span>
-							</span>
+							</Col>
 
-							<span>
-								<span className="text-lg font-weight-bold node-spec-no">
-									{
-										this.props.nodeInfo.nodeCapacity[
-											"ephemeral-storage"
-										]
-									}
+							<Col
+								xs={12}
+								sm={12}
+								md={12}
+								lg={3}
+								className=" mb-2"
+							>
+								<span>
+									<span className="text-lg font-weight-bold node-spec-no">
+										{
+											this.props.nodeInfo.nodeCapacity[
+												"ephemeral-storage"
+											]
+										}
+									</span>
+									<br />
+									<span className="text-sm text-muted">
+										Storage
+									</span>
 								</span>
-								<br />
-								<span className="text-sm text-muted">
-									Storage
-								</span>
-							</span>
+							</Col>
 
-							<span>
-								<span className="text-lg font-weight-bold node-spec-no">
-									{this.props.nodeInfo.nodeCapacity.memory}
+							<Col
+								xs={12}
+								sm={12}
+								md={12}
+								lg={3}
+								className=" mb-2"
+							>
+								<span>
+									<span className="text-lg font-weight-bold node-spec-no">
+										{
+											this.props.nodeInfo.nodeCapacity
+												.memory
+										}
+									</span>
+									<br />
+									<span className="text-sm text-muted">
+										Memory
+									</span>
 								</span>
-								<br />
-								<span className="text-sm text-muted">
-									Memory
-								</span>
-							</span>
+							</Col>
 
-							<span>
-								<span className="text-lg font-weight-bold node-spec-no">
-									{this.props.nodeInfo.nodeCapacity.pods}
+							<Col
+								xs={12}
+								sm={12}
+								md={12}
+								lg={3}
+								className=" mb-2"
+							>
+								<span>
+									<span className="text-lg font-weight-bold node-spec-no">
+										{this.props.nodeInfo.nodeCapacity.pods}
+									</span>
+									<br />
+									<span className="text-sm text-muted">
+										Pods
+									</span>
 								</span>
-								<br />
-								<span className="text-sm text-muted">Pods</span>
-							</span>
-						</div>
+							</Col>
+							{/* </div> */}
+						</Row>
 						<hr />
 						Labels:&nbsp;
 						<CardLabels
