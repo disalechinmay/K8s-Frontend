@@ -5,7 +5,8 @@
 	"main": "index.js",
 	"scripts": {
 		"start": "cd k8s-frontend && npm start",
-		"test": "cd k8s-frontend && npm test"
+		"test": "cd k8s-frontend && npm test",
+		"ci-run": "cd k8s-frontend && npm run ci-run"
 	},
 	"repository": {
 		"type": "git",
