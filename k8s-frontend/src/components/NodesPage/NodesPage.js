@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import SmallLoadingPage from "../SmallLoadingPage";
+import SmallLoadingPage from "../common/SmallLoadingPage";
 import { getNodes } from "../../services";
 import "../../assets/styles/common.css";
 import NodeCard from "./NodeCard";

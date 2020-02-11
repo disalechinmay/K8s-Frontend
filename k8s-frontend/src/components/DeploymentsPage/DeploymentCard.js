@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Card, Row, Col } from "react-bootstrap";
-import CardLabels from "../CardLabels";
-import CardContainerList from "../CardContainerList";
+import CardLabels from "../common/CardLabels";
+import CardContainerList from "../common/CardContainerList";
 import "../../assets/styles/common.css";
 
 class DeploymentCard extends Component {

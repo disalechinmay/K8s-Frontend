@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { getDeployments } from "../../services";
-import SmallLoadingPage from "../SmallLoadingPage";
+import SmallLoadingPage from "../common/SmallLoadingPage";
 import DeploymentCard from "./DeploymentCard";
 
 class DeploymentsPage extends Component {

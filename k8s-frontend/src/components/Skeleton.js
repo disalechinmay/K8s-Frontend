@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Form, Container, Navbar, Row, Col } from "react-bootstrap";
 import "../assets/styles/common.css";
 import { NodesPage } from "./NodesPage";
-import LoadingPage from "./LoadingPage";
+import LoadingPage from "./common/LoadingPage";
 import { getNamespaces } from "../services";
 import { PodsPage } from "./PodsPage";
 import { DeploymentsPage } from "./DeploymentsPage";
