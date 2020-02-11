@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Card, Row, Col } from "react-bootstrap";
-import CardLabels from "../CardLabels";
+import CardLabels from "../common/CardLabels";
 
 class NodeCard extends Component {
 	render() {
