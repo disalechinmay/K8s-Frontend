@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Card } from "react-bootstrap";
-import CardLabels from "../common/CardLabels";
-import CardContainerList from "../common/CardContainerList";
+import { CardLabels, CardContainerList } from "../common";
 
 class PodCard extends Component {
 	state = {};

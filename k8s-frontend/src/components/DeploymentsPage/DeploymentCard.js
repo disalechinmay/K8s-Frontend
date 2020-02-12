@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { Card, Row, Col } from "react-bootstrap";
-import CardLabels from "../common/CardLabels";
-import CardContainerList from "../common/CardContainerList";
-import "../../assets/styles/common.css";
+import { CardLabels, CardContainerList } from "../common";
 
 class DeploymentCard extends Component {
 	// Returns an obj which contains key-val pairs of matched labels.
