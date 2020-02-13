@@ -199,6 +199,10 @@ class Skeleton extends Component {
 										(sidebarOption, index) => {
 											return (
 												<Col
+													key={
+														index +
+														"_SIDEBAR_OPTION_COLUMN"
+													}
 													xs={6}
 													sm={6}
 													md={12}

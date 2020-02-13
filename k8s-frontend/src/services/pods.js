@@ -32,3 +32,16 @@ export function getPods(namespace) {
 			);
 	});
 }
+
+export function deletePod(namespace, podName) {
+	return new Promise((resolve, reject) => {
+		fetch(API_LOCATION + "/pods/", {
+			method: "DELETE",
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify({ namespace, podName })
+		});
+	});
+}

@@ -1,26 +1,9 @@
 import React, { Component } from "react";
+import { deletePod } from "../../services";
 import { Card, Button, Glyphicon } from "react-bootstrap";
 import { CardLabels, CardContainerList } from "../common";
 
 class PodCard extends Component {
-	state = {};
-
-	deleteResource(resourceType, resourceName) {
-		console.log(resourceType);
-		console.log(resourceName);
-
-		if (resourceType == "RESOURCE_POD") {
-			fetch("http://localhost:5000/deletePod", {
-				method: "POST",
-				headers: {
-					Accept: "application/json",
-					"Content-Type": "application/json"
-				},
-				body: JSON.stringify({ resourceName })
-			});
-		}
-	}
-
 	render() {
 		return (
 			<React.Fragment>
@@ -36,8 +19,8 @@ class PodCard extends Component {
 							<Button
 								variant="outline-danger"
 								onClick={() =>
-									this.deleteResource(
-										"RESOURCE_POD",
+									deletePod(
+										this.props.namespace,
 										this.props.podInfo.podName
 									)
 								}
