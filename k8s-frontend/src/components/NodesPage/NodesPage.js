@@ -1,27 +1,54 @@
 import React, { Component } from "react";
-import SmallLoadingPage from "../common/SmallLoadingPage";
+import { SmallLoadingPage, SmallErrorPage } from "../common";
 import { getNodes } from "../../services";
-import "../../assets/styles/common.css";
 import NodeCard from "./NodeCard";
 
 class NodesPage extends Component {
-	state = { pageLoading: true, nodesListSet: false, nodesList: [] };
+	state = {
+		pageLoading: true,
+		nodesListSet: false,
+		nodesList: [],
+		errorSet: false,
+		errorDescription: ""
+	};
+	_isMounted = false;
 
-	constructor(props) {
-		super(props);
+	componentDidMount() {
+		this._isMounted = true;
 
-		getNodes().then(result => {
-			let newState = { ...this.state };
+		getNodes()
+			.then(result => {
+				let newState = { ...this.state };
 
-			newState.pageLoading = false;
-			newState.nodesListSet = true;
-			newState.nodesList = result.payLoad;
+				newState.pageLoading = false;
+				newState.nodesListSet = true;
+				newState.nodesList = result.payLoad;
 
-			this.setState(newState);
-		});
+				if (this._isMounted) this.setState(newState);
+			})
+			.catch(err => {
+				if (this._isMounted)
+					this.setState({
+						...this.state,
+						errorSet: true,
+						errorDescription: err
+					});
+			});
+	}
+
+	componentWillUnmount() {
+		this._isMounted = false;
 	}
 
 	render() {
+		if (this.state.errorSet) {
+			return (
+				<SmallErrorPage
+					errorDescription={this.state.errorDescription}
+				/>
+			);
+		}
+
 		if (this.state.pageLoading) return <SmallLoadingPage />;
 
 		return (
