@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Card, Row, Col } from "react-bootstrap";
-import CardLabels from "../common/CardLabels";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { CardLabels } from "../common";
 
 class ServiceCard extends Component {
 	state = {};
@@ -85,6 +84,7 @@ class ServiceCard extends Component {
 							labels={this.props.serviceInfo.serviceAnnotations}
 							refreshState={() => this.props.refreshState()}
 						/>
+						<br />
 					</Card.Body>
 				</Card>
 			</React.Fragment>

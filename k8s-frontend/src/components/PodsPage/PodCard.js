@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import { Card, Button } from "react-bootstrap";
-import CardLabels from "../common/CardLabels";
 import { deletePod } from "../../services";
-import CardContainerList from "../common/CardContainerList";
+import { Card, Button, Glyphicon } from "react-bootstrap";
+import { CardLabels, CardContainerList } from "../common";
 
 class PodCard extends Component {
 	render() {

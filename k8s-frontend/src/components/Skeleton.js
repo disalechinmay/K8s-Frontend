@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Form, Container, Navbar, Row, Col } from "react-bootstrap";
 import "../assets/styles/common.css";
 import { NodesPage } from "./NodesPage";
-import LoadingPage from "./common/LoadingPage";
+import { LoadingPage, ErrorPage } from "./common";
 import { getNamespaces } from "../services";
 import { PodsPage } from "./PodsPage";
 import { DeploymentsPage } from "./DeploymentsPage";
@@ -15,7 +15,9 @@ class Skeleton extends Component {
 		pageLoading: true,
 		namespacesListSet: false,
 		namespacesList: [],
-		namespaceSelected: "default"
+		namespaceSelected: "default",
+		errorSet: false,
+		errorDescription: ""
 	};
 
 	constructor(props) {
@@ -79,15 +81,23 @@ class Skeleton extends Component {
 			this.optionRefs[iter] = React.createRef();
 
 		// Fetching list of namespaces from backend.
-		getNamespaces().then(result => {
-			let newState = { ...this.state };
+		getNamespaces()
+			.then(result => {
+				let newState = { ...this.state };
 
-			newState.pageLoading = false;
-			newState.namespacesListSet = true;
-			newState.namespacesList = result.payLoad;
+				newState.pageLoading = false;
+				newState.namespacesListSet = true;
+				newState.namespacesList = result.payLoad;
 
-			this.setState(newState);
-		});
+				this.setState(newState);
+			})
+			.catch(err => {
+				this.setState({
+					...this.state,
+					errorSet: true,
+					errorDescription: err
+				});
+			});
 	}
 
 	// Updates the state when sidebar options are selected.
@@ -116,6 +126,9 @@ class Skeleton extends Component {
 	}
 
 	render() {
+		if (this.state.errorSet)
+			return <ErrorPage errorDescription={this.state.errorDescription} />;
+
 		if (this.state.pageLoading) return <LoadingPage />;
 
 		return (
@@ -194,6 +207,7 @@ class Skeleton extends Component {
 													sm={6}
 													md={12}
 													lg={12}
+													key={index + "_SIDEBAR_COL"}
 												>
 													<a
 														key={
@@ -267,13 +281,13 @@ class Skeleton extends Component {
 										namespace={this.state.namespaceSelected}
 									/>
 								)}
-
 								{this.state.sidebarOptionSelected === 5 && (
 									<JobsPage
 										refreshState={() => this.refreshState()}
 										namespace={this.state.namespaceSelected}
 									/>
 								)}
+
 							</Col>
 						</Row>
 					</Container>

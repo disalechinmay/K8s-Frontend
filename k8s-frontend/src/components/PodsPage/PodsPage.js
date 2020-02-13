@@ -1,49 +1,84 @@
 import React, { Component } from "react";
-import SmallLoadingPage from "../common/SmallLoadingPage";
+import { SmallLoadingPage, SmallErrorPage } from "../common";
 import { getPods } from "../../services";
-import "../../assets/styles/common.css";
 import PodCard from "./PodCard";
 
 class PodsPage extends Component {
-	state = { pageLoading: true, podsListSet: false, podsList: [] };
+	state = {
+		pageLoading: true,
+		podsListSet: false,
+		podsList: [],
+		errorSet: false,
+		errorDescription: ""
+	};
+	_isMounted = false;
 
-	constructor(props) {
-		super(props);
+	componentDidMount() {
+		this._isMounted = true;
 
 		// Get list of pods for the selected namespace.
-		getPods(this.props.namespace).then(result => {
-			let newState = { ...this.state };
-
-			newState.pageLoading = false;
-			newState.podsListSet = true;
-			newState.podsList = result.payLoad;
-
-			this.setState(newState);
-		});
-	}
-
-	componentDidUpdate(previousProps) {
-		// If namespace is changed, get new data.
-		if (previousProps.namespace !== this.props.namespace) {
-			this.setState({
-				pageLoading: true,
-				podsListSet: false,
-				podsList: []
-			});
-
-			getPods(this.props.namespace).then(result => {
+		getPods(this.props.namespace)
+			.then(result => {
 				let newState = { ...this.state };
 
 				newState.pageLoading = false;
 				newState.podsListSet = true;
 				newState.podsList = result.payLoad;
 
-				this.setState(newState);
+				if (this._isMounted) this.setState(newState);
+			})
+			.catch(err => {
+				this.setState({
+					...this.state,
+					errorSet: true,
+					errorDescription: err
+				});
 			});
+	}
+
+	componentWillUnmount() {
+		this._isMounted = false;
+	}
+
+	componentDidUpdate(previousProps) {
+		// If namespace is changed, get new data.
+		if (previousProps.namespace !== this.props.namespace) {
+			this.setState({
+				...this.state,
+				pageLoading: true,
+				podsListSet: false,
+				podsList: []
+			});
+
+			getPods(this.props.namespace)
+				.then(result => {
+					let newState = { ...this.state };
+
+					newState.pageLoading = false;
+					newState.podsListSet = true;
+					newState.podsList = result.payLoad;
+
+					if (this._isMounted) this.setState(newState);
+				})
+				.catch(err => {
+					if (this._isMounted)
+						this.setState({
+							...this.state,
+							errorSet: true,
+							errorDescription: err
+						});
+				});
 		}
 	}
 
 	render() {
+		if (this.state.errorSet)
+			return (
+				<SmallErrorPage
+					errorDescription={this.state.errorDescription}
+				/>
+			);
+
 		if (this.state.pageLoading) return <SmallLoadingPage />;
 
 		if (
