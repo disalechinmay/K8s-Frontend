@@ -26,23 +26,48 @@ class ServiceCard extends Component {
 						/>
 						<hr />
 						<Row>
-							<Col
-								className="right-border bottom-border p-2 d-flex align-items-center text-center justify-content-center"
-								md="auto"
-							>
-								{/* <Col> */}
-								Service Type:&nbsp;&nbsp;<br></br>
-								<span className="align-items-center font-weight-bold">
-									{this.props.serviceInfo.serviceType}
+							<Col className="right-border bottom-border p-2 d-flex align-items-center text-center justify-content-center">
+								<span>
+									<span className="font-weight-bolder replica-no">
+										{this.props.serviceInfo.serviceType}
+									</span>
+									<br />
+									<span className="text-muted">
+										Service Type
+									</span>
 								</span>
 							</Col>
 
-							<Col>
-								Port &nbsp;&nbsp;
-								<span className="font-weight-bolder replica-no text-center justify-content-center">
-									{this.props.serviceInfo.servicePort}
-									=>
-									{this.props.serviceInfo.serviceTargetPort}
+							<Col className="bottom-border p-2 d-flex align-items-center text-center justify-content-center">
+								<span>
+									<span className="font-weight-bolder replica-no">
+										{this.props.serviceInfo.servicePort}
+									</span>
+									<br />
+									<span className="text-muted">
+										Service Port
+									</span>
+								</span>
+							</Col>
+
+							<Col className="bottom-border p-2 d-flex align-items-center text-center justify-content-center">
+								<span>
+									<span className="fa fa-arrow-circle-right replica-no" />
+								</span>
+							</Col>
+
+							<Col className="bottom-border p-2 d-flex align-items-center text-center justify-content-center">
+								<span>
+									<span className="font-weight-bolder replica-no">
+										{
+											this.props.serviceInfo
+												.serviceTargetPort
+										}
+									</span>
+									<br />
+									<span className="text-muted">
+										Target Port
+									</span>
 								</span>
 							</Col>
 						</Row>
