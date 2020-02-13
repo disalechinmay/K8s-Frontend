@@ -1,6 +1,6 @@
 import { API_LOCATION } from "../configs";
 
-export function getJobs() {
+export function getJobs(namespace) {
 	return new Promise((resolve, reject) => {
 		fetch(API_LOCATION + "/jobs")
 			.then(result => result.json())
