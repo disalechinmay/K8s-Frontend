@@ -102,6 +102,7 @@ class PodsPage extends Component {
 									key={index + "_POD_CARD"}
 									index={index}
 									podInfo={podInfo}
+									namespace={this.props.namespace}
 									refreshState={() =>
 										this.props.refreshState()
 									}

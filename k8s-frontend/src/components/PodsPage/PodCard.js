@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import { Card } from "react-bootstrap";
+import { deletePod } from "../../services";
+import { Card, Button, Glyphicon } from "react-bootstrap";
 import { CardLabels, CardContainerList } from "../common";
 
 class PodCard extends Component {
-	state = {};
-
 	render() {
 		return (
 			<React.Fragment>
@@ -15,6 +14,19 @@ class PodCard extends Component {
 						</span>{" "}
 						<span className="font-weight-bold dancing-font">
 							{this.props.podInfo.podName}
+						</span>
+						<span className="float-right">
+							<Button
+								variant="outline-danger"
+								onClick={() =>
+									deletePod(
+										this.props.namespace,
+										this.props.podInfo.podName
+									)
+								}
+							>
+								<span className="fa fa-trash"></span>
+							</Button>
 						</span>
 					</Card.Header>
 

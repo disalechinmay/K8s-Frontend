@@ -57,6 +57,7 @@ class ServiceCard extends Component {
 							</Col>
 
 							<Col className="bottom-border p-2 d-flex align-items-center text-center justify-content-center">
+
 								<span>
 									<span className="font-weight-bolder replica-no">
 										{
