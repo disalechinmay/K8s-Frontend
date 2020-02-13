@@ -7,6 +7,7 @@ import { getNamespaces } from "../services";
 import { PodsPage } from "./PodsPage";
 import { DeploymentsPage } from "./DeploymentsPage";
 import { ServicesPage } from "./ServicesPage";
+import { JobsPage } from "./JobsPage";
 
 class Skeleton extends Component {
 	state = {
@@ -276,6 +277,13 @@ class Skeleton extends Component {
 										namespace={this.state.namespaceSelected}
 									/>
 								)}
+								{this.state.sidebarOptionSelected === 5 && (
+									<JobsPage
+										refreshState={() => this.refreshState()}
+										namespace={this.state.namespaceSelected}
+									/>
+								)}
+
 							</Col>
 						</Row>
 					</Container>

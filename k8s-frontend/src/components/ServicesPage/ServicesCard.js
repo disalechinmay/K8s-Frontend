@@ -27,22 +27,48 @@ class ServiceCard extends Component {
 						<hr />
 						<Row>
 							<Col
-								className="right-border bottom-border p-2 d-flex align-items-center text-center justify-content-center"
-								md="auto"
+								className="right-border bottom-border p-3 d-flex align-items-center text-center justify-content-center"
+								// md="auto"
 							>
-								{/* <Col> */}
-								Service Type:&nbsp;&nbsp;<br></br>
-								<span className="align-items-center font-weight-bold">
-									{this.props.serviceInfo.serviceType}
+								<span>
+									<span className="font-weight-bolder replica-no">
+										{this.props.serviceInfo.serviceType}
+									</span>
+									<br />
+									<span className="text-muted">
+										Service Type
+									</span>
 								</span>
 							</Col>
 
-							<Col>
-								Port &nbsp;&nbsp;
-								<span className="font-weight-bolder replica-no text-center justify-content-center">
-									{this.props.serviceInfo.servicePort}
+							<Col className="bottom-border p-2 d-flex align-items-center text-center justify-content-center">
+								<span>
+									<span className="font-weight-bolder replica-no">
+										{this.props.serviceInfo.servicePort}
+									</span>
+									<br />
+									<span className="text-muted">Port</span>
+								</span>
+							</Col>
+							<Col className="bottom-border p-2 d-flex align-items-center text-center justify-content-center">
+								<span className="replica-no fa fa-arrow-circle-right" />
+								{/* <span className="font-weight-bolder replica-no">
 									=>
-									{this.props.serviceInfo.serviceTargetPort}
+								</span> */}
+							</Col>
+
+							<Col className="right-border bottom-border p-2 d-flex align-items-center text-center justify-content-center">
+								<span>
+									<span className="font-weight-bolder replica-no">
+										{
+											this.props.serviceInfo
+												.serviceTargetPort
+										}
+									</span>
+									<br />
+									<span className="text-muted">
+										Target Port
+									</span>
 								</span>
 							</Col>
 						</Row>

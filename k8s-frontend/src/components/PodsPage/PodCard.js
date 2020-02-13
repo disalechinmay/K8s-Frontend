@@ -1,9 +1,25 @@
 import React, { Component } from "react";
-import { Card } from "react-bootstrap";
+import { Card, Button, Glyphicon } from "react-bootstrap";
 import { CardLabels, CardContainerList } from "../common";
 
 class PodCard extends Component {
 	state = {};
+
+	deleteResource(resourceType, resourceName) {
+		console.log(resourceType);
+		console.log(resourceName);
+
+		if (resourceType == "RESOURCE_POD") {
+			fetch("http://localhost:5000/deletePod", {
+				method: "POST",
+				headers: {
+					Accept: "application/json",
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify({ resourceName })
+			});
+		}
+	}
 
 	render() {
 		return (
@@ -15,6 +31,19 @@ class PodCard extends Component {
 						</span>{" "}
 						<span className="font-weight-bold dancing-font">
 							{this.props.podInfo.podName}
+						</span>
+						<span className="float-right">
+							<Button
+								variant="outline-danger"
+								onClick={() =>
+									this.deleteResource(
+										"RESOURCE_POD",
+										this.props.podInfo.podName
+									)
+								}
+							>
+								<span className="fa fa-trash"></span>
+							</Button>
 						</span>
 					</Card.Header>
 
