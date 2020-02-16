@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Card, Row, Col } from "react-bootstrap";
 import { CardLabels, CardContainerList } from "../common";
 
 class DeploymentCard extends Component {
@@ -25,67 +24,76 @@ class DeploymentCard extends Component {
 	render() {
 		return (
 			<React.Fragment>
-				<Card
-					key={this.props.index + "_CARD"}
-					className=" shadow-lg p-0 mb-4 rounded"
-				>
-					<Card.Header>
-						<span className="text-muted">
-							Deployment #{this.props.index + 1}:
-						</span>{" "}
-						<span className="font-weight-bold dancing-font">
+				<div className="card flex flex-column">
+					<span className="w-100">
+						<span className="title">
+							<span className="fa fa-lastfm" />
+							&emsp;
 							{this.props.deploymentInfo.deploymentName}
 						</span>
-					</Card.Header>
+						<span className="resource-manage-section">
+							<span className="resource-delete-button fa fa-trash" />
+							<span className="resource-restart-button fa fa-refresh" />
+							<span className="resource-terminal-button fa fa-terminal" />
+						</span>
+					</span>
 
-					<Card.Body>
-						Selectors:&nbsp;
-						<CardLabels
-							labels={
-								this.props.deploymentInfo.deploymentSelectors
-							}
-							refreshState={() => this.props.refreshState()}
-							matchedLabels={this.matchedLabels(
-								this.props.deploymentInfo.deploymentSelectors,
-								this.props.deploymentInfo
-									.deploymentTemplateLabels
-							)}
-						/>
-						<hr />
-						<Row>
-							<Col className="right-border bottom-border p-2 d-flex align-items-center text-center justify-content-center">
-								<span>
-									<span className="font-weight-bolder replica-no">
-										{this.props.deploymentInfo
-											.deploymentReplicas + "x"}
-									</span>
-									<br />
-									<span className="text-muted">
-										{(this.props.deploymentInfo
-											.deploymentReplicas === 1 &&
-											"Replica") ||
-											"Replicas"}
-									</span>
+					<span className="flex flex-row">
+						<span className="mt-5">Selectors:</span>
+						<span className="flex flex-row mw-100 wrap">
+							<CardLabels
+								labels={
+									this.props.deploymentInfo
+										.deploymentSelectors
+								}
+								refreshState={() => this.props.refreshState()}
+								matchedLabels={this.matchedLabels(
+									this.props.deploymentInfo
+										.deploymentSelectors,
+									this.props.deploymentInfo
+										.deploymentTemplateLabels
+								)}
+							/>
+						</span>
+					</span>
+					<br />
+
+					<span className="flex flex-row">
+						<span>
+							<span className="font-weight-bolder huge-number">
+								{this.props.deploymentInfo.deploymentReplicas +
+									"x"}
+							</span>
+							<br />
+							<span>
+								{(this.props.deploymentInfo
+									.deploymentReplicas === 1 &&
+									"Replica") ||
+									"Replicas"}
+							</span>
+						</span>
+
+						<span className="flex flex-column left-orange-border">
+							<span className="flex flex-row">
+								<span className="flex flex-row mw-100 wrap">
+									<CardLabels
+										labels={
+											this.props.deploymentInfo
+												.deploymentTemplateLabels
+										}
+										refreshState={() =>
+											this.props.refreshState()
+										}
+										matchedLabels={this.matchedLabels(
+											this.props.deploymentInfo
+												.deploymentSelectors,
+											this.props.deploymentInfo
+												.deploymentTemplateLabels
+										)}
+									/>
 								</span>
-							</Col>
-							<Col xs={10}>
-								Template:
-								<br />
-								<CardLabels
-									labels={
-										this.props.deploymentInfo
-											.deploymentTemplateLabels
-									}
-									refreshState={() =>
-										this.props.refreshState()
-									}
-									matchedLabels={this.matchedLabels(
-										this.props.deploymentInfo
-											.deploymentSelectors,
-										this.props.deploymentInfo
-											.deploymentTemplateLabels
-									)}
-								/>
+							</span>
+							<span>
 								<CardContainerList
 									list={
 										this.props.deploymentInfo
@@ -95,24 +103,37 @@ class DeploymentCard extends Component {
 										this.props.refreshState()
 									}
 								/>
-							</Col>
-						</Row>
-						<hr />
-						Labels:&nbsp;
-						<CardLabels
-							labels={this.props.deploymentInfo.deploymentLabels}
-							refreshState={() => this.props.refreshState()}
-						/>
-						<hr />
-						Annotations:&nbsp;
-						<CardLabels
-							labels={
-								this.props.deploymentInfo.deploymentAnnotations
-							}
-							refreshState={() => this.props.refreshState()}
-						/>
-					</Card.Body>
-				</Card>
+							</span>
+						</span>
+					</span>
+
+					<br />
+
+					<span className="flex flex-row">
+						<span className="mt-5">Labels:</span>
+						<span className="flex flex-row mw-100 wrap">
+							<CardLabels
+								labels={
+									this.props.deploymentInfo.deploymentLabels
+								}
+								refreshState={() => this.props.refreshState()}
+							/>
+						</span>
+					</span>
+
+					<span className="flex flex-row">
+						<span className="mt-5">Annotations:</span>
+						<span className="flex flex-row mw-100 wrap">
+							<CardLabels
+								labels={
+									this.props.deploymentInfo
+										.deploymentAnnotations
+								}
+								refreshState={() => this.props.refreshState()}
+							/>
+						</span>
+					</span>
+				</div>
 			</React.Fragment>
 		);
 	}

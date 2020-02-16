@@ -1,9 +1,13 @@
 import { API_LOCATION } from "../configs";
+import axios from "axios";
 
 export function getPods(namespace) {
 	return new Promise((resolve, reject) => {
-		fetch(API_LOCATION + "/pods?" + new URLSearchParams({ namespace }))
-			.then(result => result.json())
+		axios
+			.get(API_LOCATION + "/pods", {
+				params: { namespace }
+			})
+			.then(result => result.data)
 			.then(result => {
 				if (result.status === "FAILURE")
 					reject({

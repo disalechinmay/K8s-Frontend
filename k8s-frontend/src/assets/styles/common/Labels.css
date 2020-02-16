@@ -1,0 +1,26 @@
+.label {
+	box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.3);
+	color: #ecf0f1;
+	background-color: #2c3e50; /*rgba(42, 42, 42, 0.95);*/
+	border-radius: 20px 20px 20px 20px;
+	margin: 5px 5px 5px 5px;
+	padding: 2px 5px 2px 5px;
+	font-size: 0.75em;
+	max-width: 100%;
+}
+
+.label .value-matched {
+	background-color: #2ecc71;
+	border-radius: 20px 20px 20px 20px;
+	padding-left: 5px;
+	padding-right: 5px;
+	margin-left: 5px;
+}
+
+.label .value {
+	background-color: #7f8c8d;
+	border-radius: 20px 20px 20px 20px;
+	padding-left: 5px;
+	padding-right: 5px;
+	margin-left: 5px;
+}

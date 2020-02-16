@@ -1,9 +1,11 @@
 import { API_LOCATION } from "../configs";
+import axios from "axios";
 
 export function getNamespaces() {
 	return new Promise((resolve, reject) => {
-		fetch(API_LOCATION + "/namespaces")
-			.then(result => result.json())
+		axios
+			.get(API_LOCATION + "/namespaces")
+			.then(result => result.data)
 			.then(result => {
 				if (result.status === "FAILURE")
 					reject({

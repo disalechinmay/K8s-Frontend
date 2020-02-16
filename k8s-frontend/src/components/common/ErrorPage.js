@@ -4,11 +4,12 @@ class ErrorPage extends Component {
 	render() {
 		return (
 			<React.Fragment>
-				<div className="d-flex align-items-center min-vh-100 mb-5 p-5">
-					<div>
-						<h1>OOPS!</h1>
-						<hr />
-						<span>Things seem to be broken a bit.</span>
+				<div className="error-page">
+					<div className="error-page-content">
+						<h1 className="oops">OOPS!</h1>
+						<span className="message">
+							Things seem to be broken a bit.
+						</span>
 
 						{this.props.errorDescription && (
 							<React.Fragment>
@@ -53,6 +54,8 @@ class ErrorPage extends Component {
 								</span>
 							</React.Fragment>
 						)}
+
+						<span className="logo">Symphonize</span>
 					</div>
 				</div>
 			</React.Fragment>

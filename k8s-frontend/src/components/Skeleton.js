@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-import { Form, Container, Navbar, Row, Col } from "react-bootstrap";
-import "../assets/styles/common.css";
-import { NodesPage } from "./NodesPage";
-import { LoadingPage, ErrorPage } from "./common";
 import { getNamespaces } from "../services";
+import { LoadingPage, ErrorPage } from "./common";
+import { NodesPage } from "./NodesPage";
 import { PodsPage } from "./PodsPage";
 import { DeploymentsPage } from "./DeploymentsPage";
 import { ServicesPage } from "./ServicesPage";
@@ -27,49 +25,41 @@ class Skeleton extends Component {
 		this.sidebarOptions = [
 			{
 				id: "nodes_sidebarOption",
-				href: "#nodes",
 				title: "Nodes",
 				style: "fa fa-desktop"
 			},
 			{
 				id: "pods_sidebarOption",
-				href: "#pods",
 				title: "Pods",
 				style: "fa fa-archive"
 			},
 			{
 				id: "deployments_sidebarOption",
-				href: "#deployments",
 				title: "Deployments",
 				style: "fa fa-cubes"
 			},
 			{
 				id: "services_sidebarOption",
-				href: "#services",
 				title: "Services",
 				style: "fa fa-random"
 			},
 			{
 				id: "jobs_sidebarOption",
-				href: "#jobs",
 				title: "Jobs",
 				style: "fa fa-tasks"
 			},
 			{
 				id: "cronJobs_sidebarOption",
-				href: "#cronJobs",
 				title: "Cron Jobs",
 				style: "fa fa-clock-o"
 			},
 			{
 				id: "configMaps_sidebarOption",
-				href: "#configMaps",
 				title: "Config Maps",
 				style: "fa fa-gears"
 			},
 			{
 				id: "secrets_sidebarOption",
-				href: "#secrets",
 				title: "Secrets",
 				style: "fa fa-user-secret"
 			}
@@ -105,12 +95,19 @@ class Skeleton extends Component {
 		let newState = { ...this.state };
 
 		for (let iter = 0; iter < this.sidebarOptions.length; iter++)
-			if (this.optionRefs[iter].current.classList.contains("active"))
-				this.optionRefs[iter].current.classList.remove("active");
+			if (
+				this.optionRefs[iter].current.classList.contains(
+					"sidebar-button-active"
+				)
+			)
+				this.optionRefs[iter].current.classList.remove(
+					"sidebar-button-active"
+				);
 
 		newState.sidebarOptionSelected = clickedOptionIndex;
 
-		if (clickedOptionIndex !== 0) event.target.classList.add("active");
+		if (clickedOptionIndex !== 0)
+			event.target.classList.add("sidebar-button-active");
 
 		this.setState(newState);
 	}
@@ -133,165 +130,108 @@ class Skeleton extends Component {
 
 		return (
 			<React.Fragment>
-				<Container className="margin-top-10 align-content-center">
-					<Container>
-						<Navbar>
-							<Navbar.Brand
-								href="#home"
-								className="navbar-title"
-								onClick={event => this.handleClick(event, 0)}
-							>
-								Symphonize
-							</Navbar.Brand>
-							<Navbar.Toggle />
-							<Navbar.Collapse className="justify-content-end">
-								<Navbar.Text>
-									<Form.Group
-										as={Row}
-										controlId="exampleForm.ControlSelect1"
-									>
-										<Form.Label column sm="4">
-											Namespace
-										</Form.Label>
-										<Col sm="8">
-											<Form.Control
-												className="namespace-selector"
-												as="select"
-												defaultValue="default"
-												onChange={event =>
-													this.handleNamespaceChange(
-														event
-													)
-												}
-											>
-												{/* Populates options of namespaces */}
-												{this.state.namespacesListSet &&
-													this.state.namespacesList.map(
-														namespace => {
-															return (
-																<option
-																	value={
-																		namespace
-																	}
-																	key={
-																		namespace +
-																		"_NAMESPACE"
-																	}
-																>
-																	{namespace}
-																</option>
-															);
-														}
-													)}
-											</Form.Control>
-										</Col>
-									</Form.Group>
-								</Navbar.Text>
-							</Navbar.Collapse>
-						</Navbar>
-
-						<hr />
-						<Row>
-							<Col xs={12} sm={12} md={12} lg={3}>
-								<Row className="sidebar shadow p-3 mb-5 bg-white rounded">
-									{/* Rendering sidebar buttons */}
-									{this.sidebarOptions.map(
-										(sidebarOption, index) => {
-											return (
-												<Col
-													key={
-														index +
-														"_SIDEBAR_OPTION_COLUMN"
-													}
-													xs={6}
-													sm={6}
-													md={12}
-													lg={12}
-													key={index + "_SIDEBAR_COL"}
-												>
-													<a
+				<div className="mainContainer">
+					<div className="sidebar">
+						<div
+							className="sidebar-title"
+							onClick={event => this.handleClick(event, 0)}
+						>
+							Symphonize
+						</div>
+						<div className="sidebar-namespace-picker">
+							<div className="namespace-picker">
+								<select
+									className="namespace-selector"
+									onChange={event =>
+										this.handleNamespaceChange(event)
+									}
+								>
+									{/* Populates options of namespaces */}
+									{this.state.namespacesListSet &&
+										this.state.namespacesList.map(
+											namespace => {
+												return (
+													<option
+														value={namespace}
 														key={
-															index +
-															"_SIDEBAR_OPTION"
-														}
-														id={sidebarOption.id}
-														className="rounded-corners margin-top-10"
-														href={
-															sidebarOption.href
-														}
-														onClick={event =>
-															this.handleClick(
-																event,
-																index + 1
-															)
-														}
-														ref={
-															this.optionRefs[
-																index
-															]
+															namespace +
+															"_NAMESPACE"
 														}
 													>
-														<span
-															className={
-																sidebarOption.style
-															}
-														></span>
-														&emsp;{" "}
-														{sidebarOption.title}
-													</a>
-												</Col>
-											);
-										}
-									)}
-								</Row>
-							</Col>
-							<Col
-								xs={12}
-								sm={12}
-								md={12}
-								lg={9}
-								className="margin-top-10"
-							>
-								{/* Depending upon sidebarOptionSelected, render respective page. */}
-								{/* IMPROVEMENT: Move to this.sidebarOptions  */}
+														{namespace}
+													</option>
+												);
+											}
+										)}
+								</select>
+							</div>
 
-								{this.state.sidebarOptionSelected === 1 && (
-									<NodesPage
-										refreshState={() => this.refreshState()}
-									/>
-								)}
+							<div className="namespace-picker-title">
+								Namespace
+							</div>
+						</div>
 
-								{this.state.sidebarOptionSelected === 2 && (
-									<PodsPage
-										refreshState={() => this.refreshState()}
-										namespace={this.state.namespaceSelected}
-									/>
-								)}
+						<div className="sidebar-section-title">Resources</div>
+						{/* Rendering sidebar buttons */}
+						{this.sidebarOptions.map((sidebarOption, index) => {
+							return (
+								<div
+									className="sidebar-button"
+									id={sidebarOption.id}
+									key={index + "_SIDEBAR_BUTTON"}
+									onClick={event =>
+										this.handleClick(event, index + 1)
+									}
+									ref={this.optionRefs[index]}
+								>
+									<span
+										className={sidebarOption.style}
+									></span>
+									&emsp; {sidebarOption.title}
+								</div>
+							);
+						})}
 
-								{this.state.sidebarOptionSelected === 3 && (
-									<DeploymentsPage
-										refreshState={() => this.refreshState()}
-										namespace={this.state.namespaceSelected}
-									/>
-								)}
+						<div className="sidebar-search">Search resources..</div>
+					</div>
 
-								{this.state.sidebarOptionSelected === 4 && (
-									<ServicesPage
-										refreshState={() => this.refreshState()}
-										namespace={this.state.namespaceSelected}
-									/>
-								)}
-								{this.state.sidebarOptionSelected === 5 && (
-									<JobsPage
-										refreshState={() => this.refreshState()}
-										namespace={this.state.namespaceSelected}
-									/>
-								)}
+					<div className="mainContent">
+						{/* Depending upon sidebarOptionSelected, render respective page. */}
 
-							</Col>
-						</Row>
-					</Container>
-				</Container>
+						{this.state.sidebarOptionSelected === 1 && (
+							<NodesPage
+								refreshState={() => this.refreshState()}
+							/>
+						)}
+
+						{this.state.sidebarOptionSelected === 2 && (
+							<PodsPage
+								refreshState={() => this.refreshState()}
+								namespace={this.state.namespaceSelected}
+							/>
+						)}
+
+						{this.state.sidebarOptionSelected === 3 && (
+							<DeploymentsPage
+								refreshState={() => this.refreshState()}
+								namespace={this.state.namespaceSelected}
+							/>
+						)}
+
+						{this.state.sidebarOptionSelected === 4 && (
+							<ServicesPage
+								refreshState={() => this.refreshState()}
+								namespace={this.state.namespaceSelected}
+							/>
+						)}
+						{this.state.sidebarOptionSelected === 5 && (
+							<JobsPage
+								refreshState={() => this.refreshState()}
+								namespace={this.state.namespaceSelected}
+							/>
+						)}
+					</div>
+				</div>
 			</React.Fragment>
 		);
 	}

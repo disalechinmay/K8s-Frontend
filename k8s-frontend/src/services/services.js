@@ -1,9 +1,13 @@
 import { API_LOCATION } from "../configs";
+import axios from "axios";
 
 export function getServices(namespace) {
 	return new Promise((resolve, reject) => {
-		fetch(API_LOCATION + "/services?" + new URLSearchParams({ namespace }))
-			.then(result => result.json())
+		axios
+			.get(API_LOCATION + "/servicesx", {
+				params: { namespace }
+			})
+			.then(result => result.data)
 			.then(result => {
 				if (result.status === "FAILURE")
 					reject({
