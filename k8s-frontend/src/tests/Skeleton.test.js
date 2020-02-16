@@ -26,8 +26,8 @@ describe("Skeleton Tests", () => {
 		await new Promise(r => setTimeout(r, 2000));
 		wrapper.update();
 
-		expect(wrapper.find("NavbarBrand").exists()).toBeTruthy();
-		expect(wrapper.find("NavbarBrand").text()).toBe("Symphonize");
+		expect(wrapper.find(".sidebar-title").exists()).toBeTruthy();
+		expect(wrapper.find(".sidebar-title").text()).toBe("Symphonize");
 	});
 
 	test("Check if clicks on sidebar buttons change state appropriately.", async () => {

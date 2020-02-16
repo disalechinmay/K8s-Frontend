@@ -1,9 +1,11 @@
 import { API_LOCATION } from "../configs";
+import axios from "axios";
 
 export function getNodes() {
 	return new Promise((resolve, reject) => {
-		fetch(API_LOCATION + "/nodes")
-			.then(result => result.json())
+		axios
+			.get(API_LOCATION + "/nodes")
+			.then(result => result.data)
 			.then(result => {
 				if (result.status === "FAILURE")
 					reject({

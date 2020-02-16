@@ -1,0 +1,166 @@
+.card {
+	align-content: center;
+	border-bottom: 1px solid rgba(127, 140, 141, 0.5);
+	color: #ecf0f1;
+	margin: 2% 1% 1% 2%;
+	padding: 1% 1% 2% 1%;
+	transition: 0.25s;
+	width: 90%;
+	max-width: 90%;
+	animation: 0.25s ease-out 0s 1 slideInFromLeft;
+}
+
+.card .title {
+	font-size: 1.5em;
+	color: #2ecc71;
+	margin-top: 1%;
+	margin-bottom: 2%;
+	max-width: 80%;
+}
+
+.card .big-number {
+	font-weight: bolder;
+	font-size: 1.5em;
+	color: #2ecc71;
+}
+
+.card .huge-number {
+	font-weight: bolder;
+	font-size: 3em;
+	color: #2ecc71;
+}
+
+.ml-5pr {
+	margin-left: 5%;
+}
+.mr-5pr {
+	margin-right: 5%;
+}
+
+.flex {
+	display: flex;
+}
+
+.flex-row {
+	flex-direction: row;
+}
+
+.flex-column {
+	flex-direction: column;
+}
+
+.w-100 {
+	width: 100%;
+}
+
+.mw-100 {
+	max-width: 100%;
+}
+
+.justify-content-center {
+	justify-content: center;
+}
+
+.align-items-center {
+	align-items: center;
+}
+
+.space-around {
+	justify-content: space-around;
+}
+
+.wrap {
+	flex-wrap: wrap;
+}
+
+.resource-manage-section {
+	float: right;
+	height: 1%;
+	max-width: 20%;
+}
+
+.resource-delete-button {
+	margin-left: 10px;
+	float: right;
+	margin-top: 1%;
+	color: red;
+	cursor: pointer;
+	transition: 0.25s;
+	padding: 5px 5px 5px 5px;
+	border-radius: 15px 15px 15px 15px;
+}
+
+.resource-delete-button:hover {
+	background-color: #212322;
+	border: 1px solid red;
+	transition: 0.25s;
+	box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.3);
+}
+
+.resource-restart-button {
+	margin-left: 10px;
+	float: right;
+	margin-top: 1%;
+	color: #dd5135;
+	cursor: pointer;
+	transition: 0.25s;
+	padding: 5px 5px 5px 5px;
+	border-radius: 15px 15px 15px 15px;
+}
+
+.resource-restart-button:hover {
+	background-color: #212322;
+	border: 1px solid #dd5135;
+	transition: 0.25s;
+	box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.3);
+}
+
+.resource-terminal-button {
+	margin-left: 10px;
+	float: right;
+	margin-top: 1%;
+	color: #2ecc71;
+	cursor: pointer;
+	transition: 0.25s;
+	padding: 5px 5px 5px 5px;
+	border-radius: 15px 15px 15px 15px;
+}
+
+.resource-terminal-button:hover {
+	background-color: #212322;
+	border: 1px solid #2ecc71;
+	transition: 0.25s;
+	box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.3);
+}
+
+.mt-5 {
+	margin-top: 5px;
+}
+
+hr {
+	color: rgba(127, 140, 141, 0.5);
+}
+
+.bolder {
+	font-weight: bolder;
+}
+
+.lighter {
+	font-weight: lighter;
+}
+
+.left-orange-border {
+	border-left: 2px solid #dd5135;
+	border-radius: 5px 5px 5px 5px;
+	margin-left: 1%;
+	padding-left: 1%;
+}
+
+@keyframes slideInFromLeft {
+	0% {
+		transform: translateX(-100%);
+	}
+	100% {
+		transform: translateX(0);
+	}
+}

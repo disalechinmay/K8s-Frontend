@@ -1,43 +1,73 @@
 import React, { Component } from "react";
 import SmallLoadingPage from "../common/SmallLoadingPage";
 import { getJobs } from "../../services/jobs";
-import "../../assets/styles/common.css";
 import JobsCard from "./JobsCard";
 
 class JobsPage extends Component {
-	state = { pageLoading: true, jobsListSet: false, jobsList: [] };
-	constructor(props) {
-		super(props);
+	state = {
+		pageLoading: true,
+		jobsListSet: false,
+		jobsList: [],
+		errorSet: false,
+		errorDescription: ""
+	};
+	_isMounted = false;
 
-		getJobs(this.props.namespace).then(result => {
-			let newState = { ...this.state };
+	componentDidMount() {
+		this._isMounted = true;
 
-			newState.pageLoading = false;
-			newState.jobsListSet = true;
-			newState.jobsList = result.payLoad;
-
-			this.setState(newState);
-		});
-	}
-
-	componentDidUpdate(previousProps) {
-		// If namespace is changed, get new data.
-		if (previousProps.namespace !== this.props.namespace) {
-			this.setState({
-				pageLoading: true,
-				jobsListSet: false,
-				jobsList: []
-			});
-
-			getJobs(this.props.namespace).then(result => {
+		// Get list of pods for the selected namespace.
+		getJobs(this.props.namespace)
+			.then(result => {
 				let newState = { ...this.state };
 
 				newState.pageLoading = false;
 				newState.jobsListSet = true;
 				newState.jobsList = result.payLoad;
 
-				this.setState(newState);
+				if (this._isMounted) this.setState(newState);
+			})
+			.catch(err => {
+				this.setState({
+					...this.state,
+					errorSet: true,
+					errorDescription: err
+				});
 			});
+	}
+
+	componentWillUnmount() {
+		this._isMounted = false;
+	}
+
+	componentDidUpdate(previousProps) {
+		// If namespace is changed, get new data.
+		if (previousProps.namespace !== this.props.namespace) {
+			this.setState({
+				...this.state,
+				pageLoading: true,
+				jobsListSet: false,
+				jobsList: []
+			});
+
+			// Get list of pods for the selected namespace.
+			getJobs(this.props.namespace)
+				.then(result => {
+					let newState = { ...this.state };
+
+					newState.pageLoading = false;
+					newState.jobsListSet = true;
+					newState.jobsList = result.payLoad;
+
+					if (this._isMounted) this.setState(newState);
+				})
+				.catch(err => {
+					this.setState({
+						...this.state,
+						errorSet: true,
+						errorDescription: err
+					});
+				});
 		}
 	}
 
