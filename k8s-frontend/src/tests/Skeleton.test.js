@@ -21,7 +21,7 @@ describe("Skeleton Tests", () => {
 		expect(wrapper.find("LoadingPage").exists()).toBeFalsy();
 	});
 
-	test("Check if NavbarBrand contains text 'Symphonize'", async () => {
+	test("Check if sidebar title contains text 'Symphonize'", async () => {
 		// Waits for 2 second(s) and then updates the wrapper
 		await new Promise(r => setTimeout(r, 2000));
 		wrapper.update();

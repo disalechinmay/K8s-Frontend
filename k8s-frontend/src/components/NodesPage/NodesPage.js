@@ -16,6 +16,7 @@ class NodesPage extends Component {
 	componentDidMount() {
 		this._isMounted = true;
 
+		// Makes a service call to get a list of nodes
 		getNodes()
 			.then(result => {
 				let newState = { ...this.state };
@@ -59,7 +60,6 @@ class NodesPage extends Component {
 							<NodeCard
 								key={index + "_NODE_CARD"}
 								nodeInfo={nodeInfo}
-								index={index}
 								refreshState={() => this.props.refreshState()}
 							/>
 						);
