@@ -35,6 +35,9 @@ class NodeCard extends Component {
 						<span className="fa fa-lastfm" />
 						&emsp;
 						{this.props.nodeInfo.nodeName}
+						{this.props.showResourceType && (
+							<sup className="resource-type">Node</sup>
+						)}
 					</span>
 
 					<div className="flex flex-row space-around">

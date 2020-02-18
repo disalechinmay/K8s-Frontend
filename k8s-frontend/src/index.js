@@ -10,7 +10,7 @@ import "./assets/styles/common/ErrorPage.css";
 import "./assets/styles/common/SmallErrorPage.css";
 import "./assets/styles/common/Cards.css";
 import "./assets/styles/common/Labels.css";
-
+import "./assets/styles/SearchPage/SearchPage.css";
 ReactDOM.render(<Skeleton />, document.getElementById("root"));
 
 // If you want your app to work offline and load faster, you can change

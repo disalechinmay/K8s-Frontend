@@ -30,6 +30,9 @@ class ServiceCard extends Component {
 							<span className="fa fa-lastfm" />
 							&emsp;
 							{this.props.serviceInfo.serviceName}
+							{this.props.showResourceType && (
+								<sup className="resource-type">Service</sup>
+							)}
 						</span>
 
 						<span className="resource-manage-section">
@@ -63,24 +66,45 @@ class ServiceCard extends Component {
 							<span>Service Type</span>
 						</span>
 
-						<span className="flex flex-row left-orange-border">
-							<span>
-								<span className="ml-5pr font-weight-bolder big-number">
-									{this.props.serviceInfo.servicePort}
-								</span>
-								<br />
-								<span>Service Port</span>
-							</span>
-							&emsp;
-							<span className="fa fa-arrow-circle-right big-number" />
-							&emsp;
-							<span>
-								<span className="font-weight-bolder big-number">
-									{this.props.serviceInfo.serviceTargetPort}
-								</span>
-								<br />
-								<span>Target Port</span>
-							</span>
+						<span className="flex flex-column left-orange-border">
+							{this.props.serviceInfo.servicePort.map(
+								(port, index) => {
+									return (
+										<div
+											className="flex flex-row w-100 mt-5pr"
+											key={index + "PORT FRAG"}
+										>
+											<span>
+												<span className="ml-5pr font-weight-bolder big-number">
+													{
+														this.props.serviceInfo
+															.servicePort[index]
+													}
+												</span>
+												<br />
+												<span>Service Port</span>
+											</span>
+											&emsp;
+											<span className="fa fa-arrow-circle-right big-number" />
+											&emsp;
+											<span>
+												<span className="font-weight-bolder big-number">
+													{
+														this.props.serviceInfo
+															.serviceTargetPort[
+															index
+														]
+													}
+												</span>
+												<br />
+												<span>Target Port</span>
+											</span>
+											<br />
+											<br />
+										</div>
+									);
+								}
+							)}
 						</span>
 					</div>
 

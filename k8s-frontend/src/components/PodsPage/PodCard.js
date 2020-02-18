@@ -12,6 +12,9 @@ class PodCard extends Component {
 							<span className="fa fa-lastfm" />
 							&emsp;
 							{this.props.podInfo.podName}
+							{this.props.showResourceType && (
+								<sup className="resource-type">Pod</sup>
+							)}
 						</span>
 
 						<span className="resource-manage-section">
