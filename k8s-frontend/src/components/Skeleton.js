@@ -6,6 +6,7 @@ import { PodsPage } from "./PodsPage";
 import { DeploymentsPage } from "./DeploymentsPage";
 import { ServicesPage } from "./ServicesPage";
 import { JobsPage } from "./JobsPage";
+import { SearchBar, SearchPage } from "./SearchPage";
 
 class Skeleton extends Component {
 	state = {
@@ -15,7 +16,8 @@ class Skeleton extends Component {
 		namespacesList: [],
 		namespaceSelected: "default",
 		errorSet: false,
-		errorDescription: ""
+		errorDescription: "",
+		searchTokens: []
 	};
 
 	constructor(props) {
@@ -122,12 +124,32 @@ class Skeleton extends Component {
 		this.setState({ ...this.state });
 	}
 
+	renderSearchPage() {
+		for (let iter = 0; iter < this.sidebarOptions.length; iter++)
+			if (
+				this.optionRefs[iter].current.classList.contains(
+					"sidebar-button-active"
+				)
+			)
+				this.optionRefs[iter].current.classList.remove(
+					"sidebar-button-active"
+				);
+		this.setState({ ...this.state, sidebarOptionSelected: 9 });
+	}
+
+	sendTokens(tokens) {
+		this.setState({
+			...this.state,
+			searchTokens: tokens,
+			sidebarOptionSelected: 9
+		});
+	}
+
 	render() {
 		if (this.state.errorSet)
 			return <ErrorPage errorDescription={this.state.errorDescription} />;
 
 		if (this.state.pageLoading) return <LoadingPage />;
-
 		return (
 			<React.Fragment>
 				<div className="mainContainer">
@@ -170,7 +192,6 @@ class Skeleton extends Component {
 								Namespace
 							</div>
 						</div>
-
 						<div className="sidebar-section-title">Resources</div>
 						{/* Rendering sidebar buttons */}
 						{this.sidebarOptions.map((sidebarOption, index) => {
@@ -191,11 +212,14 @@ class Skeleton extends Component {
 								</div>
 							);
 						})}
-
-						<div className="sidebar-search">Search resources..</div>
+						<SearchBar
+							refreshState={() => this.refreshState()}
+							renderSearchPage={() => this.renderSearchPage()}
+							sendTokens={tokens => this.sendTokens(tokens)}
+						/>
 					</div>
 
-					<div className="mainContent">
+					<div className="mainContent" id="mainContent">
 						{/* Depending upon sidebarOptionSelected, render respective page. */}
 
 						{this.state.sidebarOptionSelected === 1 && (
@@ -228,6 +252,14 @@ class Skeleton extends Component {
 							<JobsPage
 								refreshState={() => this.refreshState()}
 								namespace={this.state.namespaceSelected}
+							/>
+						)}
+
+						{this.state.sidebarOptionSelected === 9 && (
+							<SearchPage
+								refreshState={() => this.refreshState()}
+								namespace={this.state.namespaceSelected}
+								searchTokens={this.state.searchTokens}
 							/>
 						)}
 					</div>

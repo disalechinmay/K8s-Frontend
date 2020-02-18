@@ -1,0 +1,29 @@
+<html>
+	<head>
+		<script>
+			// Api call
+			getKahitari = () => {
+				return new Promise(async (resolve, reject) => {
+					await new Promise(resolve => setTimeout(resolve, 5000));
+					resolve("Zala mazha kaam!!");
+				});
+			};
+
+			doStuff = async () => {
+				let data = await getKahitari();
+				console.log(data);
+				// getKahitari()
+				// .then(data => {
+				// 	console.log(data);
+				// })
+				// .catch(err => console.log("bhkjmb" + err));
+				console.log("Nice");
+			};
+		</script>
+	</head>
+	<body>
+		Bharti
+		<br />
+		<button onclick="doStuff()">Click me</button>
+	</body>
+</html>

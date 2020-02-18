@@ -30,6 +30,9 @@ class DeploymentCard extends Component {
 							<span className="fa fa-lastfm" />
 							&emsp;
 							{this.props.deploymentInfo.deploymentName}
+							{this.props.showResourceType && (
+								<sup className="resource-type">Deployment</sup>
+							)}
 						</span>
 						<span className="resource-manage-section">
 							<span className="resource-delete-button fa fa-trash" />

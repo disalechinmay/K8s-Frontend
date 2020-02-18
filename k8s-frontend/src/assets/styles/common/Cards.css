@@ -29,7 +29,9 @@
 	font-size: 3em;
 	color: #2ecc71;
 }
-
+.mt-5pr {
+	margin-top: 5%;
+}
 .ml-5pr {
 	margin-left: 5%;
 }

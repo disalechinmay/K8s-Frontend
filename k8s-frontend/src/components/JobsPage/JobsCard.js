@@ -13,6 +13,9 @@ class JobsCard extends Component {
 							<span className="fa fa-lastfm" />
 							&emsp;
 							{this.props.jobInfo.jobName}
+							{this.props.showResourceType && (
+								<sup className="resource-type">Job</sup>
+							)}
 						</span>
 
 						<span className="resource-manage-section">

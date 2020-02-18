@@ -24,3 +24,12 @@
 	padding-right: 5px;
 	margin-left: 5px;
 }
+
+.resource-type {
+	font-size: 0.4em;
+	color: #dd5135;
+	border: 1px solid #dd5135;
+	border-radius: 5px 5px 5px 5px;
+	padding: 2px 2px 2px 2px;
+	margin-left: 1%;
+}
