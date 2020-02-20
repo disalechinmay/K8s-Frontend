@@ -25,6 +25,11 @@ class PodsPage extends Component {
 				newState.podsListSet = true;
 				newState.podsList = result.payLoad;
 
+				let newPodsList = [];
+				for (let pod of newState.podsList)
+					if (!(pod.podName in newState.deletedPods))
+						newPodsList.push();
+
 				if (this._isMounted) this.setState(newState);
 			})
 			.catch(err => {
