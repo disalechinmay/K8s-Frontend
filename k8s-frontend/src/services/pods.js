@@ -46,6 +46,55 @@ export function deletePod(namespace, podName) {
 				"Content-Type": "application/json"
 			},
 			body: JSON.stringify({ namespace, podName })
+		}).then(() => {
+			// let iters = 0;
+			// while (iters != 1000) {
+			// 	iters++;
+			// 	console.log("Inside loop");
+			// 	getPods("default").then(result => {
+			// 		console.log(result.payLoad);
+			// 	});
+			// }
 		});
+	});
+}
+
+export function getPodExposure(namespace, podName) {
+	return new Promise((resolve, reject) => {
+		axios
+			.get(API_LOCATION + "/pods/exposure", {
+				params: { namespace, podName }
+			})
+			.then(result => result.data)
+			.then(result => {
+				if (result.status === "FAILURE")
+					reject({
+						errorDescription:
+							"Something went wrong while retrieving pod exposure for pod '" +
+							podName +
+							"' '" +
+							namespace +
+							"' namespace!",
+						errorSuggestions: [
+							"Make sure the backend service is up and running.",
+							"Make sure the endpoint being accessed is valid."
+						]
+					});
+				resolve(result);
+			})
+			.catch(err =>
+				reject({
+					errorDescription:
+						"Something went wrong while retrieving pod exposure for pod '" +
+						podName +
+						"' '" +
+						namespace +
+						"' namespace!",
+					errorSuggestions: [
+						"Make sure the backend service is up and running.",
+						"Make sure the namespace is correct."
+					]
+				})
+			);
 	});
 }

@@ -1,6 +1,7 @@
-import { mount } from "enzyme";
-import Skeleton from "../components/Skeleton";
 import React from "react";
+
+import { mount } from "enzyme";
+import Skeleton from "../components/Skeleton.js";
 
 describe("Skeleton Tests", () => {
 	let wrapper;

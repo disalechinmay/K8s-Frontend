@@ -9,13 +9,13 @@ class PodsPage extends Component {
 		podsListSet: false,
 		podsList: [],
 		errorSet: false,
-		errorDescription: ""
+		errorDescription: "",
+		deletedPods: []
 	};
 	_isMounted = false;
+	refreshDataInterval = null;
 
-	componentDidMount() {
-		this._isMounted = true;
-
+	getNewData() {
 		// Get list of pods for the selected namespace.
 		getPods(this.props.namespace)
 			.then(result => {
@@ -24,6 +24,11 @@ class PodsPage extends Component {
 				newState.pageLoading = false;
 				newState.podsListSet = true;
 				newState.podsList = result.payLoad;
+
+				let newPodsList = [];
+				for (let pod of newState.podsList)
+					if (!(pod.podName in newState.deletedPods))
+						newPodsList.push();
 
 				if (this._isMounted) this.setState(newState);
 			})
@@ -36,8 +41,16 @@ class PodsPage extends Component {
 			});
 	}
 
+	componentDidMount() {
+		this._isMounted = true;
+
+		this.getNewData();
+		this.refreshDataInterval = setInterval(() => this.getNewData(), 3000);
+	}
+
 	componentWillUnmount() {
 		this._isMounted = false;
+		clearInterval(this.refreshDataInterval);
 	}
 
 	componentDidUpdate(previousProps) {
@@ -69,6 +82,19 @@ class PodsPage extends Component {
 						});
 				});
 		}
+	}
+
+	deleteCard(podName) {
+		let newState = { ...this.state };
+
+		let newPodsList = [];
+
+		for (let pod of newState.podsList)
+			if (pod.podName !== podName) newPodsList.push(pod);
+
+		newState.deletedPods.push(podName);
+
+		this.setState({ ...this.state, podsList: newPodsList });
 	}
 
 	render() {
@@ -105,6 +131,9 @@ class PodsPage extends Component {
 									namespace={this.props.namespace}
 									refreshState={() =>
 										this.props.refreshState()
+									}
+									deleteCard={podName =>
+										this.deleteCard(podName)
 									}
 								/>
 							</React.Fragment>

@@ -15,7 +15,7 @@
 	color: #2ecc71;
 	margin-top: 1%;
 	margin-bottom: 2%;
-	max-width: 80%;
+	max-width: 100%;
 }
 
 .card .big-number {
@@ -55,8 +55,15 @@
 	width: 100%;
 }
 
+.w-70 {
+	width: 70%;
+}
+
 .mw-100 {
 	max-width: 100%;
+}
+.mw-80 {
+	min-width: 80%;
 }
 
 .justify-content-center {
@@ -70,7 +77,9 @@
 .space-around {
 	justify-content: space-around;
 }
-
+.space-between {
+	justify-content: space-between;
+}
 .wrap {
 	flex-wrap: wrap;
 }
@@ -79,6 +88,7 @@
 	float: right;
 	height: 1%;
 	max-width: 20%;
+	justify-self: flex-end;
 }
 
 .resource-delete-button {
@@ -165,4 +175,11 @@ hr {
 	100% {
 		transform: translateX(0);
 	}
+}
+.tooltip-highlight {
+	color: #dd5135;
+}
+
+.live-icon {
+	margin: 1% 0% 0% 1%;
 }
