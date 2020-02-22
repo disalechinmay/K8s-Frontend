@@ -1,6 +1,6 @@
 import { mount } from "enzyme";
-import { NodeCard } from "../../components/NodesPage";
 import React from "react";
+import { NodeCard } from "../../components/NodesPage";
 
 describe("NodeCard Tests", () => {
 	test("Check if NodeCard doesn't throw error when nodeInfo prop is not passed.", () => {

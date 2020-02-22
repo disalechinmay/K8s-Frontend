@@ -1,0 +1,496 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Skeleton Tests Check if ErrorPage renders when errorSet is true. 1`] = `
+<Skeleton>
+  <ErrorPage
+    errorDescription={
+      Object {
+        "errorDescription": "Something went wrong while retrieving namespaces!",
+        "errorSuggestions": Array [
+          "Make sure the backend service is up and running.",
+          "Make sure the endpoint being accessed is valid.",
+        ],
+      }
+    }
+  >
+    <div
+      className="error-page"
+    >
+      <div
+        className="error-page-content"
+      >
+        <h1
+          className="oops"
+        >
+          OOPS!
+        </h1>
+        <span
+          className="message"
+        >
+          Things seem to be broken a bit.
+        </span>
+        <br />
+        <br />
+        <span
+          className="font-weight-bold"
+        >
+          Error: 
+        </span>
+        <span>
+          Something went wrong while retrieving namespaces!
+        </span>
+        <br />
+        <br />
+        <span
+          className="font-weight-bold"
+        >
+          Suggestions: 
+        </span>
+        <br />
+        <span>
+          Make sure the backend service is up and running.
+          <br
+            key="0_SUGGESTION"
+          />
+          Make sure the endpoint being accessed is valid.
+          <br
+            key="1_SUGGESTION"
+          />
+        </span>
+        <span
+          className="logo"
+        >
+          Symphonize
+        </span>
+      </div>
+    </div>
+  </ErrorPage>
+</Skeleton>
+`;
+
+exports[`Skeleton Tests Check if loading page renders correctly. 1`] = `
+<Skeleton>
+  <LoadingPage>
+    <div
+      className="loading-page"
+    >
+      <div
+        className="loading-page-content"
+      >
+        <span
+          className="loader"
+        >
+          <Loader
+            color="#ecf0f1"
+            css=""
+            loading={true}
+            size="5em"
+          >
+            <EmotionCssPropInternal
+              __EMOTION_TYPE_PLEASE_DO_NOT_USE__="div"
+              css={
+                Array [
+                  Object {
+                    "map": undefined,
+                    "name": "1oyc5ch",
+                    "next": undefined,
+                    "styles": "
+      position: relative;
+      width: 5em;
+      height: 5em;
+    ",
+                    "toString": [Function],
+                  },
+                  "",
+                ]
+              }
+            >
+              <div
+                className="css-8ytart"
+              >
+                <EmotionCssPropInternal
+                  __EMOTION_TYPE_PLEASE_DO_NOT_USE__="div"
+                  css={
+                    Object {
+                      "map": undefined,
+                      "name": "1vpk80i",
+                      "next": Object {
+                        "name": "animation-zodxwl",
+                        "next": undefined,
+                        "styles": "@keyframes animation-zodxwl{
+  0% {transform: rotate(0deg)}
+  50% {transform: rotate(180deg)}
+  100% {transform: rotate(360deg)}
+}",
+                      },
+                      "styles": "
+      position: absolute;
+      height: 5em;
+      width: 5em;
+      border: 1px solid #ecf0f1;
+      border-radius: 100%;
+      transition: 2s;
+      border-bottom: none;
+      border-right: none;
+      top: 0%;
+      left: 0%;
+      animation-fill-mode: \\"\\";
+      animation: animation-zodxwl 1s 0s infinite linear;
+    ",
+                      "toString": [Function],
+                    }
+                  }
+                >
+                  <div
+                    className="css-1vpk80i"
+                  />
+                </EmotionCssPropInternal>
+                <EmotionCssPropInternal
+                  __EMOTION_TYPE_PLEASE_DO_NOT_USE__="div"
+                  css={
+                    Object {
+                      "map": undefined,
+                      "name": "pwsp8i",
+                      "next": Object {
+                        "name": "animation-zodxwl",
+                        "next": undefined,
+                        "styles": "@keyframes animation-zodxwl{
+  0% {transform: rotate(0deg)}
+  50% {transform: rotate(180deg)}
+  100% {transform: rotate(360deg)}
+}",
+                      },
+                      "styles": "
+      position: absolute;
+      height: 4.5em;
+      width: 4.5em;
+      border: 1px solid #ecf0f1;
+      border-radius: 100%;
+      transition: 2s;
+      border-bottom: none;
+      border-right: none;
+      top: 1.75%;
+      left: 0.875%;
+      animation-fill-mode: \\"\\";
+      animation: animation-zodxwl 1s 0.2s infinite linear;
+    ",
+                      "toString": [Function],
+                    }
+                  }
+                >
+                  <div
+                    className="css-pwsp8i"
+                  />
+                </EmotionCssPropInternal>
+                <EmotionCssPropInternal
+                  __EMOTION_TYPE_PLEASE_DO_NOT_USE__="div"
+                  css={
+                    Object {
+                      "map": undefined,
+                      "name": "1lcb3ax",
+                      "next": Object {
+                        "name": "animation-zodxwl",
+                        "next": undefined,
+                        "styles": "@keyframes animation-zodxwl{
+  0% {transform: rotate(0deg)}
+  50% {transform: rotate(180deg)}
+  100% {transform: rotate(360deg)}
+}",
+                      },
+                      "styles": "
+      position: absolute;
+      height: 4em;
+      width: 4em;
+      border: 1px solid #ecf0f1;
+      border-radius: 100%;
+      transition: 2s;
+      border-bottom: none;
+      border-right: none;
+      top: 3.5%;
+      left: 1.75%;
+      animation-fill-mode: \\"\\";
+      animation: animation-zodxwl 1s 0.4s infinite linear;
+    ",
+                      "toString": [Function],
+                    }
+                  }
+                >
+                  <div
+                    className="css-1lcb3ax"
+                  />
+                </EmotionCssPropInternal>
+                <EmotionCssPropInternal
+                  __EMOTION_TYPE_PLEASE_DO_NOT_USE__="div"
+                  css={
+                    Object {
+                      "map": undefined,
+                      "name": "8qzkbb",
+                      "next": Object {
+                        "name": "animation-zodxwl",
+                        "next": undefined,
+                        "styles": "@keyframes animation-zodxwl{
+  0% {transform: rotate(0deg)}
+  50% {transform: rotate(180deg)}
+  100% {transform: rotate(360deg)}
+}",
+                      },
+                      "styles": "
+      position: absolute;
+      height: 3.5em;
+      width: 3.5em;
+      border: 1px solid #ecf0f1;
+      border-radius: 100%;
+      transition: 2s;
+      border-bottom: none;
+      border-right: none;
+      top: 5.249999999999999%;
+      left: 2.6249999999999996%;
+      animation-fill-mode: \\"\\";
+      animation: animation-zodxwl 1s 0.6000000000000001s infinite linear;
+    ",
+                      "toString": [Function],
+                    }
+                  }
+                >
+                  <div
+                    className="css-8qzkbb"
+                  />
+                </EmotionCssPropInternal>
+                <EmotionCssPropInternal
+                  __EMOTION_TYPE_PLEASE_DO_NOT_USE__="div"
+                  css={
+                    Object {
+                      "map": undefined,
+                      "name": "1ewkqe9",
+                      "next": Object {
+                        "name": "animation-zodxwl",
+                        "next": undefined,
+                        "styles": "@keyframes animation-zodxwl{
+  0% {transform: rotate(0deg)}
+  50% {transform: rotate(180deg)}
+  100% {transform: rotate(360deg)}
+}",
+                      },
+                      "styles": "
+      position: absolute;
+      height: 3em;
+      width: 3em;
+      border: 1px solid #ecf0f1;
+      border-radius: 100%;
+      transition: 2s;
+      border-bottom: none;
+      border-right: none;
+      top: 7%;
+      left: 3.5%;
+      animation-fill-mode: \\"\\";
+      animation: animation-zodxwl 1s 0.8s infinite linear;
+    ",
+                      "toString": [Function],
+                    }
+                  }
+                >
+                  <div
+                    className="css-1ewkqe9"
+                  />
+                </EmotionCssPropInternal>
+              </div>
+            </EmotionCssPropInternal>
+          </Loader>
+        </span>
+        <span
+          className="message"
+        >
+          Loading
+        </span>
+        <span
+          className="logo"
+        >
+          Symphonize
+        </span>
+      </div>
+    </div>
+  </LoadingPage>
+</Skeleton>
+`;
+
+exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
+<Skeleton>
+  <div
+    className="mainContainer"
+  >
+    <div
+      className="sidebar"
+    >
+      <div
+        className="sidebar-title"
+        onClick={[Function]}
+      >
+        Symphonize
+      </div>
+      <div
+        className="sidebar-namespace-picker"
+      >
+        <div
+          className="namespace-picker"
+        >
+          <select
+            className="namespace-selector"
+            onChange={[Function]}
+          >
+            <option
+              key="default_NAMESPACE"
+              value="default"
+            >
+              default
+            </option>
+            <option
+              key="kube-node-lease_NAMESPACE"
+              value="kube-node-lease"
+            >
+              kube-node-lease
+            </option>
+            <option
+              key="kube-public_NAMESPACE"
+              value="kube-public"
+            >
+              kube-public
+            </option>
+            <option
+              key="kube-system_NAMESPACE"
+              value="kube-system"
+            >
+              kube-system
+            </option>
+          </select>
+        </div>
+        <div
+          className="namespace-picker-title"
+        >
+          Namespace
+        </div>
+      </div>
+      <div
+        className="sidebar-section-title"
+      >
+        Resources
+      </div>
+      <div
+        className="sidebar-button"
+        id="nodes_sidebarOption"
+        key="0_SIDEBAR_BUTTON"
+        onClick={[Function]}
+      >
+        <span
+          className="fa fa-desktop"
+        />
+          
+        Nodes
+      </div>
+      <div
+        className="sidebar-button"
+        id="pods_sidebarOption"
+        key="1_SIDEBAR_BUTTON"
+        onClick={[Function]}
+      >
+        <span
+          className="fa fa-archive"
+        />
+          
+        Pods
+      </div>
+      <div
+        className="sidebar-button"
+        id="deployments_sidebarOption"
+        key="2_SIDEBAR_BUTTON"
+        onClick={[Function]}
+      >
+        <span
+          className="fa fa-cubes"
+        />
+          
+        Deployments
+      </div>
+      <div
+        className="sidebar-button"
+        id="services_sidebarOption"
+        key="3_SIDEBAR_BUTTON"
+        onClick={[Function]}
+      >
+        <span
+          className="fa fa-random"
+        />
+          
+        Services
+      </div>
+      <div
+        className="sidebar-button"
+        id="jobs_sidebarOption"
+        key="4_SIDEBAR_BUTTON"
+        onClick={[Function]}
+      >
+        <span
+          className="fa fa-tasks"
+        />
+          
+        Jobs
+      </div>
+      <div
+        className="sidebar-button"
+        id="cronJobs_sidebarOption"
+        key="5_SIDEBAR_BUTTON"
+        onClick={[Function]}
+      >
+        <span
+          className="fa fa-clock-o"
+        />
+          
+        Cron Jobs
+      </div>
+      <div
+        className="sidebar-button"
+        id="configMaps_sidebarOption"
+        key="6_SIDEBAR_BUTTON"
+        onClick={[Function]}
+      >
+        <span
+          className="fa fa-gears"
+        />
+          
+        Config Maps
+      </div>
+      <div
+        className="sidebar-button"
+        id="secrets_sidebarOption"
+        key="7_SIDEBAR_BUTTON"
+        onClick={[Function]}
+      >
+        <span
+          className="fa fa-user-secret"
+        />
+          
+        Secrets
+      </div>
+      <SearchBar
+        refreshState={[Function]}
+        renderSearchPage={[Function]}
+        sendTokens={[Function]}
+      >
+        <div
+          className="sidebar-search"
+          contentEditable="true"
+          onBlur={[Function]}
+          onClick={[Function]}
+          onInput={[Function]}
+          suppressContentEditableWarning="true"
+        >
+          Search Resources..
+        </div>
+      </SearchBar>
+    </div>
+    <div
+      className="mainContent"
+      id="mainContent"
+    />
+  </div>
+</Skeleton>
+`;

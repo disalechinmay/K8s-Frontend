@@ -1,6 +1,7 @@
 import { API_LOCATION } from "../configs";
 import axios from "axios";
 
+// Makes a call to the backend and returns a list of nodes.
 export function getNodes() {
 	return new Promise((resolve, reject) => {
 		axios
@@ -16,10 +17,10 @@ export function getNodes() {
 							"Make sure the endpoint being accessed is valid."
 						]
 					});
+
 				resolve(result);
 			})
-			.catch(err => {
-				console.log("Rejecting...");
+			.catch(error => {
 				reject({
 					errorDescription:
 						"Something went wrong while retrieving nodes!",
