@@ -16,11 +16,28 @@ class NodeCard extends Component {
 
 		if (!this.props.nodeInfo.nodeCapacity) return false;
 		if (typeof this.props.nodeInfo.nodeCapacity !== "object") return false;
-		if (!this.props.nodeInfo.nodeCapacity.cpu) return false;
-		if (!this.props.nodeInfo.nodeCapacity["ephemeral-storage"])
+		if (
+			!this.props.nodeInfo.nodeCapacity.cpu ||
+			typeof this.props.nodeInfo.nodeCapacity.cpu !== "string"
+		)
 			return false;
-		if (!this.props.nodeInfo.nodeCapacity.memory) return false;
-		if (!this.props.nodeInfo.nodeCapacity.pods) return false;
+		if (
+			!this.props.nodeInfo.nodeCapacity.memory ||
+			typeof this.props.nodeInfo.nodeCapacity.memory !== "string"
+		)
+			return false;
+
+		if (
+			!this.props.nodeInfo.nodeCapacity.pods ||
+			typeof this.props.nodeInfo.nodeCapacity.pods !== "string"
+		)
+			return false;
+		if (
+			!this.props.nodeInfo.nodeCapacity["ephemeral-storage"] ||
+			typeof this.props.nodeInfo.nodeCapacity["ephemeral-storage"] !==
+				"string"
+		)
+			return false;
 
 		return true;
 	}

@@ -19,20 +19,20 @@ class NodesPage extends Component {
 		// Makes a service call to get a list of nodes
 		getNodes()
 			.then(result => {
-				let newState = { ...this.state };
-
-				newState.pageLoading = false;
-				newState.nodesListSet = true;
-				newState.nodesList = result.payLoad;
-
-				if (this._isMounted) this.setState(newState);
+				if (this._isMounted)
+					this.setState({
+						...this.state,
+						pageLoading: false,
+						nodesListSet: true,
+						nodesList: result.payLoad
+					});
 			})
-			.catch(err => {
+			.catch(error => {
 				if (this._isMounted)
 					this.setState({
 						...this.state,
 						errorSet: true,
-						errorDescription: err
+						errorDescription: error
 					});
 			});
 	}

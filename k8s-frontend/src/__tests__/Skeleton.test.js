@@ -1,6 +1,5 @@
 import React from "react";
 import { mount } from "enzyme";
-import renderer from "react-test-renderer";
 import toJson from "enzyme-to-json";
 import { PAGE_LOAD_LIMIT_TIME } from "../configs";
 import Skeleton from "../components/Skeleton.js";
@@ -23,6 +22,15 @@ describe("Skeleton Tests", () => {
 
 		expect(wrapper.find(".sidebar-title").exists()).toBeTruthy();
 		expect(wrapper.find(".sidebar-title").text()).toBe("Symphonize");
+	});
+
+	test("Check if click on sidebar title changes state appropriately.", async () => {
+		await new Promise(resolve => setTimeout(resolve, PAGE_LOAD_LIMIT_TIME));
+		wrapper.update();
+
+		wrapper.find(".sidebar-title").simulate("click");
+		wrapper.update();
+		expect(wrapper.state("sidebarOptionSelected")).toBe(0);
 	});
 
 	test("Check if clicks on sidebar buttons change state appropriately.", async () => {
@@ -50,6 +58,28 @@ describe("Skeleton Tests", () => {
 		}
 	});
 
+	test("Check if clicks on sidebar buttons renders pages appropriately.", async () => {
+		// Waits for PAGE_LOAD_LIMIT_TIME second(s) and then updates the wrapper
+		await new Promise(resolve => setTimeout(resolve, PAGE_LOAD_LIMIT_TIME));
+		wrapper.update();
+
+		expect(wrapper.state("sidebarOptionSelected")).toBe(0);
+
+		let buttonsToCheck = [
+			{ id: "#nodes_sidebarOption", page: "NodesPage" },
+			{ id: "#pods_sidebarOption", page: "PodsPage" },
+			{ id: "#deployments_sidebarOption", page: "DeploymentsPage" },
+			{ id: "#services_sidebarOption", page: "ServicesPage" },
+			{ id: "#jobs_sidebarOption", page: "JobsPage" }
+		];
+
+		for (let button of buttonsToCheck) {
+			wrapper.find(button.id).simulate("click");
+			wrapper.update();
+			expect(wrapper.find(button.page).exists()).toBeTruthy();
+		}
+	});
+
 	test("Check if namespace selector works.", async () => {
 		await new Promise(resolve => setTimeout(resolve, PAGE_LOAD_LIMIT_TIME));
 		wrapper.update();
@@ -60,6 +90,17 @@ describe("Skeleton Tests", () => {
 			.at(0)
 			.simulate("change", { target: { value: "a" } });
 		expect(wrapper.state("namespaceSelected")).toBe("a");
+	});
+
+	test("Check if refreshState() works.", async () => {
+		await new Promise(resolve => setTimeout(resolve, PAGE_LOAD_LIMIT_TIME));
+		wrapper.update();
+
+		let oldState = { ...wrapper.state() };
+		wrapper.instance().refreshState();
+		wrapper.update();
+
+		expect(wrapper.state()).toEqual(oldState);
 	});
 
 	test("Check if renderSearchPage() works.", async () => {

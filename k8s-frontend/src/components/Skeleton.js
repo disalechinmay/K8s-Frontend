@@ -117,14 +117,19 @@ class Skeleton extends Component {
 
 		return (
 			<React.Fragment>
+				{/* Main Container */}
 				<div className="mainContainer">
+					{/* Sidebar */}
 					<div className="sidebar">
+						{/* Sidebar Title*/}
 						<div
 							className="sidebar-title"
 							onClick={event => this.handleClick(event, 0)}
 						>
 							Symphonize
 						</div>
+
+						{/* Sidebar Namespace Picker*/}
 						<div className="sidebar-namespace-picker">
 							<div className="namespace-picker">
 								<select
@@ -157,6 +162,8 @@ class Skeleton extends Component {
 								Namespace
 							</div>
 						</div>
+
+						{/* Sidebar Buttons*/}
 						<div className="sidebar-section-title">Resources</div>
 						{/* Rendering sidebar buttons */}
 						{this.sidebarOptions.map((sidebarOption, index) => {
@@ -177,6 +184,8 @@ class Skeleton extends Component {
 								</div>
 							);
 						})}
+
+						{/* Sidebar SearchBar*/}
 						<SearchBar
 							refreshState={() => this.refreshState()}
 							renderSearchPage={() => this.renderSearchPage()}
@@ -184,6 +193,7 @@ class Skeleton extends Component {
 						/>
 					</div>
 
+					{/* Main Content: Displays core pages.*/}
 					<div className="mainContent" id="mainContent">
 						{/* Depending upon sidebarOptionSelected, render respective page. */}
 
