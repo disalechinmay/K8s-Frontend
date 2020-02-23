@@ -1,8 +1,17 @@
 import React, { Component } from "react";
 import { SmallLoadingPage, SmallErrorPage } from "../common";
-import { getPods } from "../../services";
+import { getPods, deletePod } from "../../services";
 import PodCard from "./PodCard";
 
+/* 
+	Compulsory props:
+		1. refreshState (method) [NON-TESTABLE]
+			- Used to refresh parent's state.
+		2. namespace
+
+	Optional props:
+		None
+*/
 class PodsPage extends Component {
 	state = {
 		pageLoading: true,
@@ -15,29 +24,30 @@ class PodsPage extends Component {
 	_isMounted = false;
 	refreshDataInterval = null;
 
+	// Makes a service call and sets podsList.
 	getNewData() {
 		// Get list of pods for the selected namespace.
 		getPods(this.props.namespace)
 			.then(result => {
 				let newState = { ...this.state };
-
 				newState.pageLoading = false;
 				newState.podsListSet = true;
-				newState.podsList = result.payLoad;
+				newState.podsList = [];
 
-				let newPodsList = [];
-				for (let pod of newState.podsList)
-					if (!(pod.podName in newState.deletedPods))
-						newPodsList.push();
+				// If pod is not in deletedPods, include.
+				for (let podInfo of result.payLoad)
+					if (newState.deletedPods.indexOf(podInfo.podName) <= -1)
+						newState.podsList.push(podInfo);
 
 				if (this._isMounted) this.setState(newState);
 			})
-			.catch(err => {
-				this.setState({
-					...this.state,
-					errorSet: true,
-					errorDescription: err
-				});
+			.catch(error => {
+				if (this._isMounted)
+					this.setState({
+						...this.state,
+						errorSet: true,
+						errorDescription: error
+					});
 			});
 	}
 
@@ -45,59 +55,46 @@ class PodsPage extends Component {
 		this._isMounted = true;
 
 		this.getNewData();
+
+		// getNewData() will be called after everry 3 second(s).
 		this.refreshDataInterval = setInterval(() => this.getNewData(), 3000);
 	}
 
 	componentWillUnmount() {
 		this._isMounted = false;
+
+		// Clears the interval.
 		clearInterval(this.refreshDataInterval);
 	}
 
 	componentDidUpdate(previousProps) {
 		// If namespace is changed, get new data.
 		if (previousProps.namespace !== this.props.namespace) {
-			this.setState({
-				...this.state,
-				pageLoading: true,
-				podsListSet: false,
-				podsList: []
-			});
-
-			getPods(this.props.namespace)
-				.then(result => {
-					let newState = { ...this.state };
-
-					newState.pageLoading = false;
-					newState.podsListSet = true;
-					newState.podsList = result.payLoad;
-
-					if (this._isMounted) this.setState(newState);
-				})
-				.catch(err => {
-					if (this._isMounted)
-						this.setState({
-							...this.state,
-							errorSet: true,
-							errorDescription: err
-						});
+			if (this._isMounted)
+				this.setState({
+					...this.state,
+					pageLoading: true,
+					podsListSet: false,
+					podsList: []
 				});
+
+			this.getNewData();
 		}
 	}
 
-	deleteCard(podName) {
+	// Makes a service call to delete the pod.
+	// Maintains a list of deletedPods, so that deleted pods wont show up in the list while they are being deleted.
+	deletePodX(namespace, podName) {
+		deletePod(namespace, podName);
+
 		let newState = { ...this.state };
-
-		let newPodsList = [];
-
-		for (let pod of newState.podsList)
-			if (pod.podName !== podName) newPodsList.push(pod);
-
 		newState.deletedPods.push(podName);
 
-		this.setState({ ...this.state, podsList: newPodsList });
+		if (this._isMounted) this.setState(newState);
 	}
 
 	render() {
+		// If errorSet is set, render SmallErrorPage.
 		if (this.state.errorSet)
 			return (
 				<SmallErrorPage
@@ -105,6 +102,7 @@ class PodsPage extends Component {
 				/>
 			);
 
+		// If pageLoading is set, render SmallLoadingPage.
 		if (this.state.pageLoading) return <SmallLoadingPage />;
 
 		if (
@@ -120,6 +118,7 @@ class PodsPage extends Component {
 
 		return (
 			<React.Fragment>
+				{/* Map podsList if it is set. */}
 				{this.state.podsListSet &&
 					this.state.podsList.map((podInfo, index) => {
 						return (
@@ -132,8 +131,8 @@ class PodsPage extends Component {
 									refreshState={() =>
 										this.props.refreshState()
 									}
-									deleteCard={podName =>
-										this.deleteCard(podName)
+									deletePod={(namespace, podName) =>
+										this.deletePodX(namespace, podName)
 									}
 								/>
 							</React.Fragment>

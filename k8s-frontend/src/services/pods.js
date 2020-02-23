@@ -43,7 +43,7 @@ export function getPods(namespace) {
 export function deletePod(namespace, podName) {
 	return new Promise((resolve, reject) => {
 		axios
-			.delete(API_LOCATION + "/pods", {
+			.post(API_LOCATION + "/pods", {
 				namespace,
 				podName
 			})

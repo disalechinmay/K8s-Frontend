@@ -1,3 +1,5 @@
 {
-    "/deployments\\?namespace=:id": "/deployments"
+	"/deployments\\?namespace=:id": "/deployments",
+	"/pods\\?namespace=:id": "/pods",
+	"/servicesx\\?namespace=:id": "/sericesx"
 }

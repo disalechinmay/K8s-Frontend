@@ -3,6 +3,14 @@ import { SmallLoadingPage, SmallErrorPage } from "../common";
 import { getNodes } from "../../services";
 import NodeCard from "./NodeCard";
 
+/* 
+	Compulsory props:
+		1. refreshState (method) [NON-TESTABLE]
+			- Used to refresh parent's state.
+
+	Optional props:
+		None
+*/
 class NodesPage extends Component {
 	state = {
 		pageLoading: true,
@@ -42,6 +50,7 @@ class NodesPage extends Component {
 	}
 
 	render() {
+		// If errorSet is set, render SmallErrorPage.
 		if (this.state.errorSet) {
 			return (
 				<SmallErrorPage
@@ -50,10 +59,12 @@ class NodesPage extends Component {
 			);
 		}
 
+		// If pageLoading is set, render SmallLoadingPage.
 		if (this.state.pageLoading) return <SmallLoadingPage />;
 
 		return (
 			<React.Fragment>
+				{/* Map nodesList if it is set. */}
 				{this.state.nodesListSet &&
 					this.state.nodesList.map((nodeInfo, index) => {
 						return (

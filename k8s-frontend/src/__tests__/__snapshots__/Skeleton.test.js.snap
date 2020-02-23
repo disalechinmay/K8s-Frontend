@@ -344,6 +344,12 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
               default
             </option>
             <option
+              key="docker_NAMESPACE"
+              value="docker"
+            >
+              docker
+            </option>
+            <option
               key="kube-node-lease_NAMESPACE"
               value="kube-node-lease"
             >
@@ -360,6 +366,12 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
               value="kube-system"
             >
               kube-system
+            </option>
+            <option
+              key="kubernetes-dashboard_NAMESPACE"
+              value="kubernetes-dashboard"
+            >
+              kubernetes-dashboard
             </option>
           </select>
         </div>

@@ -9,7 +9,7 @@ jest.mock("../../services");
 
 describe("NodesPage Tests", () => {
 	test("Check if SmallLoadingPage renders", () => {
-		getNodes.mockImplementationOnce(() => Promise.reject());
+		getNodes.mockImplementationOnce(() => Promise.resolve());
 
 		let wrapper = mount(<NodesPage />);
 		expect(wrapper.find("SmallLoadingPage").exists()).toBeTruthy();

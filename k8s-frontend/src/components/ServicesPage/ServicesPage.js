@@ -3,6 +3,15 @@ import { SmallLoadingPage, SmallErrorPage } from "../common";
 import { getServices } from "../../services/services";
 import ServiceCard from "./ServicesCard";
 
+/* 
+	Compulsory props:
+		1. refreshState (method) [NON-TESTABLE]
+			- Used to refresh parent's state.
+		2. namespace
+
+	Optional props:
+		None
+*/
 class ServicesPage extends Component {
 	state = {
 		pageLoading: true,
@@ -13,26 +22,32 @@ class ServicesPage extends Component {
 	};
 	_isMounted = false;
 
+	// Makes a service call and sets servicesList.
+	getNewData() {
+		getServices(this.props.namespace)
+			.then(result => {
+				if (this._isMounted)
+					this.setState({
+						...this.state,
+						pageLoading: false,
+						servicesListSet: true,
+						servicesList: result.payLoad
+					});
+			})
+			.catch(error => {
+				if (this._isMounted)
+					this.setState({
+						...this.state,
+						errorSet: true,
+						errorDescription: error
+					});
+			});
+	}
+
 	componentDidMount() {
 		this._isMounted = true;
 
-		getServices(this.props.namespace)
-			.then(result => {
-				let newState = { ...this.state };
-
-				newState.pageLoading = false;
-				newState.servicesListSet = true;
-				newState.servicesList = result.payLoad;
-
-				if (this._isMounted) this.setState(newState);
-			})
-			.catch(err => {
-				this.setState({
-					...this.state,
-					errorSet: true,
-					errorDescription: err
-				});
-			});
+		this.getNewData();
 	}
 
 	componentWillUnmount() {
@@ -42,35 +57,20 @@ class ServicesPage extends Component {
 	componentDidUpdate(previousProps) {
 		// If namespace is changed, get new data.
 		if (previousProps.namespace !== this.props.namespace) {
-			this.setState({
-				...this.state,
-				pageLoading: true,
-				servicesListSet: false,
-				servicesList: []
-			});
-
-			getServices(this.props.namespace)
-				.then(result => {
-					let newState = { ...this.state };
-
-					newState.pageLoading = false;
-					newState.servicesListSet = true;
-					newState.servicesList = result.payLoad;
-
-					if (this._isMounted) this.setState(newState);
-				})
-				.catch(err => {
-					if (this._isMounted)
-						this.setState({
-							...this.state,
-							errorSet: true,
-							errorDescription: err
-						});
+			if (this._isMounted)
+				this.setState({
+					...this.state,
+					pageLoading: true,
+					servicesListSet: false,
+					servicesList: []
 				});
+
+			this.getNewData();
 		}
 	}
 
 	render() {
+		// If errorSet is set, render SmallErrorPage.
 		if (this.state.errorSet)
 			return (
 				<SmallErrorPage
@@ -78,6 +78,7 @@ class ServicesPage extends Component {
 				/>
 			);
 
+		// If pageLoading is set, render SmallLoadingPage.
 		if (this.state.pageLoading) return <SmallLoadingPage />;
 
 		if (
@@ -93,6 +94,7 @@ class ServicesPage extends Component {
 
 		return (
 			<React.Fragment>
+				{/* Map servicesList if it is set. */}
 				{this.state.servicesListSet &&
 					this.state.servicesList.map((serviceInfo, index) => {
 						return (

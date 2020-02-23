@@ -27,12 +27,13 @@ class JobsPage extends Component {
 
 				if (this._isMounted) this.setState(newState);
 			})
-			.catch(err => {
-				this.setState({
-					...this.state,
-					errorSet: true,
-					errorDescription: err
-				});
+			.catch(error => {
+				if (this._isMounted)
+					this.setState({
+						...this.state,
+						errorSet: true,
+						errorDescription: error
+					});
 			});
 	}
 
@@ -43,12 +44,13 @@ class JobsPage extends Component {
 	componentDidUpdate(previousProps) {
 		// If namespace is changed, get new data.
 		if (previousProps.namespace !== this.props.namespace) {
-			this.setState({
-				...this.state,
-				pageLoading: true,
-				jobsListSet: false,
-				jobsList: []
-			});
+			if (this._isMounted)
+				this.setState({
+					...this.state,
+					pageLoading: true,
+					jobsListSet: false,
+					jobsList: []
+				});
 
 			// Get list of pods for the selected namespace.
 			getJobs(this.props.namespace)
@@ -62,11 +64,12 @@ class JobsPage extends Component {
 					if (this._isMounted) this.setState(newState);
 				})
 				.catch(err => {
-					this.setState({
-						...this.state,
-						errorSet: true,
-						errorDescription: err
-					});
+					if (this._isMounted)
+						this.setState({
+							...this.state,
+							errorSet: true,
+							errorDescription: err
+						});
 				});
 		}
 	}

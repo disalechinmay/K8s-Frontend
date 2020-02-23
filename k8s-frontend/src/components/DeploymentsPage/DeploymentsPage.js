@@ -3,6 +3,15 @@ import { getDeployments } from "../../services";
 import { SmallLoadingPage, SmallErrorPage } from "../common";
 import DeploymentCard from "./DeploymentCard";
 
+/* 
+	Compulsory props:
+		1. refreshState (method) [NON-TESTABLE]
+			- Used to refresh parent's state.
+		2. namespace
+
+	Optional props:
+		None
+*/
 class DeploymentsPage extends Component {
 	state = {
 		pageLoading: true,
@@ -13,28 +22,32 @@ class DeploymentsPage extends Component {
 	};
 	_isMounted = false;
 
-	componentDidMount() {
-		this._isMounted = true;
-
+	// Makes a service call and sets deploymentsList.
+	getNewData() {
 		// Get list of deployments for the selected namespace.
 		getDeployments(this.props.namespace)
 			.then(result => {
-				let newState = { ...this.state };
-
-				newState.pageLoading = false;
-				newState.deploymentsListSet = true;
-				newState.deploymentsList = result.payLoad;
-
-				if (this._isMounted) this.setState(newState);
+				if (this._isMounted)
+					this.setState({
+						...this.state,
+						pageLoading: false,
+						deploymentsListSet: true,
+						deploymentsList: result.payLoad
+					});
 			})
-			.catch(err => {
+			.catch(error => {
 				if (this._isMounted)
 					this.setState({
 						...this.state,
 						errorSet: true,
-						errorDescription: err
+						errorDescription: error
 					});
 			});
+	}
+
+	componentDidMount() {
+		this._isMounted = true;
+		this.getNewData();
 	}
 
 	componentWillUnmount() {
@@ -51,27 +64,12 @@ class DeploymentsPage extends Component {
 				deploymentsList: []
 			});
 
-			getDeployments(this.props.namespace)
-				.then(result => {
-					let newState = { ...this.state };
-
-					newState.pageLoading = false;
-					newState.deploymentsListSet = true;
-					newState.deploymentsList = result.payLoad;
-
-					this.setState(newState);
-				})
-				.catch(err => {
-					this.setState({
-						...this.state,
-						errorSet: true,
-						errorDescription: err
-					});
-				});
+			this.getNewData();
 		}
 	}
 
 	render() {
+		// If errorSet is set, render SmallErrorPage.
 		if (this.state.errorSet)
 			return (
 				<SmallErrorPage
@@ -79,6 +77,7 @@ class DeploymentsPage extends Component {
 				/>
 			);
 
+		// If pageLoading is set, render SmallLoadingPage.
 		if (this.state.pageLoading) return <SmallLoadingPage />;
 
 		if (
@@ -94,6 +93,7 @@ class DeploymentsPage extends Component {
 
 		return (
 			<React.Fragment>
+				{/* Map deploymentsList if it is set. */}
 				{this.state.deploymentsListSet &&
 					this.state.deploymentsList.map((deploymentInfo, index) => {
 						return (

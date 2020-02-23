@@ -75,7 +75,7 @@ describe("Pods Service Tests: deletePod", () => {
 
 	test(testLabel + ": Check if resolves to mock data.", () => {
 		// Make axios.get to return mock data.
-		axios.delete.mockImplementationOnce(() =>
+		axios.post.mockImplementationOnce(() =>
 			Promise.resolve({
 				data: {
 					payLoad: "Dummy payLoad",
@@ -92,7 +92,7 @@ describe("Pods Service Tests: deletePod", () => {
 
 	test(testLabel + ": Check rejection.", () => {
 		// Make axios.get to return mock data.
-		axios.delete.mockImplementationOnce(() => Promise.reject());
+		axios.post.mockImplementationOnce(() => Promise.reject());
 
 		return expect(functionToTest(namespace, podName)).rejects.toEqual({
 			errorDescription:
