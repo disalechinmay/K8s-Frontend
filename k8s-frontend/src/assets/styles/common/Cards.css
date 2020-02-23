@@ -84,6 +84,10 @@
 	flex-wrap: wrap;
 }
 
+.flex-start {
+	align-items: flex-start;
+}
+
 .resource-manage-section {
 	float: right;
 	height: 1%;

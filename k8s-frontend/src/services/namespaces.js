@@ -1,6 +1,7 @@
 import { API_LOCATION } from "../configs";
 import axios from "axios";
 
+// Makes a call to the backend and returns a list of namespaces.
 export function getNamespaces() {
 	return new Promise((resolve, reject) => {
 		axios
@@ -16,9 +17,10 @@ export function getNamespaces() {
 							"Make sure the endpoint being accessed is valid."
 						]
 					});
+
 				resolve(result);
 			})
-			.catch(err =>
+			.catch(error =>
 				reject({
 					errorDescription:
 						"Something went wrong while retrieving namespaces!",

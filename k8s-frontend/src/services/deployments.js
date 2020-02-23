@@ -1,6 +1,7 @@
 import { API_LOCATION } from "../configs";
 import axios from "axios";
 
+// Makes a call to the backend and returns a list of deployments in a namespace.
 export function getDeployments(namespace) {
 	return new Promise((resolve, reject) => {
 		axios
@@ -22,7 +23,7 @@ export function getDeployments(namespace) {
 					});
 				resolve(result);
 			})
-			.catch(err =>
+			.catch(error =>
 				reject({
 					errorDescription:
 						"Something went wrong while retrieving deployments for '" +

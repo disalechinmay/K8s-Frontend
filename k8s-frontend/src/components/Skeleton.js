@@ -7,6 +7,7 @@ import { DeploymentsPage } from "./DeploymentsPage";
 import { ServicesPage } from "./ServicesPage";
 import { JobsPage } from "./JobsPage";
 import { SearchBar, SearchPage } from "./SearchPage";
+import { SIDEBAR_OPTIONS } from "../configs";
 
 class Skeleton extends Component {
 	state = {
@@ -24,50 +25,9 @@ class Skeleton extends Component {
 		super(props);
 
 		// List of buttons which will appear on sidebar.
-		this.sidebarOptions = [
-			{
-				id: "nodes_sidebarOption",
-				title: "Nodes",
-				style: "fa fa-desktop"
-			},
-			{
-				id: "pods_sidebarOption",
-				title: "Pods",
-				style: "fa fa-archive"
-			},
-			{
-				id: "deployments_sidebarOption",
-				title: "Deployments",
-				style: "fa fa-cubes"
-			},
-			{
-				id: "services_sidebarOption",
-				title: "Services",
-				style: "fa fa-random"
-			},
-			{
-				id: "jobs_sidebarOption",
-				title: "Jobs",
-				style: "fa fa-tasks"
-			},
-			{
-				id: "cronJobs_sidebarOption",
-				title: "Cron Jobs",
-				style: "fa fa-clock-o"
-			},
-			{
-				id: "configMaps_sidebarOption",
-				title: "Config Maps",
-				style: "fa fa-gears"
-			},
-			{
-				id: "secrets_sidebarOption",
-				title: "Secrets",
-				style: "fa fa-user-secret"
-			}
-		];
+		this.sidebarOptions = SIDEBAR_OPTIONS;
 
-		// References of sidebar buttons.
+		// References for sidebar buttons.
 		this.optionRefs = [];
 		for (let iter = 0; iter < this.sidebarOptions.length; iter++)
 			this.optionRefs[iter] = React.createRef();
@@ -75,19 +35,18 @@ class Skeleton extends Component {
 		// Fetching list of namespaces from backend.
 		getNamespaces()
 			.then(result => {
-				let newState = { ...this.state };
-
-				newState.pageLoading = false;
-				newState.namespacesListSet = true;
-				newState.namespacesList = result.payLoad;
-
-				this.setState(newState);
+				this.setState({
+					...this.state,
+					pageLoading: false,
+					namespacesListSet: true,
+					namespacesList: result.payLoad
+				});
 			})
-			.catch(err => {
+			.catch(error => {
 				this.setState({
 					...this.state,
 					errorSet: true,
-					errorDescription: err
+					errorDescription: error
 				});
 			});
 	}
@@ -124,6 +83,8 @@ class Skeleton extends Component {
 		this.setState({ ...this.state });
 	}
 
+	// Sets sidebarOptionSelectec to 9, which in turn renders SearchPage.
+	// Manipulated by SearchBar.
 	renderSearchPage() {
 		for (let iter = 0; iter < this.sidebarOptions.length; iter++)
 			if (
@@ -137,6 +98,7 @@ class Skeleton extends Component {
 		this.setState({ ...this.state, sidebarOptionSelected: 9 });
 	}
 
+	// Sets searchTokens in state, which is in turn sent to SearchPage.
 	sendTokens(tokens) {
 		this.setState({
 			...this.state,
@@ -146,20 +108,28 @@ class Skeleton extends Component {
 	}
 
 	render() {
+		// Renders ErrorPage if errorSet is true.
 		if (this.state.errorSet)
 			return <ErrorPage errorDescription={this.state.errorDescription} />;
 
+		// Renders LoadingPage if pageLoading is true.
 		if (this.state.pageLoading) return <LoadingPage />;
+
 		return (
 			<React.Fragment>
+				{/* Main Container */}
 				<div className="mainContainer">
+					{/* Sidebar */}
 					<div className="sidebar">
+						{/* Sidebar Title*/}
 						<div
 							className="sidebar-title"
 							onClick={event => this.handleClick(event, 0)}
 						>
 							Symphonize
 						</div>
+
+						{/* Sidebar Namespace Picker*/}
 						<div className="sidebar-namespace-picker">
 							<div className="namespace-picker">
 								<select
@@ -192,6 +162,8 @@ class Skeleton extends Component {
 								Namespace
 							</div>
 						</div>
+
+						{/* Sidebar Buttons*/}
 						<div className="sidebar-section-title">Resources</div>
 						{/* Rendering sidebar buttons */}
 						{this.sidebarOptions.map((sidebarOption, index) => {
@@ -212,6 +184,8 @@ class Skeleton extends Component {
 								</div>
 							);
 						})}
+
+						{/* Sidebar SearchBar*/}
 						<SearchBar
 							refreshState={() => this.refreshState()}
 							renderSearchPage={() => this.renderSearchPage()}
@@ -219,6 +193,7 @@ class Skeleton extends Component {
 						/>
 					</div>
 
+					{/* Main Content: Displays core pages.*/}
 					<div className="mainContent" id="mainContent">
 						{/* Depending upon sidebarOptionSelected, render respective page. */}
 

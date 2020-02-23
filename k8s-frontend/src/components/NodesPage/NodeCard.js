@@ -1,13 +1,19 @@
 import React, { Component } from "react";
 
 /* 
-	Takes in a few compulsory props:
-		1. nodeInfo
+	Compulsory props:
+		1. nodeInfo (object)
+			- Information about the node to be displayed.
+		2. refreshState (method) [NON-TESTABLE]
+			- Used to refresh parent's state.
 
-	WARNING: Doesn't render anything without these props.
+	Optional props:
+		1. showResourceType (boolean)
+			- If set, displays a resource type tag in the card header.
+			- Used by SearchPage.
 */
 class NodeCard extends Component {
-	// Validates nodeInfo prop
+	// Validates props sent to this component.
 	validateProps() {
 		if (!this.props.nodeInfo) return false;
 
@@ -16,11 +22,28 @@ class NodeCard extends Component {
 
 		if (!this.props.nodeInfo.nodeCapacity) return false;
 		if (typeof this.props.nodeInfo.nodeCapacity !== "object") return false;
-		if (!this.props.nodeInfo.nodeCapacity.cpu) return false;
-		if (!this.props.nodeInfo.nodeCapacity["ephemeral-storage"])
+		if (
+			!this.props.nodeInfo.nodeCapacity.cpu ||
+			typeof this.props.nodeInfo.nodeCapacity.cpu !== "string"
+		)
 			return false;
-		if (!this.props.nodeInfo.nodeCapacity.memory) return false;
-		if (!this.props.nodeInfo.nodeCapacity.pods) return false;
+		if (
+			!this.props.nodeInfo.nodeCapacity.memory ||
+			typeof this.props.nodeInfo.nodeCapacity.memory !== "string"
+		)
+			return false;
+
+		if (
+			!this.props.nodeInfo.nodeCapacity.pods ||
+			typeof this.props.nodeInfo.nodeCapacity.pods !== "string"
+		)
+			return false;
+		if (
+			!this.props.nodeInfo.nodeCapacity["ephemeral-storage"] ||
+			typeof this.props.nodeInfo.nodeCapacity["ephemeral-storage"] !==
+				"string"
+		)
+			return false;
 
 		return true;
 	}

@@ -3,6 +3,14 @@ import { SmallLoadingPage, SmallErrorPage } from "../common";
 import { getNodes } from "../../services";
 import NodeCard from "./NodeCard";
 
+/* 
+	Compulsory props:
+		1. refreshState (method) [NON-TESTABLE]
+			- Used to refresh parent's state.
+
+	Optional props:
+		None
+*/
 class NodesPage extends Component {
 	state = {
 		pageLoading: true,
@@ -19,20 +27,20 @@ class NodesPage extends Component {
 		// Makes a service call to get a list of nodes
 		getNodes()
 			.then(result => {
-				let newState = { ...this.state };
-
-				newState.pageLoading = false;
-				newState.nodesListSet = true;
-				newState.nodesList = result.payLoad;
-
-				if (this._isMounted) this.setState(newState);
+				if (this._isMounted)
+					this.setState({
+						...this.state,
+						pageLoading: false,
+						nodesListSet: true,
+						nodesList: result.payLoad
+					});
 			})
-			.catch(err => {
+			.catch(error => {
 				if (this._isMounted)
 					this.setState({
 						...this.state,
 						errorSet: true,
-						errorDescription: err
+						errorDescription: error
 					});
 			});
 	}
@@ -42,6 +50,7 @@ class NodesPage extends Component {
 	}
 
 	render() {
+		// If errorSet is set, render SmallErrorPage.
 		if (this.state.errorSet) {
 			return (
 				<SmallErrorPage
@@ -50,10 +59,12 @@ class NodesPage extends Component {
 			);
 		}
 
+		// If pageLoading is set, render SmallLoadingPage.
 		if (this.state.pageLoading) return <SmallLoadingPage />;
 
 		return (
 			<React.Fragment>
+				{/* Map nodesList if it is set. */}
 				{this.state.nodesListSet &&
 					this.state.nodesList.map((nodeInfo, index) => {
 						return (

@@ -1,0 +1,92 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NodesPage Tests Resolve getNodes service call with empty payload. 1`] = `<NodesPage />`;
+
+exports[`NodesPage Tests Resolve getNodes service call with non empty payload. 1`] = `
+<NodesPage>
+  <NodeCard
+    key="0_NODE_CARD"
+    nodeInfo={
+      Object {
+        "nodeAnnotations": Object {
+          "kubeadm.alpha.kubernetes.io/cri-socket": "/var/run/dockershim.sock",
+          "node.alpha.kubernetes.io/ttl": "0",
+          "volumes.kubernetes.io/controller-managed-attach-detach": "true",
+        },
+        "nodeCapacity": Object {
+          "cpu": "4",
+          "ephemeral-storage": "34471692Ki",
+          "hugepages-1Gi": "0",
+          "hugepages-2Mi": "0",
+          "memory": "3963180Ki",
+          "pods": "110",
+        },
+        "nodeLabels": Object {
+          "beta.kubernetes.io/arch": "amd64",
+          "beta.kubernetes.io/os": "linux",
+          "kubernetes.io/arch": "amd64",
+          "kubernetes.io/hostname": "minikube",
+          "kubernetes.io/os": "linux",
+          "node-role.kubernetes.io/master": "",
+        },
+        "nodeName": "minikube",
+      }
+    }
+    refreshState={[Function]}
+  >
+    <div
+      className="card flex flex-column"
+    >
+      <span
+        className="title w-100"
+      >
+        <span
+          className="fa fa-lastfm"
+        />
+         
+        minikube
+      </span>
+      <div
+        className="flex flex-row space-around"
+      >
+        <span>
+          <span
+            className="big-number"
+          >
+            4
+          </span>
+          <br />
+          CPU
+        </span>
+        <span>
+          <span
+            className="big-number"
+          >
+            34471692Ki
+          </span>
+          <br />
+          Storage
+        </span>
+        <span>
+          <span
+            className="big-number"
+          >
+            3963180Ki
+          </span>
+          <br />
+          Memory
+        </span>
+        <span>
+          <span
+            className="big-number"
+          >
+            110
+          </span>
+          <br />
+          Pods
+        </span>
+      </div>
+    </div>
+  </NodeCard>
+</NodesPage>
+`;

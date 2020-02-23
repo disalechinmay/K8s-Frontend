@@ -1,0 +1,177 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NodeCard Tests Check if everything renders if nodeInfo prop is valid & showResourceType is set 1`] = `
+<NodeCard
+  nodeInfo={
+    Object {
+      "nodeAnnotations": Object {
+        "kubeadm.alpha.kubernetes.io/cri-socket": "/var/run/dockershim.sock",
+        "node.alpha.kubernetes.io/ttl": "0",
+        "volumes.kubernetes.io/controller-managed-attach-detach": "true",
+      },
+      "nodeCapacity": Object {
+        "cpu": "4",
+        "ephemeral-storage": "34471692Ki",
+        "hugepages-1Gi": "0",
+        "hugepages-2Mi": "0",
+        "memory": "3963180Ki",
+        "pods": "110",
+      },
+      "nodeLabels": Object {
+        "beta.kubernetes.io/arch": "amd64",
+        "beta.kubernetes.io/os": "linux",
+        "kubernetes.io/arch": "amd64",
+        "kubernetes.io/hostname": "minikube",
+        "kubernetes.io/os": "linux",
+        "node-role.kubernetes.io/master": "",
+      },
+      "nodeName": "minikube",
+    }
+  }
+  showResourceType={true}
+>
+  <div
+    className="card flex flex-column"
+  >
+    <span
+      className="title w-100"
+    >
+      <span
+        className="fa fa-lastfm"
+      />
+       
+      minikube
+      <sup
+        className="resource-type"
+      >
+        Node
+      </sup>
+    </span>
+    <div
+      className="flex flex-row space-around"
+    >
+      <span>
+        <span
+          className="big-number"
+        >
+          4
+        </span>
+        <br />
+        CPU
+      </span>
+      <span>
+        <span
+          className="big-number"
+        >
+          34471692Ki
+        </span>
+        <br />
+        Storage
+      </span>
+      <span>
+        <span
+          className="big-number"
+        >
+          3963180Ki
+        </span>
+        <br />
+        Memory
+      </span>
+      <span>
+        <span
+          className="big-number"
+        >
+          110
+        </span>
+        <br />
+        Pods
+      </span>
+    </div>
+  </div>
+</NodeCard>
+`;
+
+exports[`NodeCard Tests Check if everything renders if nodeInfo prop is valid 1`] = `
+<NodeCard
+  nodeInfo={
+    Object {
+      "nodeAnnotations": Object {
+        "kubeadm.alpha.kubernetes.io/cri-socket": "/var/run/dockershim.sock",
+        "node.alpha.kubernetes.io/ttl": "0",
+        "volumes.kubernetes.io/controller-managed-attach-detach": "true",
+      },
+      "nodeCapacity": Object {
+        "cpu": "4",
+        "ephemeral-storage": "34471692Ki",
+        "hugepages-1Gi": "0",
+        "hugepages-2Mi": "0",
+        "memory": "3963180Ki",
+        "pods": "110",
+      },
+      "nodeLabels": Object {
+        "beta.kubernetes.io/arch": "amd64",
+        "beta.kubernetes.io/os": "linux",
+        "kubernetes.io/arch": "amd64",
+        "kubernetes.io/hostname": "minikube",
+        "kubernetes.io/os": "linux",
+        "node-role.kubernetes.io/master": "",
+      },
+      "nodeName": "minikube",
+    }
+  }
+>
+  <div
+    className="card flex flex-column"
+  >
+    <span
+      className="title w-100"
+    >
+      <span
+        className="fa fa-lastfm"
+      />
+       
+      minikube
+    </span>
+    <div
+      className="flex flex-row space-around"
+    >
+      <span>
+        <span
+          className="big-number"
+        >
+          4
+        </span>
+        <br />
+        CPU
+      </span>
+      <span>
+        <span
+          className="big-number"
+        >
+          34471692Ki
+        </span>
+        <br />
+        Storage
+      </span>
+      <span>
+        <span
+          className="big-number"
+        >
+          3963180Ki
+        </span>
+        <br />
+        Memory
+      </span>
+      <span>
+        <span
+          className="big-number"
+        >
+          110
+        </span>
+        <br />
+        Pods
+      </span>
+    </div>
+  </div>
+</NodeCard>
+`;

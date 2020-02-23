@@ -4,9 +4,15 @@ import { NodeCard } from "../NodesPage";
 import { PodCard } from "../PodsPage";
 import { DeploymentCard } from "../DeploymentsPage";
 import { ServiceCard } from "../ServicesPage";
-
 import stringSimilarity from "string-similarity";
 
+/* 
+	Compulsory props:
+		1. searchTokens (list)
+
+	Optional props:
+		None
+*/
 class SearchPage extends Component {
 	state = { cards: [] };
 	CONFIDENCE_THRESHOLD = 0.1;
@@ -27,15 +33,17 @@ class SearchPage extends Component {
 		this._isMounted = false;
 	}
 
+	// This method is called for each token in searchTokens.
 	async search(token) {
 		if (this._isMounted) this.setState({ ...this.state, cards: [] });
 
-		this.checkNodes(token);
-		this.checkPods(token);
-		this.checkDeployments(token);
-		this.checkServices(token);
+		await this.checkNodes(token);
+		await this.checkPods(token);
+		await this.checkDeployments(token);
+		await this.checkServices(token);
 	}
 
+	// Searches for a matching node, and adds to cards.
 	async checkNodes(token) {
 		let nodes = await getNodes();
 		nodes = nodes.payLoad;
@@ -58,9 +66,11 @@ class SearchPage extends Component {
 		}
 	}
 
+	// Searches for a matching pod, and adds to cards.
 	async checkPods(token) {
 		let pods = await getPods(this.props.namespace);
 		pods = pods.payLoad;
+
 		for (let pod of pods) {
 			//Checking if pod name is similar
 			let confidence = stringSimilarity.compareTwoStrings(
@@ -128,6 +138,7 @@ class SearchPage extends Component {
 		}
 	}
 
+	// Searches for a matching deployment, and adds to cards.
 	async checkDeployments(token) {
 		let deployments = await getDeployments(this.props.namespace);
 		deployments = deployments.payLoad;
@@ -204,6 +215,8 @@ class SearchPage extends Component {
 			}
 		}
 	}
+
+	// Searches for a matching service, and adds to cards.
 	async checkServices(token) {
 		let services = await getServices(this.props.namespace);
 		services = services.payLoad;

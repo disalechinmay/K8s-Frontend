@@ -31,26 +31,28 @@ class ErrorPage extends Component {
 								</span>
 								<br />
 								<span>
-									{this.props.errorDescription.errorSuggestions.map(
-										(suggestion, index) => {
-											return (
-												<React.Fragment
-													key={
-														index +
-														"_SUGGESTION_FRAG"
-													}
-												>
-													{suggestion}
-													<br
+									{this.props.errorDescription
+										.errorSuggestions &&
+										this.props.errorDescription.errorSuggestions.map(
+											(suggestion, index) => {
+												return (
+													<React.Fragment
 														key={
 															index +
-															"_SUGGESTION"
+															"_SUGGESTION_FRAG"
 														}
-													/>
-												</React.Fragment>
-											);
-										}
-									)}
+													>
+														{suggestion}
+														<br
+															key={
+																index +
+																"_SUGGESTION"
+															}
+														/>
+													</React.Fragment>
+												);
+											}
+										)}
 								</span>
 							</React.Fragment>
 						)}
