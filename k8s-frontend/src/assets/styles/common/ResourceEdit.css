@@ -1,0 +1,35 @@
+.information-pane {
+	background-color: transparent;
+}
+
+.information-pane .error {
+	border-top: 1px solid rgba(127, 140, 141, 0.5);
+	border-bottom: 1px solid rgba(127, 140, 141, 0.5);
+
+	padding-top: 1%;
+	padding-bottom: 1%;
+
+	margin-top: 1%;
+	margin-bottom: 1%;
+}
+
+.information-pane .success {
+	border-top: 1px solid rgba(127, 140, 141, 0.5);
+	border-bottom: 1px solid rgba(127, 140, 141, 0.5);
+
+	padding-top: 1%;
+	padding-bottom: 1%;
+
+	margin-top: 1%;
+	margin-bottom: 1%;
+}
+
+.information-pane .red-cross {
+	color: #dd5135;
+	font-size: 1.5em;
+}
+
+.information-pane .green-check {
+	color: #2ecc71;
+	font-size: 1.5em;
+}

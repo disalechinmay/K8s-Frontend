@@ -148,6 +148,23 @@
 	transition: 0.25s;
 	box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.3);
 }
+.resource-edit-button {
+	margin-left: 10px;
+	float: right;
+	margin-top: 1%;
+	color: #2ecc71;
+	cursor: pointer;
+	transition: 0.25s;
+	padding: 5px 5px 5px 5px;
+	border-radius: 15px 15px 15px 15px;
+}
+
+.resource-edit-button:hover {
+	background-color: #212322;
+	border: 1px solid #2ecc71;
+	transition: 0.25s;
+	box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.3);
+}
 
 .mt-5 {
 	margin-top: 5px;

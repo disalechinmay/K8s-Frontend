@@ -4,6 +4,7 @@ import { LoadingPage, ErrorPage } from "./common";
 import { NodesPage } from "./NodesPage";
 import { PodsPage } from "./PodsPage";
 import { DeploymentsPage } from "./DeploymentsPage";
+import { DeploymentEditPage } from "./DeploymentEditPage";
 import { ServicesPage } from "./ServicesPage";
 import { JobsPage } from "./JobsPage";
 import { SearchBar, SearchPage } from "./SearchPage";
@@ -18,7 +19,8 @@ class Skeleton extends Component {
 		namespaceSelected: "default",
 		errorSet: false,
 		errorDescription: "",
-		searchTokens: []
+		searchTokens: [],
+		editResourceName: "" // Used as a prop to Edit Resource Page
 	};
 
 	constructor(props) {
@@ -105,6 +107,27 @@ class Skeleton extends Component {
 			searchTokens: tokens,
 			sidebarOptionSelected: 9
 		});
+	}
+
+	// Sets editResourceName and renders the resource edit page
+	renderResourceEditPage(resourceType, resourceName) {
+		for (let iter = 0; iter < this.sidebarOptions.length; iter++)
+			if (
+				this.optionRefs[iter].current.classList.contains(
+					"sidebar-button-active"
+				)
+			)
+				this.optionRefs[iter].current.classList.remove(
+					"sidebar-button-active"
+				);
+
+		if (resourceType === "DEPLOYMENT") {
+			this.setState({
+				...this.state,
+				editResourceName: resourceName,
+				sidebarOptionSelected: 13
+			});
+		}
 	}
 
 	render() {
@@ -212,6 +235,12 @@ class Skeleton extends Component {
 
 						{this.state.sidebarOptionSelected === 3 && (
 							<DeploymentsPage
+								renderEditPage={(resourceType, resourceName) =>
+									this.renderResourceEditPage(
+										resourceType,
+										resourceName
+									)
+								}
 								refreshState={() => this.refreshState()}
 								namespace={this.state.namespaceSelected}
 							/>
@@ -235,6 +264,13 @@ class Skeleton extends Component {
 								refreshState={() => this.refreshState()}
 								namespace={this.state.namespaceSelected}
 								searchTokens={this.state.searchTokens}
+							/>
+						)}
+
+						{this.state.sidebarOptionSelected === 13 && (
+							<DeploymentEditPage
+								namespace={this.state.namespaceSelected}
+								resourceName={this.state.editResourceName}
 							/>
 						)}
 					</div>

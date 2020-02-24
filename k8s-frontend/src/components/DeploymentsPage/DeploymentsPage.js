@@ -8,6 +8,7 @@ import DeploymentCard from "./DeploymentCard";
 		1. refreshState (method) [NON-TESTABLE]
 			- Used to refresh parent's state.
 		2. namespace
+		3. renderEditPage (method)
 
 	Optional props:
 		None
@@ -104,6 +105,15 @@ class DeploymentsPage extends Component {
 									deploymentInfo={deploymentInfo}
 									refreshState={() =>
 										this.props.refreshState()
+									}
+									renderEditPage={(
+										resourceType,
+										resourceName
+									) =>
+										this.props.renderEditPage(
+											resourceType,
+											resourceName
+										)
 									}
 								/>
 							</React.Fragment>
