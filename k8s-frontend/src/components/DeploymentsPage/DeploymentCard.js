@@ -8,6 +8,7 @@ import { CardLabels, CardContainerList } from "../common";
 		2. refreshState (method) [NON-TESTABLE]
 			- Used to refresh parent's state.
 		3. namespace (string)
+		4. renderEditPage (method)
 
 	Optional props:
 		1. showResourceType (boolean)
@@ -57,6 +58,16 @@ class DeploymentCard extends Component {
 							<span className="resource-manage-section">
 								<span className="resource-delete-button fa fa-trash" />
 								<span className="resource-restart-button fa fa-refresh" />
+								<span
+									className="resource-edit-button fa fa-pencil"
+									onClick={() =>
+										this.props.renderEditPage(
+											"DEPLOYMENT",
+											this.props.deploymentInfo
+												.deploymentName
+										)
+									}
+								/>
 							</span>
 						</span>
 					</React.Fragment>

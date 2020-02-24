@@ -1,0 +1,148 @@
+.jsoneditor {
+	border: none;
+}
+
+.jsoneditor-menu {
+	background-color: transparent;
+	border-bottom: none;
+}
+
+.jsoneditor-frame {
+	background-color: transparent;
+	border-bottom: 1px solid #bdc3c7;
+	border-radius: 1em;
+}
+
+.jsoneditor-results input {
+	color: #bdc3c7;
+}
+
+.jsoneditor-search input {
+	color: #bdc3c7;
+}
+
+.jsoneditor-search input:focus {
+	outline: none;
+}
+
+div.jsoneditor-field,
+div.jsoneditor-value,
+div.jsoneditor td,
+div.jsoneditor th,
+div.jsoneditor textarea,
+pre.jsoneditor-preview,
+.jsoneditor-schema-error,
+.jsoneditor-popover {
+	color: #bdc3c7;
+}
+
+div.jsoneditor-value.jsoneditor-string {
+	color: limegreen;
+}
+
+.jsoneditor input:active {
+	border: none;
+}
+
+.jsoneditor input,
+.jsoneditor input:not([type]),
+.jsoneditor input[type="text"],
+.jsoneditor input[type="search"],
+.jsoneditor-modal input,
+.jsoneditor-modal input:not([type]),
+.jsoneditor-modal input[type="text"],
+.jsoneditor-modal input[type="search"] {
+	border: none;
+	background-color: transparent;
+}
+
+.jsoneditor-navigation-bar {
+	color: #bdc3c7;
+	background-color: transparent;
+	border: none;
+}
+
+.jsoneditor-contextmenu .jsoneditor-menu {
+	background-color: #bdc3c7;
+}
+
+.json {
+	align-content: center;
+	border-bottom: 1px solid rgba(127, 140, 141, 0.5);
+	color: #ecf0f1;
+	margin: 2% 1% 1% 2%;
+	padding: 1% 1% 2% 1%;
+	transition: 0.25s;
+	width: 90%;
+	max-width: 90%;
+	animation: 0.25s ease-out 0s 1 slideInFromLeft;
+}
+
+.json-title {
+	font-size: 1.5em;
+	color: #2ecc71;
+	margin-top: 1%;
+	margin-bottom: 2%;
+	max-width: 100%;
+}
+
+.jsoneditor-transform {
+	visibility: hidden;
+}
+
+.jsoneditor-sort {
+	visibility: hidden;
+}
+
+.save-changes-button-saved {
+	margin-left: 10px;
+	float: right;
+	margin-top: 1%;
+	color: #2ecc71;
+	cursor: pointer;
+	transition: 0.25s;
+	padding: 5px 5px 5px 5px;
+	border-radius: 15px 15px 15px 15px;
+}
+
+.save-changes-button-saved:hover {
+	background-color: #212322;
+	border: 1px solid #2ecc71;
+	transition: 0.25s;
+	box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.3);
+}
+
+.save-changes-button-unsaved {
+	margin-left: 10px;
+	float: right;
+	margin-top: 1%;
+	color: #dd5135;
+	cursor: pointer;
+	transition: 0.25s;
+	padding: 5px 5px 5px 5px;
+	border-radius: 15px 15px 15px 15px;
+}
+
+.save-changes-button-unsaved:hover {
+	background-color: #212322;
+	border: 1px solid #dd5135;
+	transition: 0.25s;
+	box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.3);
+}
+.save-changes-button-no-change {
+	margin-left: 10px;
+	float: right;
+	margin-top: 1%;
+	color: #bdc3c7;
+	cursor: pointer;
+	transition: 0.25s;
+	padding: 5px 5px 5px 5px;
+	border-radius: 15px 15px 15px 15px;
+}
+
+.save-changes-button-no-change:hover {
+	background-color: #212322;
+	border: 1px solid #bdc3c7;
+	transition: 0.25s;
+	box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.3);
+}
