@@ -88,10 +88,11 @@ export function patchDeployment(namespace, resourceName, body) {
 			.then(result => {
 				if (result.status === "FAILURE")
 					reject({
+						rawError: result.payLoad,
 						errorDescription:
-							"Something went wrong while patching deployment " +
+							"Something went wrong while patching deployment '" +
 							resourceName +
-							" of '" +
+							"'' of '" +
 							namespace +
 							"' namespace!",
 						errorSuggestions: [
@@ -105,10 +106,11 @@ export function patchDeployment(namespace, resourceName, body) {
 			})
 			.catch(error =>
 				reject({
+					rawError: error,
 					errorDescription:
-						"Something went wrong while patching deployment " +
+						"Something went wrong while patching deployment '" +
 						resourceName +
-						" of '" +
+						"' of '" +
 						namespace +
 						"' namespace!",
 					errorSuggestions: [

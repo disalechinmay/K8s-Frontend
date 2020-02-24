@@ -94,6 +94,14 @@ div.jsoneditor-value.jsoneditor-string {
 	visibility: hidden;
 }
 
+.jsoneditor-undo {
+	visibility: hidden;
+}
+
+.jsoneditor-redo {
+	visibility: hidden;
+}
+
 .save-changes-button-saved {
 	margin-left: 10px;
 	float: right;

@@ -11,6 +11,7 @@ import "./assets/styles/common/SmallErrorPage.css";
 import "./assets/styles/common/Cards.css";
 import "./assets/styles/common/Labels.css";
 import "./assets/styles/common/JsonEditor.css";
+import "./assets/styles/common/ResourceEdit.css";
 import "./assets/styles/SearchPage/SearchPage.css";
 ReactDOM.render(<Skeleton />, document.getElementById("root"));
 

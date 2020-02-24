@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { getDeployment, patchDeployment } from "../../services";
-import { SmallLoadingPage, SmallErrorPage } from "../common";
-import { JsonEditor as Editor } from "jsoneditor-react";
-
+import { SmallLoadingPage } from "../common";
+import { JSONEditorX } from "../common";
 /* 
 	Compulsory props:
 		1. namespace
@@ -18,7 +17,10 @@ class DeploymentEditPage extends Component {
 		deploymentSet: false,
 		pageLoading: true,
 		changesMade: false,
-		changesSaved: false
+		changesSaved: false,
+		informationPane: "",
+		errorSet: false,
+		successSet: false
 	};
 	_isMounted = false;
 
@@ -54,6 +56,8 @@ class DeploymentEditPage extends Component {
 		this._isMounted = false;
 	}
 
+	// If JSON is changed, sets changesMade as true & changesSaved as false
+	// Puts the new deployment in updatedDeployment
 	onChangeHandler(event) {
 		this.setState({
 			...this.state,
@@ -63,6 +67,8 @@ class DeploymentEditPage extends Component {
 		});
 	}
 
+	// Sets changesSaved as true
+	// Updates deployment to updatedDeployment
 	saveChanges() {
 		this.setState({
 			...this.state,
@@ -73,35 +79,85 @@ class DeploymentEditPage extends Component {
 
 	// Makes a service call to patch the deployment.
 	patchChanges() {
+		if (this._isMounted)
+			this.setState({
+				...this.state,
+				pageLoading: true,
+				errorSet: false,
+				successSet: false
+			});
+
 		patchDeployment(
 			this.props.namespace,
 			this.props.resourceName,
 			this.state.deployment
 		)
 			.then(result => {
-				console.log(result);
-			})
-			.catch(error => {
 				if (this._isMounted)
 					this.setState({
 						...this.state,
-						errorSet: true,
-						errorDescription: error
+						pageLoading: false,
+						informationPane: result,
+						successSet: true
 					});
-
-				console.log(error);
+			})
+			.catch(error => {
+				if (this._isMounted) {
+					this.setState({
+						...this.state,
+						pageLoading: false,
+						informationPane: error,
+						errorSet: true
+					});
+				}
 			});
 	}
 
-	render() {
-		// If errorSet is set, render SmallErrorPage.
-		if (this.state.errorSet)
-			return (
-				<SmallErrorPage
-					errorDescription={this.state.errorDescription}
-				/>
-			);
+	printError(error) {
+		return (
+			<div className="error">
+				<span className="fa fa-times red-cross" />
+				&nbsp;
+				{error.rawError.status} Code: {error.rawError.code} (API
+				Version: {error.rawError.apiVersion})
+				<br />
+				<br />
+				Message:
+				<br />
+				{error.rawError.message}
+				<br />
+				<br />
+				{error.rawError.details &&
+					error.rawError.details.causes.map((cause, index) => {
+						return (
+							<React.Fragment key={index + "_CAUSE_FRAG"}>
+								Field:&nbsp;
+								{cause.field}
+								<br />
+								Message:&nbsp;
+								{cause.message}
+								<br />
+								Reason:&nbsp;
+								{cause.reason}
+								<br />
+								<br />
+							</React.Fragment>
+						);
+					})}
+			</div>
+		);
+	}
 
+	printSuccess(success) {
+		return (
+			<div className="success">
+				<span className="fa fa-check green-check" />
+				&nbsp; Deployment edited successfully.
+			</div>
+		);
+	}
+
+	render() {
 		// If pageLoading is set, render SmallLoadingPage.
 		if (this.state.pageLoading) return <SmallLoadingPage />;
 
@@ -141,10 +197,18 @@ class DeploymentEditPage extends Component {
 						</span>
 					</span>
 
+					<div className="information-pane">
+						{this.state.errorSet &&
+							this.printError(this.state.informationPane)}
+
+						{this.state.successSet &&
+							this.printSuccess(this.state.informationPane)}
+					</div>
+
 					{this.state.deploymentSet && (
-						<Editor
-							value={this.state.deployment}
-							onChange={event => this.onChangeHandler(event)}
+						<JSONEditorX
+							json={this.state.deployment}
+							onChangeJSON={event => this.onChangeHandler(event)}
 						/>
 					)}
 				</div>
