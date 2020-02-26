@@ -34,7 +34,8 @@ class DeploymentEditPage extends Component {
 						...this.state,
 						pageLoading: false,
 						deploymentSet: true,
-						deployment: result.payLoad
+						deployment: result.payLoad,
+						updatedDeployment: result.payLoad
 					});
 			})
 			.catch(error => {
@@ -59,6 +60,7 @@ class DeploymentEditPage extends Component {
 	// If JSON is changed, sets changesMade as true & changesSaved as false
 	// Puts the new deployment in updatedDeployment
 	onChangeHandler(event) {
+		console.log("CHANGE");
 		this.setState({
 			...this.state,
 			changesMade: true,
@@ -70,6 +72,7 @@ class DeploymentEditPage extends Component {
 	// Sets changesSaved as true
 	// Updates deployment to updatedDeployment
 	saveChanges() {
+		console.log("SAVE");
 		this.setState({
 			...this.state,
 			changesSaved: true,
@@ -207,7 +210,7 @@ class DeploymentEditPage extends Component {
 
 					{this.state.deploymentSet && (
 						<JSONEditorX
-							json={this.state.deployment}
+							json={this.state.updatedDeployment}
 							onChangeJSON={event => this.onChangeHandler(event)}
 						/>
 					)}

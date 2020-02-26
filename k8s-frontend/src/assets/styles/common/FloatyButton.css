@@ -1,0 +1,60 @@
+.floaty-button {
+	/* position: relative; */
+	margin-left: 10px;
+	float: right;
+	margin-top: 1%;
+	color: white;
+	cursor: pointer;
+	transition: 0.25s;
+	padding: 5px 5px 5px 5px;
+	border-radius: 15px 15px 15px 15px;
+	cursor: pointer;
+	color: rgba(139, 137, 137, 0.95);
+}
+
+.floaty-button:hover {
+	background-color: #212322;
+	border: 1px solid white;
+	transition: 0.25s;
+	box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.3);
+	color: white;
+	cursor: pointer;
+	animation: rotate-in 0.5s;
+}
+
+.buttons {
+	position: relative;
+	visibility: hidden;
+}
+
+.buttons:hover {
+	visibility: visible;
+}
+
+.floaty-button:hover + .buttons {
+	visibility: visible;
+}
+
+@keyframes rotate-in {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(180deg);
+	}
+}
+
+@keyframes rotate-out {
+	from {
+		transform: rotate(180deg);
+	}
+	to {
+		transform: rotate(0deg);
+	}
+}
+
+@keyframes slideInFromRight {
+	100% {
+		right: 0;
+	}
+}

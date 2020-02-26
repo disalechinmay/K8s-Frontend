@@ -56,18 +56,21 @@ class DeploymentCard extends Component {
 
 							{/* Card Resource Manip Button */}
 							<span className="resource-manage-section">
-								<span className="resource-delete-button fa fa-trash" />
-								<span className="resource-restart-button fa fa-refresh" />
-								<span
-									className="resource-edit-button fa fa-pencil"
-									onClick={() =>
-										this.props.renderEditPage(
-											"DEPLOYMENT",
-											this.props.deploymentInfo
-												.deploymentName
-										)
-									}
-								/>
+								<span className="fa fa-bars floaty-button" />
+								<span className="buttons">
+									<span className="resource-delete-button fa fa-trash" />
+									<span className="resource-restart-button fa fa-refresh" />
+									<span
+										className="resource-edit-button fa fa-pencil"
+										onClick={() =>
+											this.props.renderEditPage(
+												"DEPLOYMENT",
+												this.props.deploymentInfo
+													.deploymentName
+											)
+										}
+									/>
+								</span>
 							</span>
 						</span>
 					</React.Fragment>
