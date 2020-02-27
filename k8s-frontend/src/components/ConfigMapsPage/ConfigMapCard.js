@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { CardLabels, CardContainerList } from "../common";
+import { CardLabels } from "../common";
 
 /* 
 	Compulsory props:
@@ -16,25 +16,6 @@ import { CardLabels, CardContainerList } from "../common";
 			- Used by SearchPage.
 */
 class ConfigMapCard extends Component {
-	// Returns an obj which contains key-val pairs of matched labels.
-	matchedLabels(selectorLabels, templateLabels) {
-		let finalResult = {};
-
-		if (!selectorLabels || !templateLabels) return finalResult;
-
-		Object.entries(selectorLabels).forEach(([key, val], index) => {
-			if (
-				templateLabels.hasOwnProperty(key) &&
-				templateLabels[key] === val
-			)
-				finalResult[key] = val;
-
-			return;
-		});
-
-		return finalResult;
-	}
-
 	render() {
 		return (
 			<React.Fragment>
@@ -46,7 +27,7 @@ class ConfigMapCard extends Component {
 							<span className="flex flex-row title mw-80 flex-start">
 								<span className="fa fa-lastfm" />
 								&emsp;
-								{this.props.configMapsInfo.configMapName}
+								{this.props.configMapInfo.configMapName}
 								{this.props.showResourceType && (
 									<sup className="resource-type">
 										ConfigMap
@@ -65,7 +46,7 @@ class ConfigMapCard extends Component {
 										onClick={() =>
 											this.props.renderEditPage(
 												"configMaps",
-												this.props.configMapsInfo
+												this.props.configMapInfo
 													.configMapName
 											)
 										}
@@ -77,24 +58,55 @@ class ConfigMapCard extends Component {
 
 					{/* Card Body */}
 					<React.Fragment>
-						{/* data */}
+						{/* Data */}
+						<div className="flex flex-column mw-100">
+							{Object.entries(
+								this.props.configMapInfo.configMapData
+							).map(([key, val], index) => {
+								return (
+									<React.Fragment>
+										<div
+											className="secret-data"
+											key={index + "_FRAG"}
+										>
+											<span className="section-key">
+												{key}
+											</span>
+										</div>
+										{val
+											.split("\n")
+											.map((string, index) => {
+												let pair = string.split("=");
 
-						<span className="flex flex-row">
-							<span className="mt-5">Data</span>
-							<span className="flex flex-row mw-100 wrap">
-								{JSON.stringify(
-									this.props.configMapsInfo.configMapData
-								)}{" "}
-							</span>
-						</span>
+												return (
+													<div
+														className="flex flex-row secret-data secret-data-section"
+														key={index + "_FRAG"}
+													>
+														&emsp;&emsp;
+														<span className="key">
+															{pair[0]}
+														</span>
+														&emsp;
+														<span className="value">
+															{pair[1]}
+														</span>
+													</div>
+												);
+											})}
+										<br />
+									</React.Fragment>
+								);
+							})}
+						</div>
+
 						{/* Labels */}
 						<span className="flex flex-row">
 							<span className="mt-5">Labels:</span>
 							<span className="flex flex-row mw-100 wrap">
 								<CardLabels
 									labels={
-										this.props.configMapsInfo
-											.configMapLabels
+										this.props.configMapInfo.configMapLabels
 									}
 									refreshState={() =>
 										this.props.refreshState()
@@ -109,7 +121,7 @@ class ConfigMapCard extends Component {
 							<span className="flex flex-row mw-100 wrap">
 								<CardLabels
 									labels={
-										this.props.configMapsInfo
+										this.props.configMapInfo
 											.configMapAnnotations
 									}
 									refreshState={() =>

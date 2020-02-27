@@ -344,12 +344,6 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
               default
             </option>
             <option
-              key="docker_NAMESPACE"
-              value="docker"
-            >
-              docker
-            </option>
-            <option
               key="kube-node-lease_NAMESPACE"
               value="kube-node-lease"
             >
@@ -366,12 +360,6 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
               value="kube-system"
             >
               kube-system
-            </option>
-            <option
-              key="kubernetes-dashboard_NAMESPACE"
-              value="kubernetes-dashboard"
-            >
-              kubernetes-dashboard
             </option>
           </select>
         </div>
@@ -532,7 +520,7 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
                   Object {
                     "color": "#2ecc71",
                     "title": "Running Pods",
-                    "value": 8,
+                    "value": 3,
                   },
                   Object {
                     "color": "#dd5135",
@@ -659,7 +647,7 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
                           "percentage": 100,
                           "startOffset": 0,
                           "title": "Running Pods",
-                          "value": 8,
+                          "value": 3,
                         },
                         Object {
                           "color": "#dd5135",
@@ -700,7 +688,7 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
                       x={50}
                       y={50}
                     >
-                      8
+                      3
                     </text>
                   </ReactMinimalPieChartLabel>
                   <ReactMinimalPieChartLabel
@@ -713,7 +701,7 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
                           "percentage": 100,
                           "startOffset": 0,
                           "title": "Running Pods",
-                          "value": 8,
+                          "value": 3,
                         },
                         Object {
                           "color": "#dd5135",
@@ -780,7 +768,7 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
                   Object {
                     "color": "#2ecc71",
                     "title": "Running Deployments",
-                    "value": 4,
+                    "value": 1,
                   },
                   Object {
                     "color": "#dd5135",
@@ -907,7 +895,7 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
                           "percentage": 100,
                           "startOffset": 0,
                           "title": "Running Deployments",
-                          "value": 4,
+                          "value": 1,
                         },
                         Object {
                           "color": "#dd5135",
@@ -948,7 +936,7 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
                       x={50}
                       y={50}
                     >
-                      4
+                      1
                     </text>
                   </ReactMinimalPieChartLabel>
                   <ReactMinimalPieChartLabel
@@ -961,7 +949,7 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
                           "percentage": 100,
                           "startOffset": 0,
                           "title": "Running Deployments",
-                          "value": 4,
+                          "value": 1,
                         },
                         Object {
                           "color": "#dd5135",
@@ -1028,7 +1016,7 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
                   Object {
                     "color": "#2ecc71",
                     "title": "Running Jobs",
-                    "value": 1,
+                    "value": 2,
                   },
                   Object {
                     "color": "#dd5135",
@@ -1155,7 +1143,7 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
                           "percentage": 100,
                           "startOffset": 0,
                           "title": "Running Jobs",
-                          "value": 1,
+                          "value": 2,
                         },
                         Object {
                           "color": "#dd5135",
@@ -1196,7 +1184,7 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
                       x={50}
                       y={50}
                     >
-                      1
+                      2
                     </text>
                   </ReactMinimalPieChartLabel>
                   <ReactMinimalPieChartLabel
@@ -1209,7 +1197,7 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
                           "percentage": 100,
                           "startOffset": 0,
                           "title": "Running Jobs",
-                          "value": 1,
+                          "value": 2,
                         },
                         Object {
                           "color": "#dd5135",

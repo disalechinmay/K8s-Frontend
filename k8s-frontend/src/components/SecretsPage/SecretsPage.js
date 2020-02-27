@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { getConfigMaps } from "../../services";
+import { getSecrets } from "../../services";
 import { SmallLoadingPage, SmallErrorPage } from "../common";
-import ConfigMapCard from "./ConfigMapCard";
+import SecretCard from "./SecretCard";
 
 /* 
 	Compulsory props:
@@ -13,27 +13,27 @@ import ConfigMapCard from "./ConfigMapCard";
 	Optional props:
 		None
 */
-class ConfigMapsPage extends Component {
+class SecretsPage extends Component {
 	state = {
 		pageLoading: true,
-		configMapsListSet: false,
-		configMapsList: [],
+		secretsListSet: false,
+		secretsList: [],
 		errorSet: false,
 		errorDescription: ""
 	};
 	_isMounted = false;
 
-	// Makes a service call and sets configMapsList.
+	// Makes a service call and sets secretsList.
 	getNewData() {
-		// Get list of configMaps for the selected namespace.
-		getConfigMaps(this.props.namespace)
+		// Get list of secrets for the selected namespace.
+		getSecrets(this.props.namespace)
 			.then(result => {
 				if (this._isMounted)
 					this.setState({
 						...this.state,
 						pageLoading: false,
-						configMapsListSet: true,
-						configMapsList: result.payLoad
+						secretsListSet: true,
+						secretsList: result.payLoad
 					});
 			})
 			.catch(error => {
@@ -61,8 +61,8 @@ class ConfigMapsPage extends Component {
 			this.setState({
 				...this.state,
 				pageLoading: true,
-				configMapsListSet: false,
-				configMapsList: []
+				secretsListSet: false,
+				secretsList: []
 			});
 
 			this.getNewData();
@@ -83,26 +83,26 @@ class ConfigMapsPage extends Component {
 
 		if (
 			this.state.pageLoading === false &&
-			this.state.configMapsListSet &&
-			this.state.configMapsList.length === 0
+			this.state.secretsListSet &&
+			this.state.secretsList.length === 0
 		)
 			return (
 				<React.Fragment>
-					No configMaps present in this namespace.
+					No deployments present in this namespace.
 				</React.Fragment>
 			);
 
 		return (
 			<React.Fragment>
-				{/* Map configMapsList if it is set. */}
-				{this.state.configMapsListSet &&
-					this.state.configMapsList.map((configMapInfo, index) => {
+				{/* Map secretsList if it is set. */}
+				{this.state.secretsListSet &&
+					this.state.secretsList.map((secretInfo, index) => {
 						return (
 							<React.Fragment key={index + "_FRAG"}>
-								<ConfigMapCard
-									key={index + "_configMaps_CARD"}
+								<SecretCard
+									key={index + "_SECRET_CARD"}
 									index={index}
-									configMapInfo={configMapInfo}
+									secretInfo={secretInfo}
 									refreshState={() =>
 										this.props.refreshState()
 									}
@@ -124,4 +124,4 @@ class ConfigMapsPage extends Component {
 	}
 }
 
-export default ConfigMapsPage;
+export default SecretsPage;

@@ -5,3 +5,4 @@ export { getDeployments, getDeployment, patchDeployment } from "./deployments";
 export { getServices } from "./services";
 export { getJobs } from "./jobs";
 export { getConfigMaps } from "./configmaps";
+export { getSecrets, getSecret, patchSecret } from "./secrets";

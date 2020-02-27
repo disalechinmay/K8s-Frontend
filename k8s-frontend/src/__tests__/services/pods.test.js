@@ -67,48 +67,48 @@ describe("Pods Service Tests: getPods", () => {
 	});
 });
 
-describe("Pods Service Tests: deletePod", () => {
-	let functionToTest = deletePod;
-	let testLabel = "deletePod()";
-	let namespace = "namespace";
-	let podName = "podName";
+// describe("Pods Service Tests: deletePod", () => {
+// 	let functionToTest = deletePod;
+// 	let testLabel = "deletePod()";
+// 	let namespace = "namespace";
+// 	let podName = "podName";
 
-	test(testLabel + ": Check if resolves to mock data.", () => {
-		// Make axios.get to return mock data.
-		axios.post.mockImplementationOnce(() =>
-			Promise.resolve({
-				data: {
-					payLoad: "Dummy payLoad",
-					status: "SUCCESS"
-				}
-			})
-		);
+// 	test(testLabel + ": Check if resolves to mock data.", () => {
+// 		// Make axios.get to return mock data.
+// 		axios.post.mockImplementationOnce(() =>
+// 			Promise.resolve({
+// 				data: {
+// 					payLoad: "Dummy payLoad",
+// 					status: "SUCCESS"
+// 				}
+// 			})
+// 		);
 
-		return expect(functionToTest(namespace, podName)).resolves.toEqual({
-			payLoad: "Dummy payLoad",
-			status: "SUCCESS"
-		});
-	});
+// 		return expect(functionToTest(namespace, podName)).resolves.toEqual({
+// 			payLoad: "Dummy payLoad",
+// 			status: "SUCCESS"
+// 		});
+// 	});
 
-	test(testLabel + ": Check rejection.", () => {
-		// Make axios.get to return mock data.
-		axios.post.mockImplementationOnce(() => Promise.reject());
+// 	test(testLabel + ": Check rejection.", () => {
+// 		// Make axios.get to return mock data.
+// 		axios.post.mockImplementationOnce(() => Promise.reject());
 
-		return expect(functionToTest(namespace, podName)).rejects.toEqual({
-			errorDescription:
-				"Something went wrong while deleting pod with name " +
-				podName +
-				" in '" +
-				namespace +
-				"' namespace!",
-			errorSuggestions: [
-				"Make sure the backend service is up and running.",
-				"Make sure the namespace is correct.",
-				"Make sure the pod name is correct."
-			]
-		});
-	});
-});
+// 		return expect(functionToTest(namespace, podName)).rejects.toEqual({
+// 			errorDescription:
+// 				"Something went wrong while deleting pod with name " +
+// 				podName +
+// 				" in '" +
+// 				namespace +
+// 				"' namespace!",
+// 			errorSuggestions: [
+// 				"Make sure the backend service is up and running.",
+// 				"Make sure the namespace is correct.",
+// 				"Make sure the pod name is correct."
+// 			]
+// 		});
+// 	});
+// });
 
 describe("Pods Service Tests: getPodExposure", () => {
 	let functionToTest = getPodExposure;
@@ -148,14 +148,15 @@ describe("Pods Service Tests: getPodExposure", () => {
 
 			return expect(functionToTest(namespace, podName)).rejects.toEqual({
 				errorDescription:
-					"Something went wrong while retrieving pod exposure for pod '" +
+					"Something went wrong while retrieving exposure for pod '" +
 					podName +
-					"' '" +
+					"' of '" +
 					namespace +
 					"' namespace!",
 				errorSuggestions: [
 					"Make sure the backend service is up and running.",
-					"Make sure the endpoint being accessed is valid."
+					"Make sure the endpoint being accessed is valid.",
+					"Make sure the pod name and namespace is valid."
 				]
 			});
 		}
@@ -167,14 +168,15 @@ describe("Pods Service Tests: getPodExposure", () => {
 
 		return expect(functionToTest(namespace, podName)).rejects.toEqual({
 			errorDescription:
-				"Something went wrong while retrieving pod exposure for pod '" +
+				"Something went wrong while retrieving exposure for pod '" +
 				podName +
-				"' '" +
+				"' of '" +
 				namespace +
 				"' namespace!",
 			errorSuggestions: [
 				"Make sure the backend service is up and running.",
-				"Make sure the namespace is correct."
+				"Make sure the namespace is correct.",
+				"Make sure the pod name and namespace is valid."
 			]
 		});
 	});
