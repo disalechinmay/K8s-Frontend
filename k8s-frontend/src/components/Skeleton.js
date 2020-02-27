@@ -5,6 +5,8 @@ import { HomePage } from "./HomePage";
 import { NodesPage } from "./NodesPage";
 import { PodsPage } from "./PodsPage";
 import { DeploymentsPage } from "./DeploymentsPage";
+import { ConfigMapsPage } from "./ConfigMapsPage";
+
 import { DeploymentEditPage } from "./DeploymentEditPage";
 import { ServicesPage } from "./ServicesPage";
 import { JobsPage } from "./JobsPage";
@@ -270,6 +272,13 @@ class Skeleton extends Component {
 
 						{this.state.sidebarOptionSelected === 9 && (
 							<SearchPage
+								refreshState={() => this.refreshState()}
+								namespace={this.state.namespaceSelected}
+								searchTokens={this.state.searchTokens}
+							/>
+						)}
+						{this.state.sidebarOptionSelected === 7 && (
+							<ConfigMapsPage
 								refreshState={() => this.refreshState()}
 								namespace={this.state.namespaceSelected}
 								searchTokens={this.state.searchTokens}
