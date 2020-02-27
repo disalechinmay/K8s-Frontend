@@ -1,7 +1,7 @@
 import { API_LOCATION } from "../configs";
 import axios from "axios";
 
-// Makes a call to the backend and returns a list of deployments in a namespace.
+// Makes a call to the backend and returns a list of config maps in a namespace.
 export function getConfigMaps(namespace) {
 	return new Promise((resolve, reject) => {
 		axios
@@ -13,7 +13,7 @@ export function getConfigMaps(namespace) {
 				if (result.status === "FAILURE")
 					reject({
 						errorDescription:
-							"Something went wrong while retrieving configMaps for '" +
+							"Something went wrong while retrieving config maps for '" +
 							namespace +
 							"' namespace!",
 						errorSuggestions: [

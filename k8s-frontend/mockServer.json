@@ -1,15 +1,8 @@
 {
 	"namespaces": {
-		"payLoad": [
-			"default",
-			"docker",
-			"kube-node-lease",
-			"kube-public",
-			"kube-system",
-			"kubernetes-dashboard"
-		],
+		"payLoad": ["default", "kube-node-lease", "kube-public", "kube-system"],
 		"status": "SUCCESS",
-		"statusDetails": "Returning data from /namespaces/ endpoint."
+		"statusDetails": "Returning a list of namespaces present in the cluster."
 	},
 	"nodes": {
 		"payLoad": [
@@ -20,207 +13,89 @@
 					"volumes.kubernetes.io/controller-managed-attach-detach": "true"
 				},
 				"nodeCapacity": {
-					"cpu": "2",
-					"ephemeral-storage": "61255652Ki",
+					"cpu": "4",
+					"ephemeral-storage": "34471692Ki",
 					"hugepages-1Gi": "0",
 					"hugepages-2Mi": "0",
-					"memory": "2047012Ki",
+					"memory": "3963180Ki",
 					"pods": "110"
 				},
 				"nodeLabels": {
 					"beta.kubernetes.io/arch": "amd64",
 					"beta.kubernetes.io/os": "linux",
 					"kubernetes.io/arch": "amd64",
-					"kubernetes.io/hostname": "docker-desktop",
+					"kubernetes.io/hostname": "minikube",
 					"kubernetes.io/os": "linux",
 					"node-role.kubernetes.io/master": ""
 				},
-				"nodeName": "docker-desktop"
+				"nodeName": "minikube"
 			}
 		],
 		"status": "SUCCESS",
-		"statusDetails": "Returning data from /nodes/ endpoint."
+		"statusDetails": "Returning a list of nodes present in the cluster."
 	},
 	"pods": {
 		"payLoad": [
 			{
 				"podAnnotations": null,
-				"podContainers": ["disalechinmay/flask_app:latest"],
+				"podContainers": ["disalechinmay/flask_load_testing:latest"],
 				"podLabels": {
 					"app": "flask",
-					"pod-template-hash": "545ddb746"
+					"pod-template-hash": "5f7fc6b5d9"
 				},
-				"podName": "flask-deployment-545ddb746-dzdtp",
+				"podName": "flask-deployment-5f7fc6b5d9-8mg8p",
 				"podStatus": "Running"
 			},
 			{
 				"podAnnotations": null,
-				"podContainers": ["disalechinmay/flask_app:latest"],
+				"podContainers": ["disalechinmay/flask_load_testing:latest"],
 				"podLabels": {
 					"app": "flask",
-					"pod-template-hash": "545ddb746"
+					"pod-template-hash": "5f7fc6b5d9"
 				},
-				"podName": "flask-deployment-545ddb746-jbd9q",
+				"podName": "flask-deployment-5f7fc6b5d9-gwptr",
 				"podStatus": "Running"
 			},
 			{
 				"podAnnotations": null,
-				"podContainers": ["disalechinmay/flask_app:latest"],
+				"podContainers": ["disalechinmay/flask_load_testing:latest"],
 				"podLabels": {
 					"app": "flask",
-					"pod-template-hash": "545ddb746"
+					"pod-template-hash": "5f7fc6b5d9"
 				},
-				"podName": "flask-deployment-545ddb746-jk759",
-				"podStatus": "Running"
-			},
-			{
-				"podAnnotations": null,
-				"podContainers": ["disalechinmay/flask_app:latest"],
-				"podLabels": {
-					"app": "flask",
-					"pod-template-hash": "545ddb746"
-				},
-				"podName": "flask-deployment-545ddb746-vcrvl",
-				"podStatus": "Running"
-			},
-			{
-				"podAnnotations": null,
-				"podContainers": ["disalechinmay/flask_app:latest"],
-				"podLabels": {
-					"app": "flask",
-					"pod-template-hash": "545ddb746"
-				},
-				"podName": "flask-deployment-545ddb746-z8d7r",
-				"podStatus": "Running"
-			},
-			{
-				"podAnnotations": null,
-				"podContainers": ["disalechinmay/flask_app:latest"],
-				"podLabels": {
-					"app": "flask-new",
-					"pod-template-hash": "6c8784d689"
-				},
-				"podName": "flask-deployment-new-6c8784d689-8797f",
-				"podStatus": "Running"
-			},
-			{
-				"podAnnotations": null,
-				"podContainers": ["perl"],
-				"podLabels": {
-					"controller-uid": "c5f81b40-5885-11ea-a236-00155d013401",
-					"job-name": "pi"
-				},
-				"podName": "pi-76cdj",
-				"podStatus": "Succeeded"
-			},
-			{
-				"podAnnotations": null,
-				"podContainers": ["alpine"],
-				"podLabels": {
-					"controller-uid": "1d1cda2e-5888-11ea-a236-00155d013401",
-					"job-name": "pi2"
-				},
-				"podName": "pi2-h79hs",
-				"podStatus": "Succeeded"
-			},
-			{
-				"podAnnotations": null,
-				"podContainers": ["pyclient:latest"],
-				"podLabels": {
-					"app": "pyclient",
-					"pod-template-hash": "5d6fd7dff6"
-				},
-				"podName": "pyclient-deployment-5d6fd7dff6-84sdx",
-				"podStatus": "Running"
-			},
-			{
-				"podAnnotations": null,
-				"podContainers": ["pyclient:latest"],
-				"podLabels": {
-					"app": "pyclient",
-					"pod-template-hash": "5d6fd7dff6"
-				},
-				"podName": "pyclient-deployment-5d6fd7dff6-hd78x",
-				"podStatus": "Running"
-			},
-			{
-				"podAnnotations": null,
-				"podContainers": ["pyclient:latest"],
-				"podLabels": {
-					"app": "pyclient",
-					"pod-template-hash": "5d6fd7dff6"
-				},
-				"podName": "pyclient-deployment-5d6fd7dff6-pfrfw",
+				"podName": "flask-deployment-5f7fc6b5d9-lrqqs",
 				"podStatus": "Running"
 			}
 		],
 		"status": "SUCCESS",
-		"statusDetails": "Returning data from /pods endpoint."
+		"statusDetails": "Returning a list of pods in 'default' namespace."
 	},
 	"deployments": {
 		"payLoad": [
 			{
 				"deploymentAnnotations": {
 					"deployment.kubernetes.io/revision": "1",
-					"kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apps/v1\",\"kind\":\"Deployment\",\"metadata\":{\"annotations\":{},\"labels\":{\"app\":\"flask\"},\"name\":\"flask-deployment\",\"namespace\":\"default\"},\"spec\":{\"replicas\":3,\"selector\":{\"matchLabels\":{\"app\":\"flask\"}},\"template\":{\"metadata\":{\"labels\":{\"app\":\"flask\"}},\"spec\":{\"containers\":[{\"image\":\"disalechinmay/flask_app:latest\",\"name\":\"flask-container\"}]}}}}\n"
+					"kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apps/v1\",\"kind\":\"Deployment\",\"metadata\":{\"annotations\":{},\"name\":\"flask-deployment\",\"namespace\":\"default\"},\"spec\":{\"replicas\":3,\"selector\":{\"matchLabels\":{\"app\":\"flask\"}},\"template\":{\"metadata\":{\"labels\":{\"app\":\"flask\"}},\"spec\":{\"containers\":[{\"image\":\"disalechinmay/flask_load_testing:latest\",\"name\":\"flask-container\",\"ports\":[{\"containerPort\":5000}]}]}}}}\n"
 				},
 				"deploymentLabels": {
-					"app": "flask"
+					"environment": "unsecure"
 				},
 				"deploymentName": "flask-deployment",
-				"deploymentReadyReplicas": 5,
-				"deploymentReplicas": 5,
-				"deploymentSelectors": {
-					"app": "flask"
-				},
-				"deploymentTemplateContainers": [
-					"disalechinmay/flask_app:latest"
-				],
-				"deploymentTemplateLabels": {
-					"app": "flask"
-				}
-			},
-			{
-				"deploymentAnnotations": {
-					"deployment.kubernetes.io/revision": "1",
-					"kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apps/v1\",\"kind\":\"Deployment\",\"metadata\":{\"annotations\":{},\"labels\":{\"app\":\"flask-new\"},\"name\":\"flask-deployment-new\",\"namespace\":\"default\"},\"spec\":{\"replicas\":1,\"selector\":{\"matchLabels\":{\"app\":\"flask-new\"}},\"template\":{\"metadata\":{\"labels\":{\"app\":\"flask-new\"}},\"spec\":{\"containers\":[{\"image\":\"disalechinmay/flask_app:latest\",\"name\":\"flask-container\"}]}}}}\n"
-				},
-				"deploymentLabels": {
-					"app": "flask-new"
-				},
-				"deploymentName": "flask-deployment-new",
-				"deploymentReadyReplicas": 1,
-				"deploymentReplicas": 1,
-				"deploymentSelectors": {
-					"app": "flask-new"
-				},
-				"deploymentTemplateContainers": [
-					"disalechinmay/flask_app:latest"
-				],
-				"deploymentTemplateLabels": {
-					"app": "flask-new"
-				}
-			},
-			{
-				"deploymentAnnotations": {
-					"deployment.kubernetes.io/revision": "1",
-					"kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apps/v1\",\"kind\":\"Deployment\",\"metadata\":{\"annotations\":{},\"name\":\"pyclient-deployment\",\"namespace\":\"default\"},\"spec\":{\"replicas\":1,\"selector\":{\"matchLabels\":{\"app\":\"pyclient\"}},\"template\":{\"metadata\":{\"labels\":{\"app\":\"pyclient\"}},\"spec\":{\"containers\":[{\"image\":\"pyclient:latest\",\"imagePullPolicy\":\"Never\",\"name\":\"pyclient-container\"}]}}}}\n"
-				},
-				"deploymentLabels": null,
-				"deploymentName": "pyclient-deployment",
-				"deploymentReadyReplicas": null,
+				"deploymentReadyReplicas": 3,
 				"deploymentReplicas": 3,
 				"deploymentSelectors": {
-					"app": "pyclient"
+					"app": "flask"
 				},
-				"deploymentTemplateContainers": ["pyclient:latest"],
+				"deploymentTemplateContainers": [
+					"disalechinmay/flask_load_testing:latest"
+				],
 				"deploymentTemplateLabels": {
-					"app": "pyclient"
+					"app": "flask"
 				}
 			}
 		],
 		"status": "SUCCESS",
-		"statusDetails": "Returning data from /deployments endpoint."
+		"statusDetails": "Returning a list of deployments in 'default' namespace."
 	},
 	"servicesx": {
 		"payLoad": [
@@ -251,7 +126,7 @@
 			}
 		],
 		"status": "SUCCESS",
-		"statusDetails": "Returning data from /servicesx endpoint."
+		"statusDetails": "Returning a list of services of 'default' namespace."
 	},
 	"jobs": {
 		"payLoad": [

@@ -43,9 +43,11 @@ export function getPods(namespace) {
 export function deletePod(namespace, podName) {
 	return new Promise((resolve, reject) => {
 		axios
-			.post(API_LOCATION + "/pods", {
-				namespace,
-				podName
+			.delete(API_LOCATION + "/pod", {
+				data: {
+					namespace,
+					podName
+				}
 			})
 			.then(result => result.data)
 			.then(result => resolve(result))
@@ -71,7 +73,7 @@ export function deletePod(namespace, podName) {
 export function getPodExposure(namespace, podName) {
 	return new Promise((resolve, reject) => {
 		axios
-			.get(API_LOCATION + "/pods/exposure", {
+			.get(API_LOCATION + "/pod/exposure", {
 				params: { namespace, podName }
 			})
 			.then(result => result.data)
@@ -79,14 +81,15 @@ export function getPodExposure(namespace, podName) {
 				if (result.status === "FAILURE")
 					reject({
 						errorDescription:
-							"Something went wrong while retrieving pod exposure for pod '" +
+							"Something went wrong while retrieving exposure for pod '" +
 							podName +
-							"' '" +
+							"' of '" +
 							namespace +
 							"' namespace!",
 						errorSuggestions: [
 							"Make sure the backend service is up and running.",
-							"Make sure the endpoint being accessed is valid."
+							"Make sure the endpoint being accessed is valid.",
+							"Make sure the pod name and namespace is valid."
 						]
 					});
 				resolve(result);
@@ -94,14 +97,15 @@ export function getPodExposure(namespace, podName) {
 			.catch(error =>
 				reject({
 					errorDescription:
-						"Something went wrong while retrieving pod exposure for pod '" +
+						"Something went wrong while retrieving exposure for pod '" +
 						podName +
-						"' '" +
+						"' of '" +
 						namespace +
 						"' namespace!",
 					errorSuggestions: [
 						"Make sure the backend service is up and running.",
-						"Make sure the namespace is correct."
+						"Make sure the namespace is correct.",
+						"Make sure the pod name and namespace is valid."
 					]
 				})
 			);
