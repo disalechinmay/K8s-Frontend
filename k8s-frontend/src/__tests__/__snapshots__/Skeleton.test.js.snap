@@ -532,12 +532,12 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
                   Object {
                     "color": "#2ecc71",
                     "title": "Running Pods",
-                    "value": 9,
+                    "value": 8,
                   },
                   Object {
                     "color": "#dd5135",
                     "title": "Non-Running Pods",
-                    "value": 2,
+                    "value": 0,
                   },
                 ]
               }
@@ -578,7 +578,7 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
                     cy={50}
                     fill="none"
                     key="0"
-                    lengthAngle={294.5454545454546}
+                    lengthAngle={360}
                     lineWidth={3.75}
                     radius={25}
                     reveal={100}
@@ -593,10 +593,10 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
                     title="Running Pods"
                   >
                     <path
-                      d="M 73.125 50 A 23.125 23.125 0 1 1 59.60647217566865 28.964760107426777"
+                      d="M 73.125 50 A 23.125 23.125 0 1 1 73.12499999647787 49.9995963926105"
                       fill="none"
                       stroke="#2ecc71"
-                      strokeDasharray={118.88072200515924}
+                      strokeDasharray={145.29866022852792}
                       strokeDashoffset={0}
                       strokeLinecap="round"
                       strokeWidth={3.75}
@@ -616,11 +616,11 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
                     cy={50}
                     fill="none"
                     key="1"
-                    lengthAngle={65.45454545454545}
+                    lengthAngle={0}
                     lineWidth={3.75}
                     radius={25}
                     reveal={100}
-                    startAngle={294.5454545454546}
+                    startAngle={360}
                     stroke="#dd5135"
                     strokeLinecap="round"
                     style={
@@ -631,10 +631,10 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
                     title="Non-Running Pods"
                   >
                     <path
-                      d="M 59.60647217566865 28.964760107426777 A 23.125 23.125 0 0 1 73.125 50.000000000000036"
+                      d=""
                       fill="none"
                       stroke="#dd5135"
-                      strokeDasharray={26.417938223368715}
+                      strokeDasharray={0}
                       strokeDashoffset={0}
                       strokeLinecap="round"
                       strokeWidth={3.75}
@@ -655,25 +655,25 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
                       Array [
                         Object {
                           "color": "#2ecc71",
-                          "degrees": 294.5454545454546,
-                          "percentage": 81.81818181818183,
+                          "degrees": 360,
+                          "percentage": 100,
                           "startOffset": 0,
                           "title": "Running Pods",
-                          "value": 9,
+                          "value": 8,
                         },
                         Object {
                           "color": "#dd5135",
-                          "degrees": 65.45454545454545,
-                          "percentage": 18.181818181818183,
-                          "startOffset": 294.5454545454546,
+                          "degrees": 0,
+                          "percentage": 0,
+                          "startOffset": 360,
                           "title": "Non-Running Pods",
-                          "value": 2,
+                          "value": 0,
                         },
                       ]
                     }
                     dataIndex={0}
-                    dx={-10.51566916038977}
-                    dy={6.758010218194962}
+                    dx={-12.5}
+                    dy={1.5308084989341915e-15}
                     key="label-0"
                     style={
                       Object {
@@ -687,8 +687,8 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
                   >
                     <text
                       dominantBaseline="middle"
-                      dx={-10.51566916038977}
-                      dy={6.758010218194962}
+                      dx={-12.5}
+                      dy={1.5308084989341915e-15}
                       fill="#2ecc71"
                       style={
                         Object {
@@ -700,7 +700,7 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
                       x={50}
                       y={50}
                     >
-                      9
+                      8
                     </text>
                   </ReactMinimalPieChartLabel>
                   <ReactMinimalPieChartLabel
@@ -709,25 +709,25 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
                       Array [
                         Object {
                           "color": "#2ecc71",
-                          "degrees": 294.5454545454546,
-                          "percentage": 81.81818181818183,
+                          "degrees": 360,
+                          "percentage": 100,
                           "startOffset": 0,
                           "title": "Running Pods",
-                          "value": 9,
+                          "value": 8,
                         },
                         Object {
                           "color": "#dd5135",
-                          "degrees": 65.45454545454545,
-                          "percentage": 18.181818181818183,
-                          "startOffset": 294.5454545454546,
+                          "degrees": 0,
+                          "percentage": 0,
+                          "startOffset": 360,
                           "title": "Non-Running Pods",
-                          "value": 2,
+                          "value": 0,
                         },
                       ]
                     }
                     dataIndex={1}
-                    dx={10.515669160389777}
-                    dy={-6.75801021819495}
+                    dx={12.5}
+                    dy={-3.061616997868383e-15}
                     key="label-1"
                     style={
                       Object {
@@ -741,8 +741,8 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
                   >
                     <text
                       dominantBaseline="middle"
-                      dx={10.515669160389777}
-                      dy={-6.75801021819495}
+                      dx={12.5}
+                      dy={-3.061616997868383e-15}
                       fill="#dd5135"
                       style={
                         Object {
@@ -754,7 +754,7 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
                       x={50}
                       y={50}
                     >
-                      2
+                      0
                     </text>
                   </ReactMinimalPieChartLabel>
                 </svg>
@@ -780,12 +780,12 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
                   Object {
                     "color": "#2ecc71",
                     "title": "Running Deployments",
-                    "value": 2,
+                    "value": 4,
                   },
                   Object {
                     "color": "#dd5135",
                     "title": "Non-Running Deployments",
-                    "value": 1,
+                    "value": 0,
                   },
                 ]
               }
@@ -826,7 +826,7 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
                     cy={50}
                     fill="none"
                     key="0"
-                    lengthAngle={239.99999999999997}
+                    lengthAngle={360}
                     lineWidth={3.75}
                     radius={25}
                     reveal={100}
@@ -841,11 +841,11 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
                     title="Running Deployments"
                   >
                     <path
-                      d="M 73.125 50 A 23.125 23.125 0 1 1 38.437499999999986 29.97316253748486"
+                      d="M 73.125 50 A 23.125 23.125 0 1 1 73.12499999647787 49.9995963926105"
                       fill="none"
                       stroke="#2ecc71"
-                      strokeDasharray={96.86577348568527}
-                      strokeDashoffset={1.4210854715202004e-14}
+                      strokeDasharray={145.29866022852792}
+                      strokeDashoffset={0}
                       strokeLinecap="round"
                       strokeWidth={3.75}
                       style={
@@ -864,11 +864,11 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
                     cy={50}
                     fill="none"
                     key="1"
-                    lengthAngle={119.99999999999999}
+                    lengthAngle={0}
                     lineWidth={3.75}
                     radius={25}
                     reveal={100}
-                    startAngle={239.99999999999997}
+                    startAngle={360}
                     stroke="#dd5135"
                     strokeLinecap="round"
                     style={
@@ -879,11 +879,11 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
                     title="Non-Running Deployments"
                   >
                     <path
-                      d="M 38.437499999999986 29.97316253748486 A 23.125 23.125 0 0 1 73.125 49.99999999999997"
+                      d=""
                       fill="none"
                       stroke="#dd5135"
-                      strokeDasharray={48.43288674284263}
-                      strokeDashoffset={7.105427357601002e-15}
+                      strokeDasharray={0}
+                      strokeDashoffset={0}
                       strokeLinecap="round"
                       strokeWidth={3.75}
                       style={
@@ -903,25 +903,25 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
                       Array [
                         Object {
                           "color": "#2ecc71",
-                          "degrees": 239.99999999999997,
-                          "percentage": 66.66666666666666,
+                          "degrees": 360,
+                          "percentage": 100,
                           "startOffset": 0,
                           "title": "Running Deployments",
-                          "value": 2,
+                          "value": 4,
                         },
                         Object {
                           "color": "#dd5135",
-                          "degrees": 119.99999999999999,
-                          "percentage": 33.33333333333333,
-                          "startOffset": 239.99999999999997,
+                          "degrees": 0,
+                          "percentage": 0,
+                          "startOffset": 360,
                           "title": "Non-Running Deployments",
-                          "value": 1,
+                          "value": 0,
                         },
                       ]
                     }
                     dataIndex={0}
-                    dx={-6.249999999999997}
-                    dy={10.825317547305485}
+                    dx={-12.5}
+                    dy={1.5308084989341915e-15}
                     key="label-0"
                     style={
                       Object {
@@ -935,8 +935,8 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
                   >
                     <text
                       dominantBaseline="middle"
-                      dx={-6.249999999999997}
-                      dy={10.825317547305485}
+                      dx={-12.5}
+                      dy={1.5308084989341915e-15}
                       fill="#2ecc71"
                       style={
                         Object {
@@ -948,7 +948,7 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
                       x={50}
                       y={50}
                     >
-                      2
+                      4
                     </text>
                   </ReactMinimalPieChartLabel>
                   <ReactMinimalPieChartLabel
@@ -957,25 +957,25 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
                       Array [
                         Object {
                           "color": "#2ecc71",
-                          "degrees": 239.99999999999997,
-                          "percentage": 66.66666666666666,
+                          "degrees": 360,
+                          "percentage": 100,
                           "startOffset": 0,
                           "title": "Running Deployments",
-                          "value": 2,
+                          "value": 4,
                         },
                         Object {
                           "color": "#dd5135",
-                          "degrees": 119.99999999999999,
-                          "percentage": 33.33333333333333,
-                          "startOffset": 239.99999999999997,
+                          "degrees": 0,
+                          "percentage": 0,
+                          "startOffset": 360,
                           "title": "Non-Running Deployments",
-                          "value": 1,
+                          "value": 0,
                         },
                       ]
                     }
                     dataIndex={1}
-                    dx={6.249999999999992}
-                    dy={-10.825317547305488}
+                    dx={12.5}
+                    dy={-3.061616997868383e-15}
                     key="label-1"
                     style={
                       Object {
@@ -989,8 +989,8 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
                   >
                     <text
                       dominantBaseline="middle"
-                      dx={6.249999999999992}
-                      dy={-10.825317547305488}
+                      dx={12.5}
+                      dy={-3.061616997868383e-15}
                       fill="#dd5135"
                       style={
                         Object {
@@ -1002,7 +1002,7 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
                       x={50}
                       y={50}
                     >
-                      1
+                      0
                     </text>
                   </ReactMinimalPieChartLabel>
                 </svg>
@@ -1028,7 +1028,7 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
                   Object {
                     "color": "#2ecc71",
                     "title": "Running Jobs",
-                    "value": 2,
+                    "value": 1,
                   },
                   Object {
                     "color": "#dd5135",
@@ -1155,7 +1155,7 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
                           "percentage": 100,
                           "startOffset": 0,
                           "title": "Running Jobs",
-                          "value": 2,
+                          "value": 1,
                         },
                         Object {
                           "color": "#dd5135",
@@ -1196,7 +1196,7 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
                       x={50}
                       y={50}
                     >
-                      2
+                      1
                     </text>
                   </ReactMinimalPieChartLabel>
                   <ReactMinimalPieChartLabel
@@ -1209,7 +1209,7 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
                           "percentage": 100,
                           "startOffset": 0,
                           "title": "Running Jobs",
-                          "value": 2,
+                          "value": 1,
                         },
                         Object {
                           "color": "#dd5135",
