@@ -29,13 +29,15 @@ class PodCard extends Component {
 		// Makes a service call to get exposure.
 		getPodExposure(this.props.namespace, this.props.podInfo.podName)
 			.then(result => {
-				this.setState({
-					...this.state,
-					exposures: result.payLoad
-				});
+				if (this._isMounted)
+					this.setState({
+						...this.state,
+						exposures: result.payLoad
+					});
 			})
 			.catch(error => {
-				this.setState({ ...this.state, exposures: [] });
+				if (this._isMounted)
+					this.setState({ ...this.state, exposures: [] });
 			});
 	}
 
@@ -134,22 +136,27 @@ class PodCard extends Component {
 
 							{/* Card Resource Manip Button */}
 							<span className="resource-manage-section">
-								{this.props.podInfo.podStatus === "Running" && (
-									<span
-										className="resource-delete-button fa fa-trash"
-										onClick={() => {
-											if (this._isMounted)
-												this.props.deletePod(
-													this.props.namespace,
-													this.props.podInfo.podName
-												);
-										}}
-									/>
-								)}
+								<span className="fa fa-bars floaty-button" />
+								<span className="buttons">
+									{this.props.podInfo.podStatus ===
+										"Running" && (
+										<span
+											className="resource-delete-button fa fa-trash"
+											onClick={() => {
+												if (this._isMounted)
+													this.props.deletePod(
+														this.props.namespace,
+														this.props.podInfo
+															.podName
+													);
+											}}
+										/>
+									)}
 
-								<span className="resource-restart-button fa fa-refresh" />
-								<span className="resource-terminal-button fa fa-terminal" />
-								<span className="resource-edit-button fa fa-pencil" />
+									<span className="resource-restart-button fa fa-refresh" />
+									<span className="resource-terminal-button fa fa-terminal" />
+									<span className="resource-edit-button fa fa-pencil" />
+								</span>
 							</span>
 						</span>
 					</React.Fragment>

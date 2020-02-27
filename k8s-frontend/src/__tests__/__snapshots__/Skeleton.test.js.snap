@@ -394,6 +394,7 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
       >
         <span
           className="fa fa-desktop"
+          onClick={null}
         />
           
         Nodes
@@ -406,6 +407,7 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
       >
         <span
           className="fa fa-archive"
+          onClick={null}
         />
           
         Pods
@@ -418,6 +420,7 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
       >
         <span
           className="fa fa-cubes"
+          onClick={null}
         />
           
         Deployments
@@ -430,6 +433,7 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
       >
         <span
           className="fa fa-random"
+          onClick={null}
         />
           
         Services
@@ -442,6 +446,7 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
       >
         <span
           className="fa fa-tasks"
+          onClick={null}
         />
           
         Jobs
@@ -454,6 +459,7 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
       >
         <span
           className="fa fa-clock-o"
+          onClick={null}
         />
           
         Cron Jobs
@@ -466,6 +472,7 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
       >
         <span
           className="fa fa-gears"
+          onClick={null}
         />
           
         Config Maps
@@ -478,6 +485,7 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
       >
         <span
           className="fa fa-user-secret"
+          onClick={null}
         />
           
         Secrets
@@ -502,7 +510,761 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
     <div
       className="mainContent"
       id="mainContent"
-    />
+    >
+      <HomePage
+        namespace="default"
+        refreshState={[Function]}
+      >
+        <div
+          className="pie-chart-flex"
+        >
+          <span
+            className="pie-chart"
+          >
+            <ReactMinimalPieChart
+              animate={true}
+              animationDuration={500}
+              animationEasing="ease-out"
+              cx={50}
+              cy={50}
+              data={
+                Array [
+                  Object {
+                    "color": "#2ecc71",
+                    "title": "Running Pods",
+                    "value": 9,
+                  },
+                  Object {
+                    "color": "#dd5135",
+                    "title": "Non-Running Pods",
+                    "value": 2,
+                  },
+                ]
+              }
+              label={true}
+              labelPosition={50}
+              labelStyle={
+                Object {
+                  "fontFamily": "sans-serif",
+                  "fontSize": "10px",
+                }
+              }
+              lengthAngle={360}
+              lineWidth={15}
+              paddingAngle={0}
+              radius={25}
+              rounded={true}
+              startAngle={0}
+              viewBoxSize={
+                Array [
+                  100,
+                  100,
+                ]
+              }
+            >
+              <div>
+                <svg
+                  height="100%"
+                  style={
+                    Object {
+                      "display": "block",
+                    }
+                  }
+                  viewBox="0 0 100 100"
+                  width="100%"
+                >
+                  <ReactMinimalPieChartPath
+                    cx={50}
+                    cy={50}
+                    fill="none"
+                    key="0"
+                    lengthAngle={294.5454545454546}
+                    lineWidth={3.75}
+                    radius={25}
+                    reveal={100}
+                    startAngle={0}
+                    stroke="#2ecc71"
+                    strokeLinecap="round"
+                    style={
+                      Object {
+                        "transition": "stroke-dashoffset 500ms ease-out",
+                      }
+                    }
+                    title="Running Pods"
+                  >
+                    <path
+                      d="M 73.125 50 A 23.125 23.125 0 1 1 59.60647217566865 28.964760107426777"
+                      fill="none"
+                      stroke="#2ecc71"
+                      strokeDasharray={118.88072200515924}
+                      strokeDashoffset={0}
+                      strokeLinecap="round"
+                      strokeWidth={3.75}
+                      style={
+                        Object {
+                          "transition": "stroke-dashoffset 500ms ease-out",
+                        }
+                      }
+                    >
+                      <title>
+                        Running Pods
+                      </title>
+                    </path>
+                  </ReactMinimalPieChartPath>
+                  <ReactMinimalPieChartPath
+                    cx={50}
+                    cy={50}
+                    fill="none"
+                    key="1"
+                    lengthAngle={65.45454545454545}
+                    lineWidth={3.75}
+                    radius={25}
+                    reveal={100}
+                    startAngle={294.5454545454546}
+                    stroke="#dd5135"
+                    strokeLinecap="round"
+                    style={
+                      Object {
+                        "transition": "stroke-dashoffset 500ms ease-out",
+                      }
+                    }
+                    title="Non-Running Pods"
+                  >
+                    <path
+                      d="M 59.60647217566865 28.964760107426777 A 23.125 23.125 0 0 1 73.125 50.000000000000036"
+                      fill="none"
+                      stroke="#dd5135"
+                      strokeDasharray={26.417938223368715}
+                      strokeDashoffset={0}
+                      strokeLinecap="round"
+                      strokeWidth={3.75}
+                      style={
+                        Object {
+                          "transition": "stroke-dashoffset 500ms ease-out",
+                        }
+                      }
+                    >
+                      <title>
+                        Non-Running Pods
+                      </title>
+                    </path>
+                  </ReactMinimalPieChartPath>
+                  <ReactMinimalPieChartLabel
+                    color="#2ecc71"
+                    data={
+                      Array [
+                        Object {
+                          "color": "#2ecc71",
+                          "degrees": 294.5454545454546,
+                          "percentage": 81.81818181818183,
+                          "startOffset": 0,
+                          "title": "Running Pods",
+                          "value": 9,
+                        },
+                        Object {
+                          "color": "#dd5135",
+                          "degrees": 65.45454545454545,
+                          "percentage": 18.181818181818183,
+                          "startOffset": 294.5454545454546,
+                          "title": "Non-Running Pods",
+                          "value": 2,
+                        },
+                      ]
+                    }
+                    dataIndex={0}
+                    dx={-10.51566916038977}
+                    dy={6.758010218194962}
+                    key="label-0"
+                    style={
+                      Object {
+                        "fontFamily": "sans-serif",
+                        "fontSize": "10px",
+                      }
+                    }
+                    textAnchor="start"
+                    x={50}
+                    y={50}
+                  >
+                    <text
+                      dominantBaseline="middle"
+                      dx={-10.51566916038977}
+                      dy={6.758010218194962}
+                      fill="#2ecc71"
+                      style={
+                        Object {
+                          "fontFamily": "sans-serif",
+                          "fontSize": "10px",
+                        }
+                      }
+                      textAnchor="start"
+                      x={50}
+                      y={50}
+                    >
+                      9
+                    </text>
+                  </ReactMinimalPieChartLabel>
+                  <ReactMinimalPieChartLabel
+                    color="#dd5135"
+                    data={
+                      Array [
+                        Object {
+                          "color": "#2ecc71",
+                          "degrees": 294.5454545454546,
+                          "percentage": 81.81818181818183,
+                          "startOffset": 0,
+                          "title": "Running Pods",
+                          "value": 9,
+                        },
+                        Object {
+                          "color": "#dd5135",
+                          "degrees": 65.45454545454545,
+                          "percentage": 18.181818181818183,
+                          "startOffset": 294.5454545454546,
+                          "title": "Non-Running Pods",
+                          "value": 2,
+                        },
+                      ]
+                    }
+                    dataIndex={1}
+                    dx={10.515669160389777}
+                    dy={-6.75801021819495}
+                    key="label-1"
+                    style={
+                      Object {
+                        "fontFamily": "sans-serif",
+                        "fontSize": "10px",
+                      }
+                    }
+                    textAnchor="end"
+                    x={50}
+                    y={50}
+                  >
+                    <text
+                      dominantBaseline="middle"
+                      dx={10.515669160389777}
+                      dy={-6.75801021819495}
+                      fill="#dd5135"
+                      style={
+                        Object {
+                          "fontFamily": "sans-serif",
+                          "fontSize": "10px",
+                        }
+                      }
+                      textAnchor="end"
+                      x={50}
+                      y={50}
+                    >
+                      2
+                    </text>
+                  </ReactMinimalPieChartLabel>
+                </svg>
+                <span
+                  className="pie-label"
+                >
+                  Pods
+                </span>
+              </div>
+            </ReactMinimalPieChart>
+          </span>
+          <span
+            className="pie-chart"
+          >
+            <ReactMinimalPieChart
+              animate={true}
+              animationDuration={500}
+              animationEasing="ease-out"
+              cx={50}
+              cy={50}
+              data={
+                Array [
+                  Object {
+                    "color": "#2ecc71",
+                    "title": "Running Deployments",
+                    "value": 2,
+                  },
+                  Object {
+                    "color": "#dd5135",
+                    "title": "Non-Running Deployments",
+                    "value": 1,
+                  },
+                ]
+              }
+              label={true}
+              labelPosition={50}
+              labelStyle={
+                Object {
+                  "fontFamily": "sans-serif",
+                  "fontSize": "10px",
+                }
+              }
+              lengthAngle={360}
+              lineWidth={15}
+              paddingAngle={0}
+              radius={25}
+              rounded={true}
+              startAngle={0}
+              viewBoxSize={
+                Array [
+                  100,
+                  100,
+                ]
+              }
+            >
+              <div>
+                <svg
+                  height="100%"
+                  style={
+                    Object {
+                      "display": "block",
+                    }
+                  }
+                  viewBox="0 0 100 100"
+                  width="100%"
+                >
+                  <ReactMinimalPieChartPath
+                    cx={50}
+                    cy={50}
+                    fill="none"
+                    key="0"
+                    lengthAngle={239.99999999999997}
+                    lineWidth={3.75}
+                    radius={25}
+                    reveal={100}
+                    startAngle={0}
+                    stroke="#2ecc71"
+                    strokeLinecap="round"
+                    style={
+                      Object {
+                        "transition": "stroke-dashoffset 500ms ease-out",
+                      }
+                    }
+                    title="Running Deployments"
+                  >
+                    <path
+                      d="M 73.125 50 A 23.125 23.125 0 1 1 38.437499999999986 29.97316253748486"
+                      fill="none"
+                      stroke="#2ecc71"
+                      strokeDasharray={96.86577348568527}
+                      strokeDashoffset={1.4210854715202004e-14}
+                      strokeLinecap="round"
+                      strokeWidth={3.75}
+                      style={
+                        Object {
+                          "transition": "stroke-dashoffset 500ms ease-out",
+                        }
+                      }
+                    >
+                      <title>
+                        Running Deployments
+                      </title>
+                    </path>
+                  </ReactMinimalPieChartPath>
+                  <ReactMinimalPieChartPath
+                    cx={50}
+                    cy={50}
+                    fill="none"
+                    key="1"
+                    lengthAngle={119.99999999999999}
+                    lineWidth={3.75}
+                    radius={25}
+                    reveal={100}
+                    startAngle={239.99999999999997}
+                    stroke="#dd5135"
+                    strokeLinecap="round"
+                    style={
+                      Object {
+                        "transition": "stroke-dashoffset 500ms ease-out",
+                      }
+                    }
+                    title="Non-Running Deployments"
+                  >
+                    <path
+                      d="M 38.437499999999986 29.97316253748486 A 23.125 23.125 0 0 1 73.125 49.99999999999997"
+                      fill="none"
+                      stroke="#dd5135"
+                      strokeDasharray={48.43288674284263}
+                      strokeDashoffset={7.105427357601002e-15}
+                      strokeLinecap="round"
+                      strokeWidth={3.75}
+                      style={
+                        Object {
+                          "transition": "stroke-dashoffset 500ms ease-out",
+                        }
+                      }
+                    >
+                      <title>
+                        Non-Running Deployments
+                      </title>
+                    </path>
+                  </ReactMinimalPieChartPath>
+                  <ReactMinimalPieChartLabel
+                    color="#2ecc71"
+                    data={
+                      Array [
+                        Object {
+                          "color": "#2ecc71",
+                          "degrees": 239.99999999999997,
+                          "percentage": 66.66666666666666,
+                          "startOffset": 0,
+                          "title": "Running Deployments",
+                          "value": 2,
+                        },
+                        Object {
+                          "color": "#dd5135",
+                          "degrees": 119.99999999999999,
+                          "percentage": 33.33333333333333,
+                          "startOffset": 239.99999999999997,
+                          "title": "Non-Running Deployments",
+                          "value": 1,
+                        },
+                      ]
+                    }
+                    dataIndex={0}
+                    dx={-6.249999999999997}
+                    dy={10.825317547305485}
+                    key="label-0"
+                    style={
+                      Object {
+                        "fontFamily": "sans-serif",
+                        "fontSize": "10px",
+                      }
+                    }
+                    textAnchor="start"
+                    x={50}
+                    y={50}
+                  >
+                    <text
+                      dominantBaseline="middle"
+                      dx={-6.249999999999997}
+                      dy={10.825317547305485}
+                      fill="#2ecc71"
+                      style={
+                        Object {
+                          "fontFamily": "sans-serif",
+                          "fontSize": "10px",
+                        }
+                      }
+                      textAnchor="start"
+                      x={50}
+                      y={50}
+                    >
+                      2
+                    </text>
+                  </ReactMinimalPieChartLabel>
+                  <ReactMinimalPieChartLabel
+                    color="#dd5135"
+                    data={
+                      Array [
+                        Object {
+                          "color": "#2ecc71",
+                          "degrees": 239.99999999999997,
+                          "percentage": 66.66666666666666,
+                          "startOffset": 0,
+                          "title": "Running Deployments",
+                          "value": 2,
+                        },
+                        Object {
+                          "color": "#dd5135",
+                          "degrees": 119.99999999999999,
+                          "percentage": 33.33333333333333,
+                          "startOffset": 239.99999999999997,
+                          "title": "Non-Running Deployments",
+                          "value": 1,
+                        },
+                      ]
+                    }
+                    dataIndex={1}
+                    dx={6.249999999999992}
+                    dy={-10.825317547305488}
+                    key="label-1"
+                    style={
+                      Object {
+                        "fontFamily": "sans-serif",
+                        "fontSize": "10px",
+                      }
+                    }
+                    textAnchor="end"
+                    x={50}
+                    y={50}
+                  >
+                    <text
+                      dominantBaseline="middle"
+                      dx={6.249999999999992}
+                      dy={-10.825317547305488}
+                      fill="#dd5135"
+                      style={
+                        Object {
+                          "fontFamily": "sans-serif",
+                          "fontSize": "10px",
+                        }
+                      }
+                      textAnchor="end"
+                      x={50}
+                      y={50}
+                    >
+                      1
+                    </text>
+                  </ReactMinimalPieChartLabel>
+                </svg>
+              </div>
+            </ReactMinimalPieChart>
+            <span
+              className="pie-label"
+            >
+              Deployments
+            </span>
+          </span>
+          <span
+            className="pie-chart"
+          >
+            <ReactMinimalPieChart
+              animate={true}
+              animationDuration={500}
+              animationEasing="ease-out"
+              cx={50}
+              cy={50}
+              data={
+                Array [
+                  Object {
+                    "color": "#2ecc71",
+                    "title": "Running Jobs",
+                    "value": 2,
+                  },
+                  Object {
+                    "color": "#dd5135",
+                    "title": "Non-Running Jobs",
+                    "value": 0,
+                  },
+                ]
+              }
+              label={true}
+              labelPosition={50}
+              labelStyle={
+                Object {
+                  "fontFamily": "sans-serif",
+                  "fontSize": "10px",
+                }
+              }
+              lengthAngle={360}
+              lineWidth={15}
+              paddingAngle={0}
+              radius={25}
+              rounded={true}
+              startAngle={0}
+              viewBoxSize={
+                Array [
+                  100,
+                  100,
+                ]
+              }
+            >
+              <div>
+                <svg
+                  height="100%"
+                  style={
+                    Object {
+                      "display": "block",
+                    }
+                  }
+                  viewBox="0 0 100 100"
+                  width="100%"
+                >
+                  <ReactMinimalPieChartPath
+                    cx={50}
+                    cy={50}
+                    fill="none"
+                    key="0"
+                    lengthAngle={360}
+                    lineWidth={3.75}
+                    radius={25}
+                    reveal={100}
+                    startAngle={0}
+                    stroke="#2ecc71"
+                    strokeLinecap="round"
+                    style={
+                      Object {
+                        "transition": "stroke-dashoffset 500ms ease-out",
+                      }
+                    }
+                    title="Running Jobs"
+                  >
+                    <path
+                      d="M 73.125 50 A 23.125 23.125 0 1 1 73.12499999647787 49.9995963926105"
+                      fill="none"
+                      stroke="#2ecc71"
+                      strokeDasharray={145.29866022852792}
+                      strokeDashoffset={0}
+                      strokeLinecap="round"
+                      strokeWidth={3.75}
+                      style={
+                        Object {
+                          "transition": "stroke-dashoffset 500ms ease-out",
+                        }
+                      }
+                    >
+                      <title>
+                        Running Jobs
+                      </title>
+                    </path>
+                  </ReactMinimalPieChartPath>
+                  <ReactMinimalPieChartPath
+                    cx={50}
+                    cy={50}
+                    fill="none"
+                    key="1"
+                    lengthAngle={0}
+                    lineWidth={3.75}
+                    radius={25}
+                    reveal={100}
+                    startAngle={360}
+                    stroke="#dd5135"
+                    strokeLinecap="round"
+                    style={
+                      Object {
+                        "transition": "stroke-dashoffset 500ms ease-out",
+                      }
+                    }
+                    title="Non-Running Jobs"
+                  >
+                    <path
+                      d=""
+                      fill="none"
+                      stroke="#dd5135"
+                      strokeDasharray={0}
+                      strokeDashoffset={0}
+                      strokeLinecap="round"
+                      strokeWidth={3.75}
+                      style={
+                        Object {
+                          "transition": "stroke-dashoffset 500ms ease-out",
+                        }
+                      }
+                    >
+                      <title>
+                        Non-Running Jobs
+                      </title>
+                    </path>
+                  </ReactMinimalPieChartPath>
+                  <ReactMinimalPieChartLabel
+                    color="#2ecc71"
+                    data={
+                      Array [
+                        Object {
+                          "color": "#2ecc71",
+                          "degrees": 360,
+                          "percentage": 100,
+                          "startOffset": 0,
+                          "title": "Running Jobs",
+                          "value": 2,
+                        },
+                        Object {
+                          "color": "#dd5135",
+                          "degrees": 0,
+                          "percentage": 0,
+                          "startOffset": 360,
+                          "title": "Non-Running Jobs",
+                          "value": 0,
+                        },
+                      ]
+                    }
+                    dataIndex={0}
+                    dx={-12.5}
+                    dy={1.5308084989341915e-15}
+                    key="label-0"
+                    style={
+                      Object {
+                        "fontFamily": "sans-serif",
+                        "fontSize": "10px",
+                      }
+                    }
+                    textAnchor="start"
+                    x={50}
+                    y={50}
+                  >
+                    <text
+                      dominantBaseline="middle"
+                      dx={-12.5}
+                      dy={1.5308084989341915e-15}
+                      fill="#2ecc71"
+                      style={
+                        Object {
+                          "fontFamily": "sans-serif",
+                          "fontSize": "10px",
+                        }
+                      }
+                      textAnchor="start"
+                      x={50}
+                      y={50}
+                    >
+                      2
+                    </text>
+                  </ReactMinimalPieChartLabel>
+                  <ReactMinimalPieChartLabel
+                    color="#dd5135"
+                    data={
+                      Array [
+                        Object {
+                          "color": "#2ecc71",
+                          "degrees": 360,
+                          "percentage": 100,
+                          "startOffset": 0,
+                          "title": "Running Jobs",
+                          "value": 2,
+                        },
+                        Object {
+                          "color": "#dd5135",
+                          "degrees": 0,
+                          "percentage": 0,
+                          "startOffset": 360,
+                          "title": "Non-Running Jobs",
+                          "value": 0,
+                        },
+                      ]
+                    }
+                    dataIndex={1}
+                    dx={12.5}
+                    dy={-3.061616997868383e-15}
+                    key="label-1"
+                    style={
+                      Object {
+                        "fontFamily": "sans-serif",
+                        "fontSize": "10px",
+                      }
+                    }
+                    textAnchor="end"
+                    x={50}
+                    y={50}
+                  >
+                    <text
+                      dominantBaseline="middle"
+                      dx={12.5}
+                      dy={-3.061616997868383e-15}
+                      fill="#dd5135"
+                      style={
+                        Object {
+                          "fontFamily": "sans-serif",
+                          "fontSize": "10px",
+                        }
+                      }
+                      textAnchor="end"
+                      x={50}
+                      y={50}
+                    >
+                      0
+                    </text>
+                  </ReactMinimalPieChartLabel>
+                </svg>
+              </div>
+            </ReactMinimalPieChart>
+            <span
+              className="pie-label"
+            >
+              Jobs
+            </span>
+          </span>
+        </div>
+      </HomePage>
+    </div>
   </div>
 </Skeleton>
 `;

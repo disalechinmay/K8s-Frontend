@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { getNamespaces } from "../services";
 import { LoadingPage, ErrorPage } from "./common";
+import { HomePage } from "./HomePage";
 import { NodesPage } from "./NodesPage";
 import { PodsPage } from "./PodsPage";
 import { DeploymentsPage } from "./DeploymentsPage";
@@ -201,6 +202,7 @@ class Skeleton extends Component {
 									ref={this.optionRefs[index]}
 								>
 									<span
+										onClick={null}
 										className={sidebarOption.style}
 									></span>
 									&emsp; {sidebarOption.title}
@@ -219,6 +221,13 @@ class Skeleton extends Component {
 					{/* Main Content: Displays core pages.*/}
 					<div className="mainContent" id="mainContent">
 						{/* Depending upon sidebarOptionSelected, render respective page. */}
+
+						{this.state.sidebarOptionSelected === 0 && (
+							<HomePage
+								refreshState={() => this.refreshState()}
+								namespace={this.state.namespaceSelected}
+							/>
+						)}
 
 						{this.state.sidebarOptionSelected === 1 && (
 							<NodesPage
