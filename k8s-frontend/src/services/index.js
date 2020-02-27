@@ -4,3 +4,4 @@ export { getPods, deletePod, getPodExposure } from "./pods";
 export { getDeployments, getDeployment, patchDeployment } from "./deployments";
 export { getServices } from "./services";
 export { getJobs } from "./jobs";
+export { getSecrets, patchSecret } from "./secrets";

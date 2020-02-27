@@ -8,6 +8,8 @@ import { DeploymentsPage } from "./DeploymentsPage";
 import { DeploymentEditPage } from "./DeploymentEditPage";
 import { ServicesPage } from "./ServicesPage";
 import { JobsPage } from "./JobsPage";
+import { SecretsPage } from "./SecretsPage";
+import { SecretEditPage } from "./SecretEditPage";
 import { SearchBar, SearchPage } from "./SearchPage";
 import { SIDEBAR_OPTIONS } from "../configs";
 
@@ -127,6 +129,12 @@ class Skeleton extends Component {
 				...this.state,
 				editResourceName: resourceName,
 				sidebarOptionSelected: 13
+			});
+		} else if (resourceType === "SECRET") {
+			this.setState({
+				...this.state,
+				editResourceName: resourceName,
+				sidebarOptionSelected: 18
 			});
 		}
 	}
@@ -268,6 +276,19 @@ class Skeleton extends Component {
 							/>
 						)}
 
+						{this.state.sidebarOptionSelected === 8 && (
+							<SecretsPage
+								renderEditPage={(resourceType, resourceName) =>
+									this.renderResourceEditPage(
+										resourceType,
+										resourceName
+									)
+								}
+								refreshState={() => this.refreshState()}
+								namespace={this.state.namespaceSelected}
+							/>
+						)}
+
 						{this.state.sidebarOptionSelected === 9 && (
 							<SearchPage
 								refreshState={() => this.refreshState()}
@@ -278,6 +299,13 @@ class Skeleton extends Component {
 
 						{this.state.sidebarOptionSelected === 13 && (
 							<DeploymentEditPage
+								namespace={this.state.namespaceSelected}
+								resourceName={this.state.editResourceName}
+							/>
+						)}
+
+						{this.state.sidebarOptionSelected === 18 && (
+							<SecretEditPage
 								namespace={this.state.namespaceSelected}
 								resourceName={this.state.editResourceName}
 							/>
