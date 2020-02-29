@@ -6,11 +6,11 @@ import { NodesPage } from "./NodesPage";
 import { PodsPage } from "./PodsPage";
 import { DeploymentsPage } from "./DeploymentsPage";
 import { ConfigMapsPage } from "./ConfigMapsPage";
-
 import { DeploymentEditPage } from "./DeploymentEditPage";
 import { ServicesPage } from "./ServicesPage";
 import { JobsPage } from "./JobsPage";
 import { SecretsPage } from "./SecretsPage";
+import { SecretAddPage } from "./SecretAddPage";
 import { SecretEditPage } from "./SecretEditPage";
 import { SearchBar, SearchPage } from "./SearchPage";
 import { SIDEBAR_OPTIONS } from "../configs";
@@ -116,16 +116,6 @@ class Skeleton extends Component {
 
 	// Sets editResourceName and renders the resource edit page
 	renderResourceEditPage(resourceType, resourceName) {
-		for (let iter = 0; iter < this.sidebarOptions.length; iter++)
-			if (
-				this.optionRefs[iter].current.classList.contains(
-					"sidebar-button-active"
-				)
-			)
-				this.optionRefs[iter].current.classList.remove(
-					"sidebar-button-active"
-				);
-
 		if (resourceType === "DEPLOYMENT") {
 			this.setState({
 				...this.state,
@@ -137,6 +127,16 @@ class Skeleton extends Component {
 				...this.state,
 				editResourceName: resourceName,
 				sidebarOptionSelected: 18
+			});
+		}
+	}
+
+	// Renders resource add page
+	renderResourceAddPage(resourceType) {
+		if (resourceType === "SECRET") {
+			this.setState({
+				...this.state,
+				sidebarOptionSelected: 28
 			});
 		}
 	}
@@ -286,6 +286,9 @@ class Skeleton extends Component {
 										resourceName
 									)
 								}
+								renderAddPage={resourceType =>
+									this.renderResourceAddPage(resourceType)
+								}
 								refreshState={() => this.refreshState()}
 								namespace={this.state.namespaceSelected}
 							/>
@@ -317,6 +320,12 @@ class Skeleton extends Component {
 							<SecretEditPage
 								namespace={this.state.namespaceSelected}
 								resourceName={this.state.editResourceName}
+							/>
+						)}
+
+						{this.state.sidebarOptionSelected === 28 && (
+							<SecretAddPage
+								namespace={this.state.namespaceSelected}
 							/>
 						)}
 					</div>

@@ -1,0 +1,101 @@
+.step-form {
+	min-height: 100%;
+	min-width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	color: white;
+	overflow: scroll;
+}
+
+.step-form .greeting {
+	font-size: 2em;
+}
+
+.step-form .message {
+	font-size: 1.25em;
+}
+
+.step-form .add-new-button {
+	border: 1px solid white;
+	border-radius: 10px;
+	padding: 0.5%;
+	margin-top: 5%;
+	transition: 0.25s;
+}
+
+.step-form .add-new-button:hover {
+	background-color: #212322;
+	border: 1px solid #212322;
+	transition: 0.25s;
+	cursor: pointer;
+	box-shadow: 0 0 30px 1px #2ecc71;
+}
+
+.step-form .button-positive {
+	border: 1px solid white;
+	border-radius: 10px;
+	padding: 1%;
+	margin-top: 5%;
+	font-size: 1.3em;
+	transition: 0.25s;
+}
+
+.step-form .button-positive:hover {
+	background-color: #212322;
+	border: 1px solid #212322;
+	transition: 0.25s;
+	cursor: pointer;
+	box-shadow: 0 0 30px 1px #2ecc71;
+}
+
+.step-form input {
+	outline: none;
+	margin: 1%;
+	background-color: transparent;
+	border: none;
+	font-size: 1.5em;
+	color: white;
+	text-align: center;
+}
+
+.step-form input:hover {
+	border-bottom: 1px solid white;
+}
+
+.step-form input:focus {
+	border-bottom: 1px solid white;
+}
+
+/* Progress Bar*/
+.progress-bar .completed {
+	font-size: 5em;
+	color: #2ecc71;
+}
+.progress-bar .not-completed {
+	font-size: 5em;
+}
+
+.pairs {
+	display: flex;
+	flex-direction: column;
+	max-height: 50%;
+	overflow: auto;
+	min-width: 100%;
+}
+
+.pair {
+	margin: 1%;
+	padding: 1%;
+	border-bottom: 1px solid gray;
+}
+
+.pair .key {
+	padding: 0 5px 0 5px;
+	border-radius: 15px;
+	border: 1px solid white;
+}
+
+.pair .value {
+}

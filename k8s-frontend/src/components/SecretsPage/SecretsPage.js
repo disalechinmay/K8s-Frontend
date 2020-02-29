@@ -9,6 +9,7 @@ import SecretCard from "./SecretCard";
 			- Used to refresh parent's state.
 		2. namespace
 		3. renderEditPage (method)
+		4. renderAddPage (method)
 
 	Optional props:
 		None
@@ -94,6 +95,13 @@ class SecretsPage extends Component {
 
 		return (
 			<React.Fragment>
+				<button
+					className="add-resource-button"
+					onClick={() => this.props.renderAddPage("SECRET")}
+				>
+					+ Create new secret
+				</button>
+
 				{/* Map secretsList if it is set. */}
 				{this.state.secretsListSet &&
 					this.state.secretsList.map((secretInfo, index) => {
@@ -102,6 +110,7 @@ class SecretsPage extends Component {
 								<SecretCard
 									key={index + "_SECRET_CARD"}
 									index={index}
+									namespace={this.props.namespace}
 									secretInfo={secretInfo}
 									refreshState={() =>
 										this.props.refreshState()
