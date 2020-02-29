@@ -124,3 +124,100 @@ export function patchSecret(namespace, resourceName, body) {
 			);
 	});
 }
+
+// Makes a call to the backend and creates the target resource.
+export function createSecret(namespace, resourceName, data) {
+	return new Promise((resolve, reject) => {
+		axios
+			.post(API_LOCATION + "/secret", {
+				namespace,
+				secretName: resourceName,
+				secretData: data
+			})
+			.then(result => result.data)
+			.then(result => {
+				if (result.status === "FAILURE")
+					reject({
+						rawError: result.payLoad,
+						errorDescription:
+							"Something went wrong while creating secret '" +
+							resourceName +
+							"'' of '" +
+							namespace +
+							"' namespace!",
+						errorSuggestions: [
+							"Make sure the backend service is up and running.",
+							"Make sure the endpoint being accessed is valid.",
+							"Make sure target resource name and namespace is valid.",
+							"Make sure the secret body is valid."
+						]
+					});
+				resolve(result);
+			})
+			.catch(error =>
+				reject({
+					rawError: error,
+					errorDescription:
+						"Something went wrong while creating secret '" +
+						resourceName +
+						"' of '" +
+						namespace +
+						"' namespace!",
+					errorSuggestions: [
+						"Make sure the backend service is up and running.",
+						"Make sure the endpoint being accessed is valid.",
+						"Make sure target resource name and namespace is valid.",
+						"Make sure the secret body is valid."
+					]
+				})
+			);
+	});
+}
+
+// Makes a call to the backend and deletes the target resource.
+export function deleteSecret(namespace, resourceName) {
+	return new Promise((resolve, reject) => {
+		axios
+			.delete(API_LOCATION + "/secret", {
+				data: {
+					namespace,
+					secretName: resourceName
+				}
+			})
+			.then(result => result.data)
+			.then(result => {
+				if (result.status === "FAILURE")
+					reject({
+						rawError: result.payLoad,
+						errorDescription:
+							"Something went wrong while deleting secret '" +
+							resourceName +
+							"'' of '" +
+							namespace +
+							"' namespace!",
+						errorSuggestions: [
+							"Make sure the backend service is up and running.",
+							"Make sure the endpoint being accessed is valid.",
+							"Make sure target resource name and namespace is valid."
+						]
+					});
+				resolve(result);
+			})
+			.catch(error =>
+				reject({
+					rawError: error,
+					errorDescription:
+						"Something went wrong while deleting secret '" +
+						resourceName +
+						"' of '" +
+						namespace +
+						"' namespace!",
+					errorSuggestions: [
+						"Make sure the backend service is up and running.",
+						"Make sure the endpoint being accessed is valid.",
+						"Make sure target resource name and namespace is valid."
+					]
+				})
+			);
+	});
+}

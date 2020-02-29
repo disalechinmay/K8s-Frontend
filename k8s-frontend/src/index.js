@@ -14,6 +14,8 @@ import "./assets/styles/common/JsonEditor.css";
 import "./assets/styles/common/FloatyButton.css";
 import "./assets/styles/common/ResourceEdit.css";
 import "./assets/styles/common/SecretTable.css";
+import "./assets/styles/common/Buttons.css";
+import "./assets/styles/common/Forms.css";
 import "./assets/styles/SearchPage/SearchPage.css";
 import "./assets/styles/HomePage/HomePage.css";
 

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { CardLabels } from "../common";
+import { deleteSecret } from "../../services";
 
 /* 
 	Compulsory props:
@@ -38,7 +39,15 @@ class SecretCard extends Component {
 							<span className="resource-manage-section">
 								<span className="fa fa-bars floaty-button" />
 								<span className="buttons">
-									<span className="resource-delete-button fa fa-trash" />
+									<span
+										className="resource-delete-button fa fa-trash"
+										onClick={() =>
+											deleteSecret(
+												this.props.namespace,
+												this.props.secretInfo.secretName
+											)
+										}
+									/>
 									<span className="resource-restart-button fa fa-refresh" />
 									<span
 										className="resource-edit-button fa fa-pencil"
@@ -58,21 +67,22 @@ class SecretCard extends Component {
 					<React.Fragment>
 						{/* Data */}
 						<div className="flex flex-column mw-100">
-							{Object.entries(
-								this.props.secretInfo.secretData
-							).map(([key, val], index) => {
-								return (
-									<div
-										className="secret-data"
-										key={index + "_FRAG"}
-									>
-										<span className="key">{key}</span>
-										&emsp;
-										<span className="value">{val}</span>
-										<br />
-									</div>
-								);
-							})}
+							{this.props.secretInfo.secretData &&
+								Object.entries(
+									this.props.secretInfo.secretData
+								).map(([key, val], index) => {
+									return (
+										<div
+											className="secret-data"
+											key={index + "_FRAG"}
+										>
+											<span className="key">{key}</span>
+											&emsp;
+											<span className="value">{val}</span>
+											<br />
+										</div>
+									);
+								})}
 						</div>
 						<br />
 

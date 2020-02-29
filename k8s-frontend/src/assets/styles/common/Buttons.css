@@ -1,0 +1,16 @@
+.add-resource-button {
+	margin: 2% 0% 0% 3%;
+	padding: 0.5% 1% 0.5% 1%;
+	background-color: transparent;
+	border-radius: 15px;
+	border: 1px solid #2ecc71;
+	color: white;
+	max-width: 15%;
+	transition: 0.25s;
+}
+
+.add-resource-button:hover {
+	background-color: #2ecc71;
+	transition: 0.25s;
+	cursor: pointer;
+}
