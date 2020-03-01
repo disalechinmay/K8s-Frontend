@@ -6,6 +6,7 @@ import { NodesPage } from "./NodesPage";
 import { PodsPage } from "./PodsPage";
 import { DeploymentsPage } from "./DeploymentsPage";
 import { ConfigMapsPage } from "./ConfigMapsPage";
+import { ConfigMapAddPage } from "./ConfigMapAddPage";
 import { DeploymentEditPage } from "./DeploymentEditPage";
 import { ServicesPage } from "./ServicesPage";
 import { JobsPage } from "./JobsPage";
@@ -137,6 +138,11 @@ class Skeleton extends Component {
 			this.setState({
 				...this.state,
 				sidebarOptionSelected: 28
+			});
+		} else if (resourceType === "CONFIG_MAP") {
+			this.setState({
+				...this.state,
+				sidebarOptionSelected: 27
 			});
 		}
 	}
@@ -278,6 +284,16 @@ class Skeleton extends Component {
 							/>
 						)}
 
+						{this.state.sidebarOptionSelected === 7 && (
+							<ConfigMapsPage
+								refreshState={() => this.refreshState()}
+								namespace={this.state.namespaceSelected}
+								renderAddPage={resourceType =>
+									this.renderResourceAddPage(resourceType)
+								}
+							/>
+						)}
+
 						{this.state.sidebarOptionSelected === 8 && (
 							<SecretsPage
 								renderEditPage={(resourceType, resourceName) =>
@@ -301,13 +317,6 @@ class Skeleton extends Component {
 								searchTokens={this.state.searchTokens}
 							/>
 						)}
-						{this.state.sidebarOptionSelected === 7 && (
-							<ConfigMapsPage
-								refreshState={() => this.refreshState()}
-								namespace={this.state.namespaceSelected}
-								searchTokens={this.state.searchTokens}
-							/>
-						)}
 
 						{this.state.sidebarOptionSelected === 13 && (
 							<DeploymentEditPage
@@ -323,6 +332,11 @@ class Skeleton extends Component {
 							/>
 						)}
 
+						{this.state.sidebarOptionSelected === 27 && (
+							<ConfigMapAddPage
+								namespace={this.state.namespaceSelected}
+							/>
+						)}
 						{this.state.sidebarOptionSelected === 28 && (
 							<SecretAddPage
 								namespace={this.state.namespaceSelected}

@@ -9,6 +9,7 @@ import ConfigMapCard from "./ConfigMapCard";
 			- Used to refresh parent's state.
 		2. namespace
 		3. renderEditPage (method)
+		4. renderAddPage (method)
 
 	Optional props:
 		None
@@ -94,6 +95,12 @@ class ConfigMapsPage extends Component {
 
 		return (
 			<React.Fragment>
+				<button
+					className="add-resource-button"
+					onClick={() => this.props.renderAddPage("CONFIG_MAP")}
+				>
+					+ Create new config map
+				</button>
 				{/* Map configMapsList if it is set. */}
 				{this.state.configMapsListSet &&
 					this.state.configMapsList.map((configMapInfo, index) => {
@@ -102,6 +109,7 @@ class ConfigMapsPage extends Component {
 								<ConfigMapCard
 									key={index + "_configMaps_CARD"}
 									index={index}
+									namespace={this.props.namespace}
 									configMapInfo={configMapInfo}
 									refreshState={() =>
 										this.props.refreshState()
