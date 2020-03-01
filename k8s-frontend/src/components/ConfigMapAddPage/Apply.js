@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { createSecret } from "../../services";
+import { createConfigMap } from "../../services";
 
 class ApplyPage extends Component {
 	state = { informationPane: "", errorSet: false, successSet: false };
@@ -45,7 +45,7 @@ class ApplyPage extends Component {
 		return (
 			<div className="success">
 				<span className="fa fa-check green-check" />
-				&nbsp; Secret created successfully.
+				&nbsp; Config map created successfully.
 			</div>
 		);
 	}
@@ -84,7 +84,7 @@ class ApplyPage extends Component {
 					<span
 						className="button-positive"
 						onClick={() => {
-							createSecret(
+							createConfigMap(
 								this.props.namespace,
 								this.props.resourceName,
 								this.props.resourceData
@@ -107,7 +107,7 @@ class ApplyPage extends Component {
 								);
 						}}
 					>
-						Create new secret
+						Create new config map
 					</span>
 				</span>
 			</React.Fragment>

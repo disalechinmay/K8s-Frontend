@@ -17,7 +17,7 @@ import ApplyPage from "./Apply";
 		Apply
 */
 
-class SecretAddPage extends Component {
+class ConfigMapAddPage extends Component {
 	state = {
 		currentPage: 1,
 		totalPages: 4,
@@ -139,4 +139,4 @@ class SecretAddPage extends Component {
 	}
 }
 
-export default SecretAddPage;
+export default ConfigMapAddPage;

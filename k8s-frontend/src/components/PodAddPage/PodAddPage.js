@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import StartPage from "./StartPage";
 import ResourceNamePage from "./ResourceNamePage";
-import KeyValPage from "./KeyValPage";
+import VarSelPage from "./VarSelPage";
 import ApplyPage from "./Apply";
 /*
 	What should this component do?
@@ -17,7 +17,7 @@ import ApplyPage from "./Apply";
 		Apply
 */
 
-class SecretAddPage extends Component {
+class PodAddPage extends Component {
 	state = {
 		currentPage: 1,
 		totalPages: 4,
@@ -84,7 +84,7 @@ class SecretAddPage extends Component {
 					)}
 
 					{this.state.currentPage === 3 && (
-						<KeyValPage
+						<VarSelPage
 							resourceData={this.state.resourceData}
 							renderNextPage={() => this.renderNextPage()}
 							renderPreviousPage={() => this.renderPreviousPage()}
@@ -139,4 +139,4 @@ class SecretAddPage extends Component {
 	}
 }
 
-export default SecretAddPage;
+export default PodAddPage;

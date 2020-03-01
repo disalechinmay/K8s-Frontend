@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { CardLabels } from "../common";
+import { deleteConfigMap } from "../../services";
 
 /* 
 	Compulsory props:
@@ -39,8 +40,16 @@ class ConfigMapCard extends Component {
 							<span className="resource-manage-section">
 								<span className="fa fa-bars floaty-button" />
 								<span className="buttons">
-									<span className="resource-delete-button fa fa-trash" />
-									<span className="resource-restart-button fa fa-refresh" />
+									<span
+										className="resource-delete-button fa fa-trash"
+										onClick={() =>
+											deleteConfigMap(
+												this.props.namespace,
+												this.props.configMapInfo
+													.configMapName
+											)
+										}
+									/>
 									<span
 										className="resource-edit-button fa fa-pencil"
 										onClick={() =>
@@ -60,44 +69,22 @@ class ConfigMapCard extends Component {
 					<React.Fragment>
 						{/* Data */}
 						<div className="flex flex-column mw-100">
-							{Object.entries(
-								this.props.configMapInfo.configMapData
-							).map(([key, val], index) => {
-								return (
-									<React.Fragment>
+							{this.props.configMapInfo.configMapData &&
+								Object.entries(
+									this.props.configMapInfo.configMapData
+								).map(([key, val], index) => {
+									return (
 										<div
 											className="secret-data"
 											key={index + "_FRAG"}
 										>
-											<span className="section-key">
-												{key}
-											</span>
+											<span className="key">{key}</span>
+											&emsp;
+											<span className="value">{val}</span>
+											<br />
 										</div>
-										{val
-											.split("\n")
-											.map((string, index) => {
-												let pair = string.split("=");
-
-												return (
-													<div
-														className="flex flex-row secret-data secret-data-section"
-														key={index + "_FRAG"}
-													>
-														&emsp;&emsp;
-														<span className="key">
-															{pair[0]}
-														</span>
-														&emsp;
-														<span className="value">
-															{pair[1]}
-														</span>
-													</div>
-												);
-											})}
-										<br />
-									</React.Fragment>
-								);
-							})}
+									);
+								})}
 						</div>
 
 						{/* Labels */}

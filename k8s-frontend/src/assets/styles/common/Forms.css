@@ -36,7 +36,7 @@
 .step-form .button-positive {
 	border: 1px solid white;
 	border-radius: 10px;
-	padding: 1%;
+	padding: 10px;
 	margin-top: 5%;
 	font-size: 1.3em;
 	transition: 0.25s;
@@ -48,6 +48,22 @@
 	transition: 0.25s;
 	cursor: pointer;
 	box-shadow: 0 0 30px 1px #2ecc71;
+}
+
+.step-form .button-negative {
+	border: 1px solid white;
+	border-radius: 10px;
+	padding: 10px;
+	margin-top: 5%;
+	font-size: 1.3em;
+	transition: 0.25s;
+}
+
+.step-form .button-negative:hover {
+	background-color: #212322;
+	border: 1px solid #212322;
+	transition: 0.25s;
+	cursor: pointer;
 }
 
 .step-form input {
@@ -98,4 +114,13 @@
 }
 
 .pair .value {
+}
+
+.select {
+	background-color: transparent;
+	cursor: pointer;
+}
+
+.select:hover {
+	background-color: green;
 }
