@@ -4,6 +4,7 @@ import { LoadingPage, ErrorPage } from "./common";
 import { HomePage } from "./HomePage";
 import { NodesPage } from "./NodesPage";
 import { PodsPage } from "./PodsPage";
+import { PodAddPage } from "./PodAddPage";
 import { DeploymentsPage } from "./DeploymentsPage";
 import { ConfigMapsPage } from "./ConfigMapsPage";
 import { ConfigMapAddPage } from "./ConfigMapAddPage";
@@ -144,6 +145,11 @@ class Skeleton extends Component {
 				...this.state,
 				sidebarOptionSelected: 27
 			});
+		} else if (resourceType === "POD") {
+			this.setState({
+				...this.state,
+				sidebarOptionSelected: 23
+			});
 		}
 	}
 
@@ -255,6 +261,9 @@ class Skeleton extends Component {
 							<PodsPage
 								refreshState={() => this.refreshState()}
 								namespace={this.state.namespaceSelected}
+								renderAddPage={resourceType =>
+									this.renderResourceAddPage(resourceType)
+								}
 							/>
 						)}
 
@@ -332,6 +341,11 @@ class Skeleton extends Component {
 							/>
 						)}
 
+						{this.state.sidebarOptionSelected === 23 && (
+							<PodAddPage
+								namespace={this.state.namespaceSelected}
+							/>
+						)}
 						{this.state.sidebarOptionSelected === 27 && (
 							<ConfigMapAddPage
 								namespace={this.state.namespaceSelected}

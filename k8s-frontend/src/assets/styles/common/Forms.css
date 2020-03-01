@@ -115,3 +115,12 @@
 
 .pair .value {
 }
+
+.select {
+	background-color: transparent;
+	cursor: pointer;
+}
+
+.select:hover {
+	background-color: green;
+}

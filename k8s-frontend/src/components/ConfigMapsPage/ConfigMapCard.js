@@ -50,7 +50,6 @@ class ConfigMapCard extends Component {
 											)
 										}
 									/>
-									<span className="resource-restart-button fa fa-refresh" />
 									<span
 										className="resource-edit-button fa fa-pencil"
 										onClick={() =>
