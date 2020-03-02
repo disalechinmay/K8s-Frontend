@@ -6,6 +6,7 @@ class VarSelPage extends Component {
 		pageLoading: true,
 		configMapsListSet: false,
 		configMapsList: [],
+		resourceVars: [],
 		errorSet: false,
 		errorDescription: ""
 	};
@@ -47,7 +48,8 @@ class VarSelPage extends Component {
 		return (
 			<React.Fragment>
 				<span className="message">
-					Select the env vars you wish to attach to this pod:
+					Select the environment variables you wish to attach to this
+					pod:
 				</span>
 				<br />
 
@@ -55,31 +57,82 @@ class VarSelPage extends Component {
 				{this.state.configMapsListSet &&
 					this.state.configMapsList.map((configMapInfo, index) => {
 						return (
-							<div className="pairs">
-								<React.Fragment key={index + "_FRAG"}>
-									{Object.entries(
-										configMapInfo.configMapData
-									).map(([key, val], index) => {
-										return (
-											<div
-												className="pair select"
-												key={index + "_FRAG"}
+							<div className="pairs" key={index + "_FRAG"}>
+								{Object.entries(
+									configMapInfo.configMapData
+								).map(([key, val], index) => {
+									return (
+										<div
+											className="pair select"
+											key={index + "_FRAG"}
+										>
+											<span
+												className="key"
+												onClick={event => {
+													if (
+														!event.target.classList.contains(
+															"selected"
+														)
+													) {
+														event.target.classList.add(
+															"selected"
+														);
+
+														if (this._isMounted) {
+															let resourceVars = this
+																.state
+																.resourceVars;
+															resourceVars.push({
+																configMapName:
+																	configMapInfo.configMapName,
+																variable: key
+															});
+
+															this.setState({
+																...this.state,
+																resourceVars
+															});
+														}
+
+														this.props.setResourceVars(
+															this.state
+																.resourceVars
+														);
+													}
+												}}
 											>
-												<span className="key">
-													{key}
-												</span>
-												&emsp;
-												<span className="value">
-													{val}
-												</span>
-												<br />
-											</div>
-										);
-									})}
-								</React.Fragment>
+												{key}
+											</span>
+											&emsp;
+											<span className="value">{val}</span>
+											<br />
+										</div>
+									);
+								})}
 							</div>
 						);
 					})}
+
+				<br />
+				<span>
+					<span
+						className="button-negative"
+						onClick={async () => {
+							this.props.renderPreviousPage();
+						}}
+					>
+						Back
+					</span>
+					&emsp;&emsp;
+					<span
+						className="button-positive"
+						onClick={async () => {
+							this.props.renderNextPage();
+						}}
+					>
+						Next
+					</span>
+				</span>
 			</React.Fragment>
 		);
 	}

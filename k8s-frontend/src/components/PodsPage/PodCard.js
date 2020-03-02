@@ -155,7 +155,15 @@ class PodCard extends Component {
 
 									<span className="resource-restart-button fa fa-refresh" />
 									<span className="resource-terminal-button fa fa-terminal" />
-									<span className="resource-edit-button fa fa-pencil" />
+									<span
+										className="resource-edit-button fa fa-pencil"
+										onClick={() =>
+											this.props.renderEditPage(
+												"POD",
+												this.props.podInfo.podName
+											)
+										}
+									/>
 								</span>
 							</span>
 						</span>

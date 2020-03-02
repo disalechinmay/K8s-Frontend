@@ -5,6 +5,7 @@ import { HomePage } from "./HomePage";
 import { NodesPage } from "./NodesPage";
 import { PodsPage } from "./PodsPage";
 import { PodAddPage } from "./PodAddPage";
+import { PodEditPage } from "./PodEditPage";
 import { DeploymentsPage } from "./DeploymentsPage";
 import { ConfigMapsPage } from "./ConfigMapsPage";
 import { ConfigMapAddPage } from "./ConfigMapAddPage";
@@ -129,6 +130,12 @@ class Skeleton extends Component {
 				...this.state,
 				editResourceName: resourceName,
 				sidebarOptionSelected: 18
+			});
+		} else if (resourceType === "POD") {
+			this.setState({
+				...this.state,
+				editResourceName: resourceName,
+				sidebarOptionSelected: 12
 			});
 		}
 	}
@@ -264,6 +271,12 @@ class Skeleton extends Component {
 								renderAddPage={resourceType =>
 									this.renderResourceAddPage(resourceType)
 								}
+								renderEditPage={(resourceType, resourceName) =>
+									this.renderResourceEditPage(
+										resourceType,
+										resourceName
+									)
+								}
 							/>
 						)}
 
@@ -324,6 +337,13 @@ class Skeleton extends Component {
 								refreshState={() => this.refreshState()}
 								namespace={this.state.namespaceSelected}
 								searchTokens={this.state.searchTokens}
+							/>
+						)}
+
+						{this.state.sidebarOptionSelected === 12 && (
+							<PodEditPage
+								namespace={this.state.namespaceSelected}
+								resourceName={this.state.editResourceName}
 							/>
 						)}
 
