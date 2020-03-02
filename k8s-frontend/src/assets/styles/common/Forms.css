@@ -121,6 +121,10 @@
 	cursor: pointer;
 }
 
+.select .selected {
+	background-color: green;
+}
+
 .select:hover {
 	background-color: green;
 }

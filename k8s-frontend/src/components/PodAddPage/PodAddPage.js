@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import StartPage from "./StartPage";
 import ResourceNamePage from "./ResourceNamePage";
+import ImagePage from "./ImagePage";
 import VarSelPage from "./VarSelPage";
 import ApplyPage from "./Apply";
 /*
@@ -20,8 +21,10 @@ import ApplyPage from "./Apply";
 class PodAddPage extends Component {
 	state = {
 		currentPage: 1,
-		totalPages: 4,
+		totalPages: 5,
 		resourceName: "",
+		resourceImage: "",
+		resourceVars: [],
 		resourceData: []
 	};
 	_isMounted = false;
@@ -57,6 +60,24 @@ class PodAddPage extends Component {
 		}
 	}
 
+	setResourceImage(resourceImage) {
+		if (this._isMounted) {
+			this.setState({
+				...this.state,
+				resourceImage
+			});
+		}
+	}
+
+	setResourceVars(data) {
+		if (this._isMounted) {
+			this.setState({
+				...this.state,
+				resourceVars: data
+			});
+		}
+	}
+
 	setResourceData(data) {
 		if (this._isMounted)
 			this.setState({ ...this.state, resourceData: data });
@@ -84,19 +105,30 @@ class PodAddPage extends Component {
 					)}
 
 					{this.state.currentPage === 3 && (
-						<VarSelPage
-							resourceData={this.state.resourceData}
+						<ImagePage
+							imageName={this.state.resourceImage}
 							renderNextPage={() => this.renderNextPage()}
 							renderPreviousPage={() => this.renderPreviousPage()}
-							setResourceData={data => this.setResourceData(data)}
+							setResourceImage={data =>
+								this.setResourceImage(data)
+							}
 						/>
 					)}
 
 					{this.state.currentPage === 4 && (
+						<VarSelPage
+							renderNextPage={() => this.renderNextPage()}
+							renderPreviousPage={() => this.renderPreviousPage()}
+							setResourceVars={data => this.setResourceVars(data)}
+						/>
+					)}
+
+					{this.state.currentPage === 5 && (
 						<ApplyPage
 							namespace={this.props.namespace}
 							resourceName={this.state.resourceName}
-							resourceData={this.state.resourceData}
+							resourceImage={this.state.resourceImage}
+							resourceVars={this.state.resourceVars}
 							renderPreviousPage={() => this.renderPreviousPage()}
 						/>
 					)}

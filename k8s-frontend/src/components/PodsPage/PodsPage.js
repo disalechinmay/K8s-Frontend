@@ -141,6 +141,15 @@ class PodsPage extends Component {
 									deletePod={(namespace, podName) =>
 										this.deletePodX(namespace, podName)
 									}
+									renderEditPage={(
+										resourceType,
+										resourceName
+									) =>
+										this.props.renderEditPage(
+											resourceType,
+											resourceName
+										)
+									}
 								/>
 							</React.Fragment>
 						);

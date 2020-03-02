@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { createSecret } from "../../services";
+import { createPod } from "../../services";
 
 class ApplyPage extends Component {
 	state = { informationPane: "", errorSet: false, successSet: false };
@@ -45,7 +45,7 @@ class ApplyPage extends Component {
 		return (
 			<div className="success">
 				<span className="fa fa-check green-check" />
-				&nbsp; Secret created successfully.
+				&nbsp; Pod created successfully.
 			</div>
 		);
 	}
@@ -84,10 +84,11 @@ class ApplyPage extends Component {
 					<span
 						className="button-positive"
 						onClick={() => {
-							createSecret(
+							createPod(
 								this.props.namespace,
 								this.props.resourceName,
-								this.props.resourceData
+								this.props.resourceImage,
+								this.props.resourceVars
 							)
 								.then(result => {
 									this.setState({
@@ -107,7 +108,7 @@ class ApplyPage extends Component {
 								);
 						}}
 					>
-						Create new secret
+						Create new pod
 					</span>
 				</span>
 			</React.Fragment>

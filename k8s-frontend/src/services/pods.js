@@ -39,6 +39,44 @@ export function getPods(namespace) {
 	});
 }
 
+// Makes a call to the backend and returns a list of pods in a namespace.
+export function getPod(namespace, podName) {
+	return new Promise((resolve, reject) => {
+		axios
+			.get(API_LOCATION + "/pod", {
+				params: { namespace, podName }
+			})
+			.then(result => result.data)
+			.then(result => {
+				if (result.status === "FAILURE")
+					reject({
+						errorDescription:
+							"Something went wrong while retrieving pod for '" +
+							namespace +
+							"' namespace!",
+						errorSuggestions: [
+							"Make sure the backend service is up and running.",
+							"Make sure the endpoint being accessed is valid."
+						]
+					});
+
+				resolve(result);
+			})
+			.catch(error =>
+				reject({
+					errorDescription:
+						"Something went wrong while retrieving pod for '" +
+						namespace +
+						"' namespace!",
+					errorSuggestions: [
+						"Make sure the backend service is up and running.",
+						"Make sure the namespace is correct."
+					]
+				})
+			);
+	});
+}
+
 // Makes a call to the backend and deletes a pod in a namespace.
 export function deletePod(namespace, podName) {
 	return new Promise((resolve, reject) => {
@@ -106,6 +144,56 @@ export function getPodExposure(namespace, podName) {
 						"Make sure the backend service is up and running.",
 						"Make sure the namespace is correct.",
 						"Make sure the pod name and namespace is valid."
+					]
+				})
+			);
+	});
+}
+
+// Makes a call to the backend and creates the target resource.
+export function createPod(namespace, resourceName, podImage, podVars) {
+	return new Promise((resolve, reject) => {
+		axios
+			.post(API_LOCATION + "/pod", {
+				namespace,
+				podName: resourceName,
+				podImage,
+				podVars
+			})
+			.then(result => result.data)
+			.then(result => {
+				if (result.status === "FAILURE")
+					reject({
+						rawError: result.payLoad,
+						errorDescription:
+							"Something went wrong while creating pod '" +
+							resourceName +
+							"'' of '" +
+							namespace +
+							"' namespace!",
+						errorSuggestions: [
+							"Make sure the backend service is up and running.",
+							"Make sure the endpoint being accessed is valid.",
+							"Make sure target resource name and namespace is valid.",
+							"Make sure the pod body is valid."
+						]
+					});
+				resolve(result);
+			})
+			.catch(error =>
+				reject({
+					rawError: error,
+					errorDescription:
+						"Something went wrong while creating pod '" +
+						resourceName +
+						"' of '" +
+						namespace +
+						"' namespace!",
+					errorSuggestions: [
+						"Make sure the backend service is up and running.",
+						"Make sure the endpoint being accessed is valid.",
+						"Make sure target resource name and namespace is valid.",
+						"Make sure the pod body is valid."
 					]
 				})
 			);
