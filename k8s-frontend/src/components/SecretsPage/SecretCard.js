@@ -17,7 +17,38 @@ import { deleteSecret } from "../../services";
 			- Used by SearchPage.
 */
 class SecretCard extends Component {
-	state = {};
+	state = {
+		changesMade: false
+	};
+
+	constructor(props) {
+		super(props);
+		this.keyReferences = [];
+		this.valueReferences = [];
+		for (let [index, [key, value]] of Object.entries(
+			Object.entries(this.props.secretInfo.secretData)
+		)) {
+			this.keyReferences[index] = React.createRef();
+			this.valueReferences[index] = React.createRef();
+		}
+	}
+
+	highlight(event) {
+		event.target.classList.add("highlighted");
+	}
+
+	unHighlight(event) {
+		event.target.classList.remove("highlighted");
+	}
+
+	saveChanges() {
+		if (changeMade === true) {
+			for (let [index, [key, value]] of Object.entries(
+				Object.entries(this.props.secretInfo.secretData)
+			))
+				console.log(this.keyReferences[index].current.innerText);
+		}
+	}
 	render() {
 		return (
 			<React.Fragment>
@@ -61,27 +92,78 @@ class SecretCard extends Component {
 							</span>
 						</span>
 					</React.Fragment>
-
-					{/* Card Body */}
+					{/* Alert box with save button */}
+					<React.Fragment>
+						<div className="alert">
+							Changes have been made to this resource.
+							<button
+								className="alert-button "
+								onClick={() => this.saveChanges()}
+							>
+								Save Changes
+							</button>
+						</div>
+					</React.Fragment>
 					<React.Fragment>
 						{/* Data */}
 						<div className="flex flex-column mw-100">
-							{this.props.secretInfo.secretData &&
-								Object.entries(
-									this.props.secretInfo.secretData
-								).map(([key, val], index) => {
-									return (
-										<div
-											className="secret-data"
-											key={index + "_FRAG"}
+							{Object.entries(
+								this.props.secretInfo.secretData
+							).map(([key, val], index) => {
+								return (
+									<div
+										className="secret-data"
+										key={index + "_FRAG"}
+									>
+										<span
+											onChange={() =>
+												this.setState({
+													...this.state,
+													changesMade: true
+												})
+											}
+											onFocus={event =>
+												this.highlight(event)
+											}
+											onBlur={event =>
+												this.unHighlight(event)
+											}
+											ref={this.keyReferences[index]}
+											className="key"
+											contentEditable="true"
+											suppressContentEditableWarning={
+												true
+											}
 										>
-											<span className="key">{key}</span>
-											&emsp;
-											<span className="value">{val}</span>
-											<br />
-										</div>
-									);
-								})}
+											{key}
+										</span>
+										&emsp;
+										<span
+											className="value"
+											onChange={() =>
+												this.setState({
+													...this.state,
+													changesMade: true
+												})
+											}
+											onFocus={event =>
+												this.highlight(event)
+											}
+											onBlur={event =>
+												this.unHighlight(event)
+											}
+											ref={this.valueReferences[key]}
+											contentEditable="true"
+											suppressContentEditableWarning={
+												true
+											}
+										>
+											{val}
+										</span>
+										<br />
+									</div>
+								);
+							})}
 						</div>
 						<br />
 
