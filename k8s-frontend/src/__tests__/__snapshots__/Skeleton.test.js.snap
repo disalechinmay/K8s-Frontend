@@ -479,7 +479,6 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
         Secrets
       </div>
       <SearchBar
-        refreshState={[Function]}
         renderSearchPage={[Function]}
         sendTokens={[Function]}
       >
@@ -501,7 +500,6 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
     >
       <HomePage
         namespace="default"
-        refreshState={[Function]}
       >
         <div
           className="pie-chart-flex"
@@ -520,7 +518,7 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
                   Object {
                     "color": "#2ecc71",
                     "title": "Running Pods",
-                    "value": 3,
+                    "value": 4,
                   },
                   Object {
                     "color": "#dd5135",
@@ -647,7 +645,7 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
                           "percentage": 100,
                           "startOffset": 0,
                           "title": "Running Pods",
-                          "value": 3,
+                          "value": 4,
                         },
                         Object {
                           "color": "#dd5135",
@@ -688,7 +686,7 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
                       x={50}
                       y={50}
                     >
-                      3
+                      4
                     </text>
                   </ReactMinimalPieChartLabel>
                   <ReactMinimalPieChartLabel
@@ -701,7 +699,7 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
                           "percentage": 100,
                           "startOffset": 0,
                           "title": "Running Pods",
-                          "value": 3,
+                          "value": 4,
                         },
                         Object {
                           "color": "#dd5135",
@@ -1016,7 +1014,7 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
                   Object {
                     "color": "#2ecc71",
                     "title": "Running Jobs",
-                    "value": 2,
+                    "value": 0,
                   },
                   Object {
                     "color": "#dd5135",
@@ -1062,7 +1060,7 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
                     cy={50}
                     fill="none"
                     key="0"
-                    lengthAngle={360}
+                    lengthAngle={0}
                     lineWidth={3.75}
                     radius={25}
                     reveal={100}
@@ -1077,10 +1075,10 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
                     title="Running Jobs"
                   >
                     <path
-                      d="M 73.125 50 A 23.125 23.125 0 1 1 73.12499999647787 49.9995963926105"
+                      d=""
                       fill="none"
                       stroke="#2ecc71"
-                      strokeDasharray={145.29866022852792}
+                      strokeDasharray={0}
                       strokeDashoffset={0}
                       strokeLinecap="round"
                       strokeWidth={3.75}
@@ -1104,7 +1102,7 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
                     lineWidth={3.75}
                     radius={25}
                     reveal={100}
-                    startAngle={360}
+                    startAngle={0}
                     stroke="#dd5135"
                     strokeLinecap="round"
                     style={
@@ -1139,25 +1137,25 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
                       Array [
                         Object {
                           "color": "#2ecc71",
-                          "degrees": 360,
-                          "percentage": 100,
+                          "degrees": 0,
+                          "percentage": 0,
                           "startOffset": 0,
                           "title": "Running Jobs",
-                          "value": 2,
+                          "value": 0,
                         },
                         Object {
                           "color": "#dd5135",
                           "degrees": 0,
                           "percentage": 0,
-                          "startOffset": 360,
+                          "startOffset": 0,
                           "title": "Non-Running Jobs",
                           "value": 0,
                         },
                       ]
                     }
                     dataIndex={0}
-                    dx={-12.5}
-                    dy={1.5308084989341915e-15}
+                    dx={12.5}
+                    dy={0}
                     key="label-0"
                     style={
                       Object {
@@ -1165,14 +1163,14 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
                         "fontSize": "10px",
                       }
                     }
-                    textAnchor="start"
+                    textAnchor="end"
                     x={50}
                     y={50}
                   >
                     <text
                       dominantBaseline="middle"
-                      dx={-12.5}
-                      dy={1.5308084989341915e-15}
+                      dx={12.5}
+                      dy={0}
                       fill="#2ecc71"
                       style={
                         Object {
@@ -1180,11 +1178,11 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
                           "fontSize": "10px",
                         }
                       }
-                      textAnchor="start"
+                      textAnchor="end"
                       x={50}
                       y={50}
                     >
-                      2
+                      0
                     </text>
                   </ReactMinimalPieChartLabel>
                   <ReactMinimalPieChartLabel
@@ -1193,17 +1191,17 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
                       Array [
                         Object {
                           "color": "#2ecc71",
-                          "degrees": 360,
-                          "percentage": 100,
+                          "degrees": 0,
+                          "percentage": 0,
                           "startOffset": 0,
                           "title": "Running Jobs",
-                          "value": 2,
+                          "value": 0,
                         },
                         Object {
                           "color": "#dd5135",
                           "degrees": 0,
                           "percentage": 0,
-                          "startOffset": 360,
+                          "startOffset": 0,
                           "title": "Non-Running Jobs",
                           "value": 0,
                         },
@@ -1211,7 +1209,7 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
                     }
                     dataIndex={1}
                     dx={12.5}
-                    dy={-3.061616997868383e-15}
+                    dy={0}
                     key="label-1"
                     style={
                       Object {
@@ -1226,7 +1224,7 @@ exports[`Skeleton Tests Check if skeleton renders correctly. 1`] = `
                     <text
                       dominantBaseline="middle"
                       dx={12.5}
-                      dy={-3.061616997868383e-15}
+                      dy={0}
                       fill="#dd5135"
                       style={
                         Object {

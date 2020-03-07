@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getSecret, patchSecret } from "../../services";
+import { getSecret, patchSecret, replaceSecret } from "../../services";
 import { SmallLoadingPage } from "../common";
 import { JSONEditorX } from "../common";
 
@@ -14,11 +14,9 @@ import { JSONEditorX } from "../common";
 class SecretEditPage extends Component {
 	state = {
 		secret: null,
-		updatedSecret: null,
 		secretSet: false,
 		pageLoading: true,
 		changesMade: false,
-		changesSaved: false,
 		informationPane: "",
 		errorSet: false,
 		successSet: false
@@ -34,8 +32,7 @@ class SecretEditPage extends Component {
 						...this.state,
 						pageLoading: false,
 						secretSet: true,
-						secret: result.payLoad,
-						updatedSecret: result.payLoad
+						secret: result.payLoad
 					});
 			})
 			.catch(error => {
@@ -58,24 +55,12 @@ class SecretEditPage extends Component {
 	}
 
 	// If JSON is changed, sets changesMade as true & changesSaved as false
-	// Puts the new secret in updatedSecret
+	// Puts the new secret in secret
 	onChangeHandler(event) {
-		console.log("CHANGE");
 		this.setState({
 			...this.state,
 			changesMade: true,
-			changesSaved: false,
-			updatedSecret: event
-		});
-	}
-
-	// Sets changesSaved as true
-	// Updates secret to updatedSecret
-	saveChanges() {
-		this.setState({
-			...this.state,
-			changesSaved: true,
-			secret: this.state.updatedSecret
+			secret: event
 		});
 	}
 
@@ -100,7 +85,45 @@ class SecretEditPage extends Component {
 						...this.state,
 						pageLoading: false,
 						informationPane: result,
-						successSet: true
+						successSet: true,
+						changesMade: false
+					});
+			})
+			.catch(error => {
+				if (this._isMounted) {
+					this.setState({
+						...this.state,
+						pageLoading: false,
+						informationPane: error,
+						errorSet: true
+					});
+				}
+			});
+	}
+
+	// Makes a service call to patch the secret.
+	replaceChanges() {
+		if (this._isMounted)
+			this.setState({
+				...this.state,
+				pageLoading: true,
+				errorSet: false,
+				successSet: false
+			});
+
+		replaceSecret(
+			this.props.namespace,
+			this.props.resourceName,
+			this.state.secret
+		)
+			.then(result => {
+				if (this._isMounted)
+					this.setState({
+						...this.state,
+						pageLoading: false,
+						informationPane: result,
+						successSet: true,
+						changesMade: false
 					});
 			})
 			.catch(error => {
@@ -168,34 +191,48 @@ class SecretEditPage extends Component {
 				<div className="json">
 					<span className="flex flex-row space-between w-100 ">
 						{/* Title */}
-						<span className="flex flex-row title mw-80 flex-start">
-							<div className="json-title">
-								<span className="fa fa-lastfm"></span>
-								Editing:&nbsp;
-								{this.props.resourceName}
-							</div>
+
+						<span className="json-title">
+							<span className="fa fa-lastfm"></span>
+							Editing:&nbsp;
+							{this.props.resourceName}
 						</span>
 
-						{/* Save Changes Button */}
-						<span className="resource-manage-section">
+						{/* Save Changes Buttons */}
+						<span className="save-changes-buttons">
 							{this.state.changesMade === false && (
-								<span className="save-changes-button-no-change fa fa-save" />
+								<React.Fragment>
+									<span className="replace-button-disabled">
+										<span className="fa fa-random" />
+										&nbsp; Replace
+									</span>
+									&emsp;
+									<span className="patch-button-disabled">
+										<span className="fa fa-level-up" />
+										&nbsp; Patch
+									</span>
+								</React.Fragment>
 							)}
 
-							{this.state.changesMade === true &&
-								this.state.changesSaved === false && (
+							{this.state.changesMade === true && (
+								<React.Fragment>
 									<span
-										onClick={() => this.saveChanges()}
-										className="save-changes-button-unsaved fa fa-save"
-									/>
-								)}
-							{this.state.changesMade === true &&
-								this.state.changesSaved === true && (
+										className="replace-button"
+										onClick={() => this.replaceChanges()}
+									>
+										<span className="fa fa-random" />
+										&nbsp; Replace
+									</span>
+									&emsp;
 									<span
-										className="save-changes-button-saved fa fa-upload"
+										className="patch-button"
 										onClick={() => this.patchChanges()}
-									/>
-								)}
+									>
+										<span className="fa fa-level-up" />
+										&nbsp; Patch
+									</span>
+								</React.Fragment>
+							)}
 						</span>
 					</span>
 
@@ -209,7 +246,7 @@ class SecretEditPage extends Component {
 
 					{this.state.secretSet && (
 						<JSONEditorX
-							json={this.state.updatedSecret}
+							json={this.state.secret}
 							onChangeJSON={event => this.onChangeHandler(event)}
 						/>
 					)}

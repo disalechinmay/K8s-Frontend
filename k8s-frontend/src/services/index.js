@@ -9,6 +9,7 @@ export {
 	getSecrets,
 	getSecret,
 	patchSecret,
+	replaceSecret,
 	createSecret,
 	deleteSecret
 } from "./secrets";

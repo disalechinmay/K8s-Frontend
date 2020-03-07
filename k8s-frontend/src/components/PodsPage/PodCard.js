@@ -183,7 +183,7 @@ class PodCard extends Component {
 						{/* Labels */}
 						<span className="flex flex-row">
 							<span className="mt-5">Labels:</span>
-							<span className="flex flex-row mw-100 wrap">
+							<span className="flex flex-row mw-100 wrap labels">
 								<CardLabels
 									labels={this.props.podInfo.podLabels}
 									refreshState={() =>
@@ -196,7 +196,7 @@ class PodCard extends Component {
 						{/* Annotations */}
 						<span className="flex flex-row">
 							<span className="mt-5">Annotations:</span>
-							<span className="flex flex-row mw-100 wrap">
+							<span className="flex flex-row mw-100 wrap labels">
 								<CardLabels
 									labels={this.props.podInfo.podAnnotations}
 									refreshState={() =>

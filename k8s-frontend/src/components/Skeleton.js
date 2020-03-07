@@ -31,6 +31,8 @@ class Skeleton extends Component {
 		editResourceName: "" // Used as a prop to Edit Resource Page
 	};
 
+	// Creates sidebar button references.
+	// Sets namespacesList using a service call.
 	constructor(props) {
 		super(props);
 
@@ -61,7 +63,7 @@ class Skeleton extends Component {
 			});
 	}
 
-	// Updates the state when sidebar options are selected.
+	// Updates the state & style when sidebar options are selected.
 	handleClick(event, clickedOptionIndex) {
 		let newState = { ...this.state };
 
@@ -88,12 +90,7 @@ class Skeleton extends Component {
 		this.setState({ ...this.state, namespaceSelected: event.target.value });
 	}
 
-	// Refreshes the state. Used for reflecting child component state change.
-	refreshState() {
-		this.setState({ ...this.state });
-	}
-
-	// Sets sidebarOptionSelectec to 9, which in turn renders SearchPage.
+	// Sets sidebarOptionSelected to 9, which in turn renders SearchPage.
 	// Manipulated by SearchBar.
 	renderSearchPage() {
 		for (let iter = 0; iter < this.sidebarOptions.length; iter++)
@@ -241,7 +238,6 @@ class Skeleton extends Component {
 
 						{/* Sidebar SearchBar*/}
 						<SearchBar
-							refreshState={() => this.refreshState()}
 							renderSearchPage={() => this.renderSearchPage()}
 							sendTokens={tokens => this.sendTokens(tokens)}
 						/>
@@ -253,20 +249,16 @@ class Skeleton extends Component {
 
 						{this.state.sidebarOptionSelected === 0 && (
 							<HomePage
-								refreshState={() => this.refreshState()}
 								namespace={this.state.namespaceSelected}
 							/>
 						)}
 
 						{this.state.sidebarOptionSelected === 1 && (
-							<NodesPage
-								refreshState={() => this.refreshState()}
-							/>
+							<NodesPage />
 						)}
 
 						{this.state.sidebarOptionSelected === 2 && (
 							<PodsPage
-								refreshState={() => this.refreshState()}
 								namespace={this.state.namespaceSelected}
 								renderAddPage={resourceType =>
 									this.renderResourceAddPage(resourceType)
@@ -288,27 +280,23 @@ class Skeleton extends Component {
 										resourceName
 									)
 								}
-								refreshState={() => this.refreshState()}
 								namespace={this.state.namespaceSelected}
 							/>
 						)}
 
 						{this.state.sidebarOptionSelected === 4 && (
 							<ServicesPage
-								refreshState={() => this.refreshState()}
 								namespace={this.state.namespaceSelected}
 							/>
 						)}
 						{this.state.sidebarOptionSelected === 5 && (
 							<JobsPage
-								refreshState={() => this.refreshState()}
 								namespace={this.state.namespaceSelected}
 							/>
 						)}
 
 						{this.state.sidebarOptionSelected === 7 && (
 							<ConfigMapsPage
-								refreshState={() => this.refreshState()}
 								namespace={this.state.namespaceSelected}
 								renderAddPage={resourceType =>
 									this.renderResourceAddPage(resourceType)
@@ -327,14 +315,12 @@ class Skeleton extends Component {
 								renderAddPage={resourceType =>
 									this.renderResourceAddPage(resourceType)
 								}
-								refreshState={() => this.refreshState()}
 								namespace={this.state.namespaceSelected}
 							/>
 						)}
 
 						{this.state.sidebarOptionSelected === 9 && (
 							<SearchPage
-								refreshState={() => this.refreshState()}
 								namespace={this.state.namespaceSelected}
 								searchTokens={this.state.searchTokens}
 							/>

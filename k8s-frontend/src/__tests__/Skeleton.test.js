@@ -92,17 +92,6 @@ describe("Skeleton Tests", () => {
 		expect(wrapper.state("namespaceSelected")).toBe("a");
 	});
 
-	test("Check if refreshState() works.", async () => {
-		await new Promise(resolve => setTimeout(resolve, PAGE_LOAD_LIMIT_TIME));
-		wrapper.update();
-
-		let oldState = { ...wrapper.state() };
-		wrapper.instance().refreshState();
-		wrapper.update();
-
-		expect(wrapper.state()).toEqual(oldState);
-	});
-
 	test("Check if renderSearchPage() works.", async () => {
 		await new Promise(resolve => setTimeout(resolve, PAGE_LOAD_LIMIT_TIME));
 		wrapper.update();

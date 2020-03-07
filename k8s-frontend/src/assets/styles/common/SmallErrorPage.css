@@ -18,7 +18,7 @@
 	background: -webkit-linear-gradient(#dd5135, #ca4853);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
-	font-size: 1.5em;
+	font-size: 2vw;
 	font-weight: bold;
 	transition: 0.25s;
 	margin-top: 5%;
@@ -26,13 +26,13 @@
 
 .small-error-page .message {
 	color: #ecf0f1;
-	font-size: 2em;
+	font-size: 2.5vw;
 	transition: 0.25s;
 }
 
 .small-error-page .oops {
 	color: #ecf0f1;
-	font-size: 3em;
+	font-size: 4vw;
 	transition: 0.25s;
 }
 

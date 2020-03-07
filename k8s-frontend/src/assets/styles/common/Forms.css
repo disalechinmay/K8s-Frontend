@@ -10,11 +10,11 @@
 }
 
 .step-form .greeting {
-	font-size: 2em;
+	font-size: 2.5vw;
 }
 
 .step-form .message {
-	font-size: 1.25em;
+	font-size: 1.5vw;
 }
 
 .step-form .add-new-button {
@@ -38,7 +38,7 @@
 	border-radius: 10px;
 	padding: 10px;
 	margin-top: 5%;
-	font-size: 1.3em;
+	font-size: 1.8vw;
 	transition: 0.25s;
 }
 
@@ -55,7 +55,7 @@
 	border-radius: 10px;
 	padding: 10px;
 	margin-top: 5%;
-	font-size: 1.3em;
+	font-size: 1.8vw;
 	transition: 0.25s;
 }
 
@@ -71,7 +71,7 @@
 	margin: 1%;
 	background-color: transparent;
 	border: none;
-	font-size: 1.5em;
+	font-size: 2vw;
 	color: white;
 	text-align: center;
 }
@@ -86,11 +86,11 @@
 
 /* Progress Bar*/
 .progress-bar .completed {
-	font-size: 5em;
+	font-size: 6vw;
 	color: #2ecc71;
 }
 .progress-bar .not-completed {
-	font-size: 5em;
+	font-size: 6vw;
 }
 
 .pairs {

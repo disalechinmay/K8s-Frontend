@@ -95,12 +95,20 @@ class ConfigMapsPage extends Component {
 
 		return (
 			<React.Fragment>
-				<button
-					className="add-resource-button"
-					onClick={() => this.props.renderAddPage("CONFIG_MAP")}
-				>
-					+ Create new config map
-				</button>
+				<div className="add-resource-section">
+					<span className="message">
+						<span className="logo fa fa-info" />
+						Config Maps allow you to store non-sensitive environment
+						variables.
+					</span>
+					<button
+						className="add-resource-button"
+						onClick={() => this.props.renderAddPage("CONFIG_MAP")}
+					>
+						+ Create new config map
+					</button>
+				</div>
+
 				{/* Map configMapsList if it is set. */}
 				{this.state.configMapsListSet &&
 					this.state.configMapsList.map((configMapInfo, index) => {

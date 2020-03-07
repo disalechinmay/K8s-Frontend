@@ -78,9 +78,14 @@ div.jsoneditor-value.jsoneditor-string {
 	animation: 0.25s ease-out 0s 1 slideInFromLeft;
 }
 
+.json-title .fa {
+	margin-right: 20px;
+}
+
 .json-title {
-	font-size: 1.5em;
+	font-size: 2vw;
 	color: #2ecc71;
+	margin-left: 10px;
 	margin-top: 1%;
 	margin-bottom: 2%;
 	max-width: 100%;
@@ -109,7 +114,8 @@ div.jsoneditor-value.jsoneditor-string {
 	color: #2ecc71;
 	cursor: pointer;
 	transition: 0.25s;
-	padding: 5px 5px 5px 5px;
+	padding: 5px 1px 5px 1px;
+	text-align: center;
 	border-radius: 15px 15px 15px 15px;
 }
 
@@ -127,7 +133,8 @@ div.jsoneditor-value.jsoneditor-string {
 	color: #dd5135;
 	cursor: pointer;
 	transition: 0.25s;
-	padding: 5px 5px 5px 5px;
+	padding: 5px 1px 5px 1px;
+	text-align: center;
 	border-radius: 15px 15px 15px 15px;
 }
 
@@ -144,7 +151,8 @@ div.jsoneditor-value.jsoneditor-string {
 	color: #bdc3c7;
 	cursor: pointer;
 	transition: 0.25s;
-	padding: 5px 5px 5px 5px;
+	padding: 5px 1px 5px 1px;
+	text-align: center;
 	border-radius: 15px 15px 15px 15px;
 }
 
@@ -153,4 +161,93 @@ div.jsoneditor-value.jsoneditor-string {
 	border: 1px solid #bdc3c7;
 	transition: 0.25s;
 	box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.3);
+}
+
+.save-changes-buttons {
+	margin-top: 2%;
+}
+
+.replace-button {
+	border: 1px solid #dd5135;
+	cursor: pointer;
+	transition: 0.25s;
+	padding: 0 5px 2px 5px;
+	text-align: center;
+	border-radius: 5px;
+	color: white;
+	transition: 0.25s;
+	font-size: 1.8vw;
+	font-variant-caps: all-small-caps;
+	font-weight: bold;
+}
+
+.replace-button:hover {
+	background-color: #dd5135;
+	transition: 0.25s;
+	cursor: pointer;
+	box-shadow: 0 0 20px 1px #dd5135;
+}
+
+.replace-button .fa {
+	font-size: 1.5vw;
+}
+
+.replace-button-disabled {
+	border: 1px solid gray;
+	cursor: not-allowed;
+	transition: 0.25s;
+	padding: 0 5px 2px 5px;
+	text-align: center;
+	border-radius: 5px;
+	color: gray;
+	transition: 0.25s;
+	font-size: 1.8vw;
+	font-variant-caps: all-small-caps;
+	font-weight: bold;
+}
+
+.replace-button-disabled .fa {
+	font-size: 1.5vw;
+}
+
+.patch-button {
+	border: 1px solid #2ecc71;
+	cursor: pointer;
+	transition: 0.25s;
+	padding: 0 5px 2px 5px;
+	text-align: center;
+	border-radius: 5px;
+	color: white;
+	transition: 0.25s;
+	font-size: 1.8vw;
+	font-variant-caps: all-small-caps;
+	font-weight: bold;
+}
+.patch-button:hover {
+	background-color: #2ecc71;
+	transition: 0.25s;
+	cursor: pointer;
+	box-shadow: 0 0 20px 1px #2ecc71;
+}
+
+.patch-button .fa {
+	font-size: 1.5vw;
+}
+
+.patch-button-disabled {
+	border: 1px solid gray;
+	cursor: not-allowed;
+	transition: 0.25s;
+	padding: 0 5px 2px 5px;
+	text-align: center;
+	border-radius: 5px;
+	color: gray;
+	transition: 0.25s;
+	font-size: 1.8vw;
+	font-variant-caps: all-small-caps;
+	font-weight: bold;
+}
+
+.patch-button-disabled .fa {
+	font-size: 1.5vw;
 }
