@@ -3,6 +3,7 @@
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
+		"@material-ui/core": "^4.9.5",
 		"@testing-library/jest-dom": "^4.2.4",
 		"@testing-library/react": "^9.4.0",
 		"@testing-library/user-event": "^7.2.1",
@@ -12,6 +13,7 @@
 		"enzyme-to-json": "^3.4.4",
 		"json-server": "^0.16.0",
 		"jsoneditor": "^8.6.1",
+		"notistack": "^0.9.9",
 		"react": "^16.12.0",
 		"react-dom": "^16.12.0",
 		"react-minimal-pie-chart": "^6.0.1",

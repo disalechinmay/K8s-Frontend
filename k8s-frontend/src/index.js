@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import Skeleton from "./components/Skeleton";
 import * as serviceWorker from "./serviceWorker";
+import { SnackbarProvider } from "notistack";
 import "./assets/styles/Skeleton.css";
 import "./assets/styles/common/LoadingPage.css";
 import "./assets/styles/common/SmallLoadingPage.css";
@@ -19,7 +20,12 @@ import "./assets/styles/common/Forms.css";
 import "./assets/styles/SearchPage/SearchPage.css";
 import "./assets/styles/HomePage/HomePage.css";
 
-ReactDOM.render(<Skeleton />, document.getElementById("root"));
+ReactDOM.render(
+	<SnackbarProvider maxSnack={3}>
+		<Skeleton />
+	</SnackbarProvider>,
+	document.getElementById("root")
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

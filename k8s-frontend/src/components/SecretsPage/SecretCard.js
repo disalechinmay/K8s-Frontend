@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { CardLabels } from "../common";
 import { deleteSecret } from "../../services";
+import { withSnackbar } from "notistack";
 
 /* 
 	Compulsory props:
@@ -46,6 +47,30 @@ class SecretCard extends Component {
 												this.props.namespace,
 												this.props.secretInfo.secretName
 											)
+												.then(() =>
+													this.props.enqueueSnackbar(
+														"Secret '" +
+															this.props
+																.secretInfo
+																.secretName +
+															"' is scheduled to be deleted. Refresh the page to check if deletion has completed.",
+														{
+															variant: "success"
+														}
+													)
+												)
+												.catch(error =>
+													this.props.enqueueSnackbar(
+														"Something went wrong while deleting secret '" +
+															this.props
+																.secretInfo
+																.secretName +
+															"'.",
+														{
+															variant: "error"
+														}
+													)
+												)
 										}
 									/>
 									<span
@@ -119,4 +144,4 @@ class SecretCard extends Component {
 	}
 }
 
-export default SecretCard;
+export default withSnackbar(SecretCard);
