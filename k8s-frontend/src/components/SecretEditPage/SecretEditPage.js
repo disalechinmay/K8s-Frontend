@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { getSecret, patchSecret, replaceSecret } from "../../services";
 import { SmallLoadingPage } from "../common";
 import { JSONEditorX } from "../common";
+import ReactTooltip from "react-tooltip";
 
 /*
 	Compulsory props:
@@ -202,12 +203,32 @@ class SecretEditPage extends Component {
 						<span className="save-changes-buttons">
 							{this.state.changesMade === false && (
 								<React.Fragment>
-									<span className="replace-button-disabled">
+									<ReactTooltip
+										id="patchResourceDisabledTooltip"
+										effect="solid"
+										border={true}
+										place="bottom"
+									/>
+									<ReactTooltip
+										id="replaceResourceDisabledTooltip"
+										effect="solid"
+										border={true}
+										place="bottom"
+									/>
+									<span
+										data-tip="Replaces current resource with a new one. Can modify all configurations except for resource name."
+										data-for="replaceResourceDisabledTooltip"
+										className="replace-button-disabled"
+									>
 										<span className="fa fa-random" />
 										&nbsp; Replace
 									</span>
 									&emsp;
-									<span className="patch-button-disabled">
+									<span
+										data-tip="Patches the existing resource. Can only modify data section."
+										data-for="replaceResourceDisabledTooltip"
+										className="patch-button-disabled"
+									>
 										<span className="fa fa-level-up" />
 										&nbsp; Patch
 									</span>
@@ -216,7 +237,21 @@ class SecretEditPage extends Component {
 
 							{this.state.changesMade === true && (
 								<React.Fragment>
+									<ReactTooltip
+										id="replaceResourceTooltip"
+										effect="solid"
+										border={true}
+										place="bottom"
+									/>
+									<ReactTooltip
+										id="patchResourceTooltip"
+										effect="solid"
+										border={true}
+										place="bottom"
+									/>
 									<span
+										data-tip="Replaces current resource with a new one. Can modify all configurations except for resource name."
+										data-for="replaceResourceTooltip"
 										className="replace-button"
 										onClick={() => this.replaceChanges()}
 									>
@@ -225,6 +260,8 @@ class SecretEditPage extends Component {
 									</span>
 									&emsp;
 									<span
+										data-tip="Patches the existing resource. Can only modify data section."
+										data-for="replaceResourceTooltip"
 										className="patch-button"
 										onClick={() => this.patchChanges()}
 									>

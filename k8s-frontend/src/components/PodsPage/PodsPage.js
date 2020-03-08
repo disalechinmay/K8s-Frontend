@@ -109,12 +109,18 @@ class PodsPage extends Component {
 
 		return (
 			<React.Fragment>
-				<button
-					className="add-resource-button"
-					onClick={() => this.props.renderAddPage("POD")}
-				>
-					+ Create new pod
-				</button>
+				<div className="add-resource-section">
+					<span className="message">
+						<span className="logo fa fa-info" />
+						Pods allow you to run containerized workloads.
+					</span>
+					<button
+						className="add-resource-button"
+						onClick={() => this.props.renderAddPage("POD")}
+					>
+						+ Create new pod
+					</button>
+				</div>
 
 				{/* Map podsList if it is set. */}
 				{this.state.podsListSet &&

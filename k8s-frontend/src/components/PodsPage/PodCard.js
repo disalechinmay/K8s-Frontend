@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { getPodExposure } from "../../services";
+import { getPodExposure, deletePod } from "../../services";
 import { CardLabels, CardContainerList } from "../common";
 import { BounceLoader } from "react-spinners";
 import ReactTooltip from "react-tooltip";
+import { withSnackbar } from "notistack";
 
 /* 
 	Compulsory props:
@@ -48,6 +49,17 @@ class PodCard extends Component {
 	render() {
 		return (
 			<React.Fragment>
+				<ReactTooltip
+					id="deleteResourceTooltip"
+					effect="solid"
+					border={true}
+				/>
+				<ReactTooltip
+					id="editResourceTooltip"
+					effect="solid"
+					border={true}
+				/>
+
 				<div className="card flex flex-column">
 					{/* Card Header */}
 					<React.Fragment>
@@ -141,21 +153,46 @@ class PodCard extends Component {
 									{this.props.podInfo.podStatus ===
 										"Running" && (
 										<span
+											data-tip="Delete resource"
+											data-for="deleteResourceTooltip"
 											className="resource-delete-button fa fa-trash"
-											onClick={() => {
-												if (this._isMounted)
-													this.props.deletePod(
-														this.props.namespace,
-														this.props.podInfo
-															.podName
-													);
-											}}
+											onClick={() =>
+												deletePod(
+													this.props.namespace,
+													this.props.podInfo.podName
+												)
+													.then(() =>
+														this.props.enqueueSnackbar(
+															"Pod '" +
+																this.props
+																	.podInfo
+																	.podName +
+																"' is scheduled to be deleted. Refresh the page to check if deletion has completed.",
+															{
+																variant:
+																	"success"
+															}
+														)
+													)
+													.catch(error =>
+														this.props.enqueueSnackbar(
+															"Something went wrong while deleting pod '" +
+																this.props
+																	.podInfo
+																	.podName +
+																"'.",
+															{
+																variant: "error"
+															}
+														)
+													)
+											}
 										/>
 									)}
 
-									<span className="resource-restart-button fa fa-refresh" />
-									<span className="resource-terminal-button fa fa-terminal" />
 									<span
+										data-tip="Edit resource"
+										data-for="editResourceTooltip"
 										className="resource-edit-button fa fa-pencil"
 										onClick={() =>
 											this.props.renderEditPage(
@@ -212,4 +249,4 @@ class PodCard extends Component {
 	}
 }
 
-export default PodCard;
+export default withSnackbar(PodCard);

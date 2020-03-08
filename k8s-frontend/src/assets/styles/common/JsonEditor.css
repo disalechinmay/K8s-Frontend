@@ -251,3 +251,7 @@ div.jsoneditor-value.jsoneditor-string {
 .patch-button-disabled .fa {
 	font-size: 1.5vw;
 }
+
+.information-pane {
+	white-space: pre-wrap;
+}

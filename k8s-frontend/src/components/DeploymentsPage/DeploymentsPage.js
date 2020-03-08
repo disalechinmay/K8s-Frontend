@@ -94,6 +94,20 @@ class DeploymentsPage extends Component {
 
 		return (
 			<React.Fragment>
+				<div className="add-resource-section">
+					<span className="message">
+						<span className="logo fa fa-info" />
+						Deployments makes sure a specified number of pods are
+						always up & running.
+					</span>
+					<button
+						className="add-resource-button"
+						onClick={() => this.props.renderAddPage("DEPLOYMENT")}
+					>
+						+ Create new deployment
+					</button>
+				</div>
+
 				{/* Map deploymentsList if it is set. */}
 				{this.state.deploymentsListSet &&
 					this.state.deploymentsList.map((deploymentInfo, index) => {

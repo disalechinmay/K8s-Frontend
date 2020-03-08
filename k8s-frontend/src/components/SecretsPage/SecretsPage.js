@@ -89,7 +89,7 @@ class SecretsPage extends Component {
 		)
 			return (
 				<React.Fragment>
-					No deployments present in this namespace.
+					No secrets present in this namespace.
 				</React.Fragment>
 			);
 

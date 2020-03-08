@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { CardLabels } from "../common";
 import { deleteSecret } from "../../services";
 import { withSnackbar } from "notistack";
+import ReactTooltip from "react-tooltip";
 
 /* 
 	Compulsory props:
@@ -22,6 +23,17 @@ class SecretCard extends Component {
 	render() {
 		return (
 			<React.Fragment>
+				<ReactTooltip
+					id="deleteResourceTooltip"
+					effect="solid"
+					border={true}
+				/>
+				<ReactTooltip
+					id="editResourceTooltip"
+					effect="solid"
+					border={true}
+				/>
+
 				<div className="card flex flex-column">
 					{/* Card Header */}
 					<React.Fragment>
@@ -41,6 +53,8 @@ class SecretCard extends Component {
 								<span className="fa fa-bars floaty-button" />
 								<span className="buttons">
 									<span
+										data-tip="Delete resource"
+										data-for="deleteResourceTooltip"
 										className="resource-delete-button fa fa-trash"
 										onClick={() =>
 											deleteSecret(
@@ -74,6 +88,8 @@ class SecretCard extends Component {
 										}
 									/>
 									<span
+										data-tip="Edit resource"
+										data-for="editResourceTooltip"
 										className="resource-edit-button fa fa-pencil"
 										onClick={() =>
 											this.props.renderEditPage(
