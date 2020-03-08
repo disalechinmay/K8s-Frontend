@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { getPod } from "../../services";
+import { getPod, patchPod, replacePod } from "../../services";
 import { SmallLoadingPage } from "../common";
 import { JSONEditorX } from "../common";
+import ReactTooltip from "react-tooltip";
 /* 
 	Compulsory props:
 		1. namespace
@@ -12,30 +13,27 @@ import { JSONEditorX } from "../common";
 */
 class PodEditPage extends Component {
 	state = {
-		deployment: null,
-		updatedPod: null,
-		deploymentSet: false,
+		pod: null,
+		podSet: false,
 		pageLoading: true,
 		changesMade: false,
-		changesSaved: false,
 		informationPane: "",
 		errorSet: false,
 		successSet: false
 	};
 	_isMounted = false;
 
-	// Makes a service call and sets deployment.
+	// Makes a service call and sets pod.
 	getNewData() {
-		// Get list of deployments for the selected namespace.
+		// Get the specified pod for the selected namespace.
 		getPod(this.props.namespace, this.props.resourceName)
 			.then(result => {
 				if (this._isMounted)
 					this.setState({
 						...this.state,
 						pageLoading: false,
-						deploymentSet: true,
-						deployment: result.payLoad,
-						updatedPod: result.payLoad
+						podSet: true,
+						pod: result.payLoad
 					});
 			})
 			.catch(error => {
@@ -60,27 +58,49 @@ class PodEditPage extends Component {
 	// If JSON is changed, sets changesMade as true & changesSaved as false
 	// Puts the new deployment in updatedPod
 	onChangeHandler(event) {
-		console.log("CHANGE");
 		this.setState({
 			...this.state,
 			changesMade: true,
-			changesSaved: false,
-			updatedPod: event
+			pod: event
 		});
 	}
 
-	// Sets changesSaved as true
-	// Updates deployment to updatedPod
-	saveChanges() {
-		console.log("SAVE");
-		this.setState({
-			...this.state,
-			changesSaved: true,
-			deployment: this.state.updatedPod
-		});
+	replaceChanges() {
+		if (this._isMounted)
+			this.setState({
+				...this.state,
+				pageLoading: true,
+				errorSet: false,
+				successSet: false
+			});
+
+		replacePod(
+			this.props.namespace,
+			this.props.resourceName,
+			this.state.pod
+		)
+			.then(result => {
+				if (this._isMounted)
+					this.setState({
+						...this.state,
+						pageLoading: false,
+						informationPane: result,
+						successSet: true,
+						changesMade: false
+					});
+			})
+			.catch(error => {
+				if (this._isMounted) {
+					this.setState({
+						...this.state,
+						pageLoading: false,
+						informationPane: error,
+						errorSet: true
+					});
+				}
+			});
 	}
 
-	// Makes a service call to patch the deployment.
 	patchChanges() {
 		if (this._isMounted)
 			this.setState({
@@ -90,30 +110,27 @@ class PodEditPage extends Component {
 				successSet: false
 			});
 
-		// patchPod(
-		// 	this.props.namespace,
-		// 	this.props.resourceName,
-		// 	this.state.deployment
-		// )
-		// 	.then(result => {
-		// 		if (this._isMounted)
-		// 			this.setState({
-		// 				...this.state,
-		// 				pageLoading: false,
-		// 				informationPane: result,
-		// 				successSet: true
-		// 			});
-		// 	})
-		// 	.catch(error => {
-		// 		if (this._isMounted) {
-		// 			this.setState({
-		// 				...this.state,
-		// 				pageLoading: false,
-		// 				informationPane: error,
-		// 				errorSet: true
-		// 			});
-		// 		}
-		// 	});
+		patchPod(this.props.namespace, this.props.resourceName, this.state.pod)
+			.then(result => {
+				if (this._isMounted)
+					this.setState({
+						...this.state,
+						pageLoading: false,
+						informationPane: result,
+						successSet: true,
+						changesMade: false
+					});
+			})
+			.catch(error => {
+				if (this._isMounted) {
+					this.setState({
+						...this.state,
+						pageLoading: false,
+						informationPane: error,
+						errorSet: true
+					});
+				}
+			});
 	}
 
 	printError(error) {
@@ -169,34 +186,83 @@ class PodEditPage extends Component {
 				<div className="json">
 					<span className="flex flex-row space-between w-100 ">
 						{/* Title */}
-						<span className="flex flex-row title mw-80 flex-start">
-							<div className="json-title">
-								<span className="fa fa-lastfm"></span> 
-								Editing:&nbsp;
-								{this.props.resourceName}
-							</div>
-						</span>
+						<div className="json-title">
+							<span className="fa fa-lastfm"></span> 
+							Editing:&nbsp;
+							{this.props.resourceName}
+						</div>
 
-						{/* Save Changes Button */}
-						<span className="resource-manage-section">
+						{/* Save Changes Buttons */}
+						<span className="save-changes-buttons">
 							{this.state.changesMade === false && (
-								<span className="save-changes-button-no-change fa fa-save" />
+								<React.Fragment>
+									<ReactTooltip
+										id="patchResourceDisabledTooltip"
+										effect="solid"
+										border={true}
+										place="bottom"
+									/>
+									<ReactTooltip
+										id="replaceResourceDisabledTooltip"
+										effect="solid"
+										border={true}
+										place="bottom"
+									/>
+									<span
+										data-tip="Replaces current resource with a new one. Can modify all configurations except for resource name."
+										data-for="replaceResourceDisabledTooltip"
+										className="replace-button-disabled"
+									>
+										<span className="fa fa-random" />
+										&nbsp; Replace
+									</span>
+									&emsp;
+									<span
+										data-tip="Patches the existing resource. Can only modify data section."
+										data-for="replaceResourceDisabledTooltip"
+										className="patch-button-disabled"
+									>
+										<span className="fa fa-level-up" />
+										&nbsp; Patch
+									</span>
+								</React.Fragment>
 							)}
 
-							{this.state.changesMade === true &&
-								this.state.changesSaved === false && (
-									<span
-										onClick={() => this.saveChanges()}
-										className="save-changes-button-unsaved fa fa-save"
+							{this.state.changesMade === true && (
+								<React.Fragment>
+									<ReactTooltip
+										id="replaceResourceTooltip"
+										effect="solid"
+										border={true}
+										place="bottom"
 									/>
-								)}
-							{this.state.changesMade === true &&
-								this.state.changesSaved === true && (
+									<ReactTooltip
+										id="patchResourceTooltip"
+										effect="solid"
+										border={true}
+										place="bottom"
+									/>
 									<span
-										className="save-changes-button-saved fa fa-upload"
+										data-tip="Replaces current resource with a new one. Can modify all configurations except for resource name."
+										data-for="replaceResourceTooltip"
+										className="replace-button"
+										onClick={() => this.replaceChanges()}
+									>
+										<span className="fa fa-random" />
+										&nbsp; Replace
+									</span>
+									&emsp;
+									<span
+										data-tip="Patches the existing resource. Can only modify data section."
+										data-for="replaceResourceTooltip"
+										className="patch-button"
 										onClick={() => this.patchChanges()}
-									/>
-								)}
+									>
+										<span className="fa fa-level-up" />
+										&nbsp; Patch
+									</span>
+								</React.Fragment>
+							)}
 						</span>
 					</span>
 
@@ -208,9 +274,9 @@ class PodEditPage extends Component {
 							this.printSuccess(this.state.informationPane)}
 					</div>
 
-					{this.state.deploymentSet && (
+					{this.state.podSet && (
 						<JSONEditorX
-							json={this.state.updatedPod}
+							json={this.state.pod}
 							onChangeJSON={event => this.onChangeHandler(event)}
 						/>
 					)}

@@ -5,8 +5,7 @@ import NodeCard from "./NodeCard";
 
 /* 
 	Compulsory props:
-		1. refreshState (method) [NON-TESTABLE]
-			- Used to refresh parent's state.
+		None
 
 	Optional props:
 		None
@@ -71,7 +70,6 @@ class NodesPage extends Component {
 							<NodeCard
 								key={index + "_NODE_CARD"}
 								nodeInfo={nodeInfo}
-								refreshState={() => this.props.refreshState()}
 							/>
 						);
 					})}

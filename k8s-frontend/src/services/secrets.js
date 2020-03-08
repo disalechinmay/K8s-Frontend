@@ -125,6 +125,55 @@ export function patchSecret(namespace, resourceName, body) {
 	});
 }
 
+// Makes a call to the backend and replaces the target resource.
+export function replaceSecret(namespace, resourceName, body) {
+	return new Promise((resolve, reject) => {
+		axios
+			.put(API_LOCATION + "/secret", {
+				namespace,
+				secretName: resourceName,
+				body
+			})
+			.then(result => result.data)
+			.then(result => {
+				if (result.status === "FAILURE")
+					reject({
+						rawError: result.payLoad,
+						errorDescription:
+							"Something went wrong while replacing secret '" +
+							resourceName +
+							"'' of '" +
+							namespace +
+							"' namespace!",
+						errorSuggestions: [
+							"Make sure the backend service is up and running.",
+							"Make sure the endpoint being accessed is valid.",
+							"Make sure target resource name and namespace is valid.",
+							"Make sure the updated secret body is valid."
+						]
+					});
+				resolve(result);
+			})
+			.catch(error =>
+				reject({
+					rawError: error,
+					errorDescription:
+						"Something went wrong while replacing secret '" +
+						resourceName +
+						"' of '" +
+						namespace +
+						"' namespace!",
+					errorSuggestions: [
+						"Make sure the backend service is up and running.",
+						"Make sure the endpoint being accessed is valid.",
+						"Make sure target resource name and namespace is valid.",
+						"Make sure the updated secret body is valid."
+					]
+				})
+			);
+	});
+}
+
 // Makes a call to the backend and creates the target resource.
 export function createSecret(namespace, resourceName, data) {
 	return new Promise((resolve, reject) => {

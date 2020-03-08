@@ -17,8 +17,9 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm install
-    - run: cd k8s-frontend && npm install
-    - run: npm run ci-run
+    - run: echo "No tests"
+    # - run: npm install
+    # - run: cd k8s-frontend && npm install
+    # - run: npm run ci-run
       env:
         CI: true

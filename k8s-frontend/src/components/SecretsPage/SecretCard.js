@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { CardLabels } from "../common";
 import { deleteSecret } from "../../services";
+import { withSnackbar } from "notistack";
+import ReactTooltip from "react-tooltip";
 
 /* 
 	Compulsory props:
@@ -21,6 +23,17 @@ class SecretCard extends Component {
 	render() {
 		return (
 			<React.Fragment>
+				<ReactTooltip
+					id="deleteResourceTooltip"
+					effect="solid"
+					border={true}
+				/>
+				<ReactTooltip
+					id="editResourceTooltip"
+					effect="solid"
+					border={true}
+				/>
+
 				<div className="card flex flex-column">
 					{/* Card Header */}
 					<React.Fragment>
@@ -40,15 +53,43 @@ class SecretCard extends Component {
 								<span className="fa fa-bars floaty-button" />
 								<span className="buttons">
 									<span
+										data-tip="Delete resource"
+										data-for="deleteResourceTooltip"
 										className="resource-delete-button fa fa-trash"
 										onClick={() =>
 											deleteSecret(
 												this.props.namespace,
 												this.props.secretInfo.secretName
 											)
+												.then(() =>
+													this.props.enqueueSnackbar(
+														"Secret '" +
+															this.props
+																.secretInfo
+																.secretName +
+															"' is scheduled to be deleted. Refresh the page to check if deletion has completed.",
+														{
+															variant: "success"
+														}
+													)
+												)
+												.catch(error =>
+													this.props.enqueueSnackbar(
+														"Something went wrong while deleting secret '" +
+															this.props
+																.secretInfo
+																.secretName +
+															"'.",
+														{
+															variant: "error"
+														}
+													)
+												)
 										}
 									/>
 									<span
+										data-tip="Edit resource"
+										data-for="editResourceTooltip"
 										className="resource-edit-button fa fa-pencil"
 										onClick={() =>
 											this.props.renderEditPage(
@@ -88,7 +129,7 @@ class SecretCard extends Component {
 						{/* Labels */}
 						<span className="flex flex-row">
 							<span className="mt-5">Labels:</span>
-							<span className="flex flex-row mw-100 wrap">
+							<span className="flex flex-row mw-100 wrap labels">
 								<CardLabels
 									labels={this.props.secretInfo.secretLabels}
 									refreshState={() =>
@@ -101,7 +142,7 @@ class SecretCard extends Component {
 						{/* Annotations */}
 						<span className="flex flex-row">
 							<span className="mt-5">Annotations:</span>
-							<span className="flex flex-row mw-100 wrap">
+							<span className="flex flex-row mw-100 wrap labels">
 								<CardLabels
 									labels={
 										this.props.secretInfo.secretAnnotations
@@ -119,4 +160,4 @@ class SecretCard extends Component {
 	}
 }
 
-export default SecretCard;
+export default withSnackbar(SecretCard);

@@ -8,10 +8,16 @@
 	width: 90%;
 	max-width: 90%;
 	animation: 0.25s ease-out 0s 1 slideInFromLeft;
+	background-color: rgba(255, 255, 255, 0.04);
+	border-radius: 10px;
+}
+
+.card:hover {
+	background-color: rgba(255, 255, 255, 0.07);
 }
 
 .card .title {
-	font-size: 1.5em;
+	font-size: 1.8vw;
 	color: #2ecc71;
 	margin-top: 1%;
 	margin-bottom: 2%;
@@ -20,13 +26,13 @@
 
 .card .big-number {
 	font-weight: bolder;
-	font-size: 1.5em;
+	font-size: 1.8vw;
 	color: #2ecc71;
 }
 
 .card .huge-number {
 	font-weight: bolder;
-	font-size: 3em;
+	font-size: 4vw;
 	color: #2ecc71;
 }
 .mt-5pr {
@@ -91,7 +97,6 @@
 .resource-manage-section {
 	float: right;
 	height: 1%;
-	max-width: 20%;
 	justify-self: flex-end;
 }
 
@@ -102,7 +107,8 @@
 	color: red;
 	cursor: pointer;
 	transition: 0.25s;
-	padding: 5px 5px 5px 5px;
+	padding: 5px 1px 5px 1px;
+	text-align: center;
 	border-radius: 15px 15px 15px 15px;
 }
 
@@ -120,7 +126,8 @@
 	color: #dd5135;
 	cursor: pointer;
 	transition: 0.25s;
-	padding: 5px 5px 5px 5px;
+	padding: 5px 1px 5px 1px;
+	text-align: center;
 	border-radius: 15px 15px 15px 15px;
 }
 
@@ -138,7 +145,8 @@
 	color: #2ecc71;
 	cursor: pointer;
 	transition: 0.25s;
-	padding: 5px 5px 5px 5px;
+	padding: 5px 1px 5px 1px;
+	text-align: center;
 	border-radius: 15px 15px 15px 15px;
 }
 
@@ -155,7 +163,8 @@
 	color: #2ecc71;
 	cursor: pointer;
 	transition: 0.25s;
-	padding: 5px 5px 5px 5px;
+	padding: 5px 1px 5px 1px;
+	text-align: center;
 	border-radius: 15px 15px 15px 15px;
 }
 

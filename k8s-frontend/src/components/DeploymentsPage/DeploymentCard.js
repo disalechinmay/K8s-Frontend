@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { CardLabels, CardContainerList } from "../common";
+import ReactTooltip from "react-tooltip";
 
 /* 
 	Compulsory props:
@@ -38,6 +39,17 @@ class DeploymentCard extends Component {
 	render() {
 		return (
 			<React.Fragment>
+				<ReactTooltip
+					id="deleteResourceTooltip"
+					effect="solid"
+					border={true}
+				/>
+				<ReactTooltip
+					id="editResourceTooltip"
+					effect="solid"
+					border={true}
+				/>
+
 				<div className="card flex flex-column">
 					{/* Card Header */}
 					<React.Fragment>
@@ -58,9 +70,14 @@ class DeploymentCard extends Component {
 							<span className="resource-manage-section">
 								<span className="fa fa-bars floaty-button" />
 								<span className="buttons">
-									<span className="resource-delete-button fa fa-trash" />
-									<span className="resource-restart-button fa fa-refresh" />
 									<span
+										data-tip="Delete resource"
+										data-for="deleteResourceTooltip"
+										className="resource-delete-button fa fa-trash"
+									/>
+									<span
+										data-tip="Edit resource"
+										data-for="editResourceTooltip"
 										className="resource-edit-button fa fa-pencil"
 										onClick={() =>
 											this.props.renderEditPage(
@@ -155,7 +172,7 @@ class DeploymentCard extends Component {
 						{/* Labels */}
 						<span className="flex flex-row">
 							<span className="mt-5">Labels:</span>
-							<span className="flex flex-row mw-100 wrap">
+							<span className="flex flex-row mw-100 wrap labels">
 								<CardLabels
 									labels={
 										this.props.deploymentInfo
@@ -171,7 +188,7 @@ class DeploymentCard extends Component {
 						{/* Annotations */}
 						<span className="flex flex-row">
 							<span className="mt-5">Annotations:</span>
-							<span className="flex flex-row mw-100 wrap">
+							<span className="flex flex-row mw-100 wrap labels">
 								<CardLabels
 									labels={
 										this.props.deploymentInfo

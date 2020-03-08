@@ -5,9 +5,7 @@ import PodCard from "./PodCard";
 
 /* 
 	Compulsory props:
-		1. refreshState (method) [NON-TESTABLE]
-			- Used to refresh parent's state.
-		2. namespace
+		1. namespace
 
 	Optional props:
 		None
@@ -22,7 +20,6 @@ class PodsPage extends Component {
 		deletedPods: []
 	};
 	_isMounted = false;
-	refreshDataInterval = null;
 
 	// Makes a service call and sets podsList.
 	getNewData() {
@@ -55,16 +52,10 @@ class PodsPage extends Component {
 		this._isMounted = true;
 
 		this.getNewData();
-
-		// getNewData() will be called after everry 3 second(s).
-		this.refreshDataInterval = setInterval(() => this.getNewData(), 3000);
 	}
 
 	componentWillUnmount() {
 		this._isMounted = false;
-
-		// Clears the interval.
-		clearInterval(this.refreshDataInterval);
 	}
 
 	componentDidUpdate(previousProps) {
@@ -118,12 +109,18 @@ class PodsPage extends Component {
 
 		return (
 			<React.Fragment>
-				<button
-					className="add-resource-button"
-					onClick={() => this.props.renderAddPage("POD")}
-				>
-					+ Create new pod
-				</button>
+				<div className="add-resource-section">
+					<span className="message">
+						<span className="logo fa fa-info" />
+						Pods allow you to run containerized workloads.
+					</span>
+					<button
+						className="add-resource-button"
+						onClick={() => this.props.renderAddPage("POD")}
+					>
+						+ Create new pod
+					</button>
+				</div>
 
 				{/* Map podsList if it is set. */}
 				{this.state.podsListSet &&
