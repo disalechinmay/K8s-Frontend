@@ -37,7 +37,42 @@ export function getConfigMaps(namespace) {
 			);
 	});
 }
-
+// Makes a call to the backend and returns a configMap in a namespace.
+export function getConfigMap(namespace, resourceName) {
+	return new Promise((resolve, reject) => {
+		axios
+			.get(API_LOCATION + "/configmap", {
+				params: { namespace, configMapName: resourceName }
+			})
+			.then(result => result.data)
+			.then(result => {
+				if (result.status === "FAILURE")
+					reject({
+						errorDescription:
+							"Something went wrong while retrieving configMap for '" +
+							namespace +
+							"' namespace!",
+						errorSuggestions: [
+							"Make sure the backend service is up and running.",
+							"Make sure the endpoint being accessed is valid."
+						]
+					});
+				resolve(result);
+			})
+			.catch(error =>
+				reject({
+					errorDescription:
+						"Something went wrong while retrieving configMap for '" +
+						namespace +
+						"' namespace!",
+					errorSuggestions: [
+						"Make sure the backend service is up and running.",
+						"Make sure the namespace is correct."
+					]
+				})
+			);
+	});
+}
 // Makes a call to the backend and creates the target resource.
 export function createConfigMap(namespace, resourceName, data) {
 	return new Promise((resolve, reject) => {
@@ -129,6 +164,55 @@ export function deleteConfigMap(namespace, resourceName) {
 						"Make sure the backend service is up and running.",
 						"Make sure the endpoint being accessed is valid.",
 						"Make sure target resource name and namespace is valid."
+					]
+				})
+			);
+	});
+}
+
+// Makes a call to the backend and patches the target resource.
+export function patchConfigMap(namespace, resourceName, body) {
+	return new Promise((resolve, reject) => {
+		axios
+			.patch(API_LOCATION + "/configmap", {
+				namespace,
+				configMapName: resourceName,
+				body
+			})
+			.then(result => result.data)
+			.then(result => {
+				if (result.status === "FAILURE")
+					reject({
+						rawError: result.payLoad,
+						errorDescription:
+							"Something went wrong while patching configMap '" +
+							resourceName +
+							"'' of '" +
+							namespace +
+							"' namespace!",
+						errorSuggestions: [
+							"Make sure the backend service is up and running.",
+							"Make sure the endpoint being accessed is valid.",
+							"Make sure target resource name and namespace is valid.",
+							"Make sure the updated configMap body is valid."
+						]
+					});
+				resolve(result);
+			})
+			.catch(error =>
+				reject({
+					rawError: error,
+					errorDescription:
+						"Something went wrong while patching configMap '" +
+						resourceName +
+						"' of '" +
+						namespace +
+						"' namespace!",
+					errorSuggestions: [
+						"Make sure the backend service is up and running.",
+						"Make sure the endpoint being accessed is valid.",
+						"Make sure target resource name and namespace is valid.",
+						"Make sure the updated configMap body is valid."
 					]
 				})
 			);
