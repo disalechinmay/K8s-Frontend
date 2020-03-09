@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getPod, patchPod, replacePod } from "../../services";
+import { getPod, patchPod } from "../../services";
 import { SmallLoadingPage } from "../common";
 import { JSONEditorX } from "../common";
 import ReactTooltip from "react-tooltip";
@@ -63,42 +63,6 @@ class PodEditPage extends Component {
 			changesMade: true,
 			pod: event
 		});
-	}
-
-	replaceChanges() {
-		if (this._isMounted)
-			this.setState({
-				...this.state,
-				pageLoading: true,
-				errorSet: false,
-				successSet: false
-			});
-
-		replacePod(
-			this.props.namespace,
-			this.props.resourceName,
-			this.state.pod
-		)
-			.then(result => {
-				if (this._isMounted)
-					this.setState({
-						...this.state,
-						pageLoading: false,
-						informationPane: result,
-						successSet: true,
-						changesMade: false
-					});
-			})
-			.catch(error => {
-				if (this._isMounted) {
-					this.setState({
-						...this.state,
-						pageLoading: false,
-						informationPane: error,
-						errorSet: true
-					});
-				}
-			});
 	}
 
 	patchChanges() {
@@ -202,21 +166,7 @@ class PodEditPage extends Component {
 										border={true}
 										place="bottom"
 									/>
-									<ReactTooltip
-										id="replaceResourceDisabledTooltip"
-										effect="solid"
-										border={true}
-										place="bottom"
-									/>
-									<span
-										data-tip="Replaces current resource with a new one. Can modify all configurations except for resource name."
-										data-for="replaceResourceDisabledTooltip"
-										className="replace-button-disabled"
-									>
-										<span className="fa fa-random" />
-										&nbsp; Replace
-									</span>
-									&emsp;
+
 									<span
 										data-tip="Patches the existing resource. Can only modify data section."
 										data-for="replaceResourceDisabledTooltip"
@@ -231,27 +181,12 @@ class PodEditPage extends Component {
 							{this.state.changesMade === true && (
 								<React.Fragment>
 									<ReactTooltip
-										id="replaceResourceTooltip"
-										effect="solid"
-										border={true}
-										place="bottom"
-									/>
-									<ReactTooltip
 										id="patchResourceTooltip"
 										effect="solid"
 										border={true}
 										place="bottom"
 									/>
-									<span
-										data-tip="Replaces current resource with a new one. Can modify all configurations except for resource name."
-										data-for="replaceResourceTooltip"
-										className="replace-button"
-										onClick={() => this.replaceChanges()}
-									>
-										<span className="fa fa-random" />
-										&nbsp; Replace
-									</span>
-									&emsp;
+
 									<span
 										data-tip="Patches the existing resource. Can only modify data section."
 										data-for="replaceResourceTooltip"

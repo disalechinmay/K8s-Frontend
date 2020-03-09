@@ -1,20 +1,13 @@
 import React, { Component } from "react";
-import { getDeployment, patchDeployment } from "../../services";
+import { getService, patchService } from "../../services";
 import { SmallLoadingPage } from "../common";
 import { JSONEditorX } from "../common";
 import ReactTooltip from "react-tooltip";
-/* 
-	Compulsory props:
-		1. namespace
-		2. resourceName
 
-	Optional props:
-		None
-*/
-class DeploymentEditPage extends Component {
+class ServiceEditPage extends Component {
 	state = {
-		deployment: null,
-		deploymentSet: false,
+		service: null,
+		serviceSet: false,
 		pageLoading: true,
 		changesMade: false,
 		informationPane: "",
@@ -23,17 +16,17 @@ class DeploymentEditPage extends Component {
 	};
 	_isMounted = false;
 
-	// Makes a service call and sets deployment.
+	// Makes a service call and sets service.
 	getNewData() {
-		// Get list of deployments for the selected namespace.
-		getDeployment(this.props.namespace, this.props.resourceName)
+		// Get list of services for the selected namespace.
+		getService(this.props.namespace, this.props.resourceName)
 			.then(result => {
 				if (this._isMounted)
 					this.setState({
 						...this.state,
 						pageLoading: false,
-						deploymentSet: true,
-						deployment: result.payLoad
+						serviceSet: true,
+						service: result.payLoad
 					});
 			})
 			.catch(error => {
@@ -56,18 +49,18 @@ class DeploymentEditPage extends Component {
 	}
 
 	// If JSON is changed, sets changesMade as true & changesSaved as false
-	// Puts the new deployment in updatedDeployment
+	// Puts the new service in updatedService
 	onChangeHandler(event) {
 		console.log("CHANGE");
 		this.setState({
 			...this.state,
 			changesMade: true,
 			changesSaved: false,
-			deployment: event
+			service: event
 		});
 	}
 
-	// Makes a service call to patch the deployment.
+	// Makes a service call to patch the service.
 	patchChanges() {
 		if (this._isMounted)
 			this.setState({
@@ -77,10 +70,10 @@ class DeploymentEditPage extends Component {
 				successSet: false
 			});
 
-		patchDeployment(
+		patchService(
 			this.props.namespace,
 			this.props.resourceName,
-			this.state.deployment
+			this.state.service
 		)
 			.then(result => {
 				if (this._isMounted)
@@ -142,7 +135,7 @@ class DeploymentEditPage extends Component {
 		return (
 			<div className="success">
 				<span className="fa fa-check green-check" />
-				&nbsp; Deployment edited successfully.
+				&nbsp; Service edited successfully.
 			</div>
 		);
 	}
@@ -214,9 +207,9 @@ class DeploymentEditPage extends Component {
 							this.printSuccess(this.state.informationPane)}
 					</div>
 
-					{this.state.deploymentSet && (
+					{this.state.serviceSet && (
 						<JSONEditorX
-							json={this.state.deployment}
+							json={this.state.service}
 							onChangeJSON={event => this.onChangeHandler(event)}
 						/>
 					)}
@@ -226,4 +219,4 @@ class DeploymentEditPage extends Component {
 	}
 }
 
-export default DeploymentEditPage;
+export default ServiceEditPage;

@@ -6,13 +6,19 @@ export {
 	deletePod,
 	getPodExposure,
 	createPod,
-	patchPod,
-	replacePod
+	patchPod
 } from "./pods";
 export { getDeployments, getDeployment, patchDeployment } from "./deployments";
-export { getServices } from "./services";
+export { getServices, getService, patchService } from "./services";
 export { getJobs } from "./jobs";
-export { getConfigMaps, createConfigMap, deleteConfigMap } from "./configmaps";
+export {
+	getConfigMaps,
+	getConfigMap,
+	patchConfigMap,
+	createConfigMap,
+	deleteConfigMap,
+	replaceConfigMap
+} from "./configmaps";
 export {
 	getSecrets,
 	getSecret,
