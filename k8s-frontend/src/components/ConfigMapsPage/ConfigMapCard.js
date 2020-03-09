@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { CardLabels } from "../common";
 import { deleteConfigMap } from "../../services";
+import { withSnackbar } from "notistack";
+import ReactTooltip from "react-tooltip";
 
 /* 
 	Compulsory props:
@@ -20,6 +22,16 @@ class ConfigMapCard extends Component {
 	render() {
 		return (
 			<React.Fragment>
+				<ReactTooltip
+					id="deleteResourceTooltip"
+					effect="solid"
+					border={true}
+				/>
+				<ReactTooltip
+					id="editResourceTooltip"
+					effect="solid"
+					border={true}
+				/>
 				<div className="card flex flex-column">
 					{/* Card Header */}
 					<React.Fragment>
@@ -41,6 +53,8 @@ class ConfigMapCard extends Component {
 								<span className="fa fa-bars floaty-button" />
 								<span className="buttons">
 									<span
+										data-tip="Delete resource"
+										data-for="deleteResourceTooltip"
 										className="resource-delete-button fa fa-trash"
 										onClick={() =>
 											deleteConfigMap(
@@ -48,13 +62,39 @@ class ConfigMapCard extends Component {
 												this.props.configMapInfo
 													.configMapName
 											)
+												.then(() =>
+													this.props.enqueueSnackbar(
+														"ConfigMap '" +
+															this.props
+																.configMapInfo
+																.configMapName +
+															"' is scheduled to be deleted.Refresh the page to check if deletion has completed.",
+														{
+															variant: "success"
+														}
+													)
+												)
+												.catch(() =>
+													this.props.enqueueSnackbar(
+														"Something went wrong while deleting '" +
+															this.props
+																.configMapInfo
+																.configMapName +
+															"'.",
+														{
+															variant: "error"
+														}
+													)
+												)
 										}
 									/>
 									<span
+										data-tip="Edit resource"
+										data-for="deleteResourceTooltip"
 										className="resource-edit-button fa fa-pencil"
 										onClick={() =>
 											this.props.renderEditPage(
-												"configMaps",
+												"CONFIG_MAP",
 												this.props.configMapInfo
 													.configMapName
 											)
@@ -86,7 +126,7 @@ class ConfigMapCard extends Component {
 									);
 								})}
 						</div>
-
+						<br />
 						{/* Labels */}
 						<span className="flex flex-row">
 							<span className="mt-5">Labels:</span>
@@ -124,4 +164,4 @@ class ConfigMapCard extends Component {
 	}
 }
 
-export default ConfigMapCard;
+export default withSnackbar(ConfigMapCard);

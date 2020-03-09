@@ -1,16 +1,15 @@
 import React, { Component } from "react";
-import { getConfigMap, patchConfigMap } from "../../services";
+import { getConfigMap, patchConfigMap, replaceConfigMap } from "../../services";
 import { SmallLoadingPage } from "../common";
 import { JSONEditorX } from "../common";
+import ReactTooltip from "react-tooltip";
 
 class ConfigMapEditPage extends Component {
 	state = {
 		configMap: null,
-		updatedConfigMap: null,
 		configMapSet: false,
 		pageLoading: true,
 		changesMade: false,
-		changesSaved: false,
 		informationPane: "",
 		errorSet: false,
 		successSet: false
@@ -26,8 +25,7 @@ class ConfigMapEditPage extends Component {
 						...this.state,
 						pageLoading: false,
 						configMapSet: true,
-						configMap: result.payLoad,
-						updatedConfigMap: result.payLoad
+						configMap: result.payLoad
 					});
 			})
 			.catch(error => {
@@ -56,18 +54,7 @@ class ConfigMapEditPage extends Component {
 		this.setState({
 			...this.state,
 			changesMade: true,
-			changesSaved: false,
-			updatedConfigMap: event
-		});
-	}
-
-	// Sets changesSaved as true
-	// Updates configMap to updatedConfigMap
-	saveChanges() {
-		this.setState({
-			...this.state,
-			changesSaved: true,
-			configMap: this.state.updatedConfigMap
+			configMap: event
 		});
 	}
 
@@ -82,6 +69,42 @@ class ConfigMapEditPage extends Component {
 			});
 
 		patchConfigMap(
+			this.props.namespace,
+			this.props.resourceName,
+			this.state.configMap
+		)
+			.then(result => {
+				if (this._isMounted)
+					this.setState({
+						...this.state,
+						pageLoading: false,
+						informationPane: result,
+						successSet: true
+					});
+			})
+			.catch(error => {
+				if (this._isMounted) {
+					this.setState({
+						...this.state,
+						pageLoading: false,
+						informationPane: error,
+						errorSet: true
+					});
+				}
+			});
+	}
+
+	// Makes a service call to replace the configMap.
+	replaceChanges() {
+		if (this._isMounted)
+			this.setState({
+				...this.state,
+				pageLoading: true,
+				errorSet: false,
+				successSet: false
+			});
+
+		replaceConfigMap(
 			this.props.namespace,
 			this.props.resourceName,
 			this.state.configMap
@@ -160,34 +183,84 @@ class ConfigMapEditPage extends Component {
 				<div className="json">
 					<span className="flex flex-row space-between w-100 ">
 						{/* Title */}
-						<span className="flex flex-row title mw-80 flex-start">
-							<div className="json-title">
-								<span className="fa fa-lastfm"></span>
-								Editing:&nbsp;
-								{this.props.resourceName}
-							</div>
+
+						<span className="json-title">
+							<span className="fa fa-lastfm"></span>
+							Editing:&nbsp;
+							{this.props.resourceName}
 						</span>
 
-						{/* Save Changes Button */}
-						<span className="resource-manage-section">
+						{/* Save Changes Buttons */}
+						<span className="save-changes-buttons">
 							{this.state.changesMade === false && (
-								<span className="save-changes-button-no-change fa fa-save" />
+								<React.Fragment>
+									<ReactTooltip
+										id="patchResourceDisabledTooltip"
+										effect="solid"
+										border={true}
+										place="bottom"
+									/>
+									<ReactTooltip
+										id="replaceResourceDisabledTooltip"
+										effect="solid"
+										border={true}
+										place="bottom"
+									/>
+									<span
+										data-tip="Replaces current resource with a new one. Can modify all configurations except for resource name."
+										data-for="replaceResourceDisabledTooltip"
+										className="replace-button-disabled"
+									>
+										<span className="fa fa-random" />
+										&nbsp; Replace
+									</span>
+									&emsp;
+									<span
+										data-tip="Patches the existing resource. Can only modify data section."
+										data-for="replaceResourceDisabledTooltip"
+										className="patch-button-disabled"
+									>
+										<span className="fa fa-level-up" />
+										&nbsp; Patch
+									</span>
+								</React.Fragment>
 							)}
 
-							{this.state.changesMade === true &&
-								this.state.changesSaved === false && (
-									<span
-										onClick={() => this.saveChanges()}
-										className="save-changes-button-unsaved fa fa-save"
+							{this.state.changesMade === true && (
+								<React.Fragment>
+									<ReactTooltip
+										id="replaceResourceTooltip"
+										effect="solid"
+										border={true}
+										place="bottom"
 									/>
-								)}
-							{this.state.changesMade === true &&
-								this.state.changesSaved === true && (
+									<ReactTooltip
+										id="patchResourceTooltip"
+										effect="solid"
+										border={true}
+										place="bottom"
+									/>
 									<span
-										className="save-changes-button-saved fa fa-upload"
+										data-tip="Replaces current resource with a new one. Can modify all configurations except for resource name."
+										data-for="replaceResourceTooltip"
+										className="replace-button"
+										onClick={() => this.replaceChanges()}
+									>
+										<span className="fa fa-random" />
+										&nbsp; Replace
+									</span>
+									&emsp;
+									<span
+										data-tip="Patches the existing resource. Can only modify data section."
+										data-for="replaceResourceTooltip"
+										className="patch-button"
 										onClick={() => this.patchChanges()}
-									/>
-								)}
+									>
+										<span className="fa fa-level-up" />
+										&nbsp; Patch
+									</span>
+								</React.Fragment>
+							)}
 						</span>
 					</span>
 
@@ -201,7 +274,7 @@ class ConfigMapEditPage extends Component {
 
 					{this.state.configMapSet && (
 						<JSONEditorX
-							json={this.state.updatedConfigMap}
+							json={this.state.configMap}
 							onChangeJSON={event => this.onChangeHandler(event)}
 						/>
 					)}

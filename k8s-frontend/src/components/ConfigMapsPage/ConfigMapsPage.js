@@ -89,7 +89,10 @@ class ConfigMapsPage extends Component {
 		)
 			return (
 				<React.Fragment>
-					No configMaps present in this namespace.
+					<span className="not-found-card">
+						<span className="fa fa-exclamation-triangle" />
+						&emsp; No configMaps present in this namespace.
+					</span>
 				</React.Fragment>
 			);
 

@@ -88,7 +88,10 @@ class ServicesPage extends Component {
 		)
 			return (
 				<React.Fragment>
-					No services present in this namespace.
+					<span className="not-found-card">
+						<span className="fa fa-exclamation-triangle" />
+						&emsp; No services present in this namespace.
+					</span>{" "}
 				</React.Fragment>
 			);
 
@@ -105,6 +108,15 @@ class ServicesPage extends Component {
 									serviceInfo={serviceInfo}
 									refreshState={() =>
 										this.props.refreshState()
+									}
+									renderEditPage={(
+										resourceType,
+										resourceName
+									) =>
+										this.props.renderEditPage(
+											resourceType,
+											resourceName
+										)
 									}
 								/>
 							</React.Fragment>

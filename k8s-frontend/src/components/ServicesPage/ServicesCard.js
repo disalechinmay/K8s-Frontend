@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { CardLabels } from "../common";
+import ReactTooltip from "react-tooltip";
 
 /* 
 	Compulsory props:
@@ -37,6 +38,16 @@ class ServiceCard extends Component {
 	render() {
 		return (
 			<React.Fragment>
+				<ReactTooltip
+					id="deleteResourceTooltip"
+					effect="solid"
+					border={true}
+				/>
+				<ReactTooltip
+					id="editResourceTooltip"
+					effect="solid"
+					border={true}
+				/>
 				<div className="card flex flex-column">
 					{/* Card Header */}
 					<React.Fragment>
@@ -53,8 +64,26 @@ class ServiceCard extends Component {
 
 							{/* Card Resource Manip Button */}
 							<span className="resource-manage-section">
-								<span className="resource-delete-button fa fa-trash" />
-								<span className="resource-restart-button fa fa-refresh" />
+								<span className="fa fa-bars floaty-button" />
+								<span className="buttons">
+									<span
+										data-tip="Delete resource"
+										data-for="deleteResourceTooltip"
+										className="resource-delete-button fa fa-trash"
+									/>
+									<span
+										data-tip="Edit resource"
+										data-for="editResourceTooltip"
+										className="resource-edit-button fa fa-pencil"
+										onClick={() =>
+											this.props.renderEditPage(
+												"SERVICE",
+												this.props.serviceInfo
+													.serviceName
+											)
+										}
+									/>
+								</span>
 							</span>
 						</span>
 					</React.Fragment>

@@ -226,7 +226,7 @@ class SecretEditPage extends Component {
 									&emsp;
 									<span
 										data-tip="Patches the existing resource. Can only modify data section."
-										data-for="replaceResourceDisabledTooltip"
+										data-for="patchResourceDisabledTooltip"
 										className="patch-button-disabled"
 									>
 										<span className="fa fa-level-up" />
@@ -261,7 +261,7 @@ class SecretEditPage extends Component {
 									&emsp;
 									<span
 										data-tip="Patches the existing resource. Can only modify data section."
-										data-for="replaceResourceTooltip"
+										data-for="patchResourceTooltip"
 										className="patch-button"
 										onClick={() => this.patchChanges()}
 									>

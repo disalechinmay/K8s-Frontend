@@ -30,6 +30,25 @@
 	color: #2ecc71;
 }
 
+.timestamp {
+	align-self: center;
+	text-align: center;
+	width: 100%;
+}
+
+.card .timestamp .date {
+	font-weight: bolder;
+	font-size: 0.8vw;
+	color: #dd5135;
+	align-self: center;
+	padding-bottom: 5px;
+}
+.card .timestamp .time {
+	font-weight: bolder;
+	font-size: 1.5vw;
+	color: #2ecc71;
+	align-self: center;
+}
 .card .huge-number {
 	font-weight: bolder;
 	font-size: 4vw;
@@ -221,4 +240,23 @@ hr {
 	.mw-pie {
 		min-width: 100%;
 	}
+}
+
+.not-found-card {
+	align-content: center;
+	border-bottom: 1px solid rgba(127, 140, 141, 0.5);
+	color: #ecf0f1;
+	margin: 2% 1% 1% 2%;
+	padding: 1% 1% 2% 1%;
+	transition: 0.25s;
+	width: 90%;
+	font-size: 2vw;
+	max-width: 90%;
+	animation: 0.25s ease-out 0s 1 slideInFromLeft;
+	background-color: rgba(255, 255, 255, 0.04);
+	border-radius: 10px;
+}
+
+.not-found-card .fa {
+	color: rgba(236, 176, 12, 0.924);
 }

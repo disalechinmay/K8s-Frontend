@@ -170,6 +170,55 @@ export function deleteConfigMap(namespace, resourceName) {
 	});
 }
 
+// Makes a call to the backend and replaces the target resource.
+export function replaceConfigMap(namespace, resourceName, body) {
+	return new Promise((resolve, reject) => {
+		axios
+			.put(API_LOCATION + "/configmap", {
+				namespace,
+				configMapName: resourceName,
+				body
+			})
+			.then(result => result.data)
+			.then(result => {
+				if (result.status === "FAILURE")
+					reject({
+						rawError: result.payLoad,
+						errorDescription:
+							"Something went wrong while replacing configmap '" +
+							resourceName +
+							"'' of '" +
+							namespace +
+							"' namespace!",
+						errorSuggestions: [
+							"Make sure the backend service is up and running.",
+							"Make sure the endpoint being accessed is valid.",
+							"Make sure target resource name and namespace is valid.",
+							"Make sure the updated configmap body is valid."
+						]
+					});
+				resolve(result);
+			})
+			.catch(error =>
+				reject({
+					rawError: error,
+					errorDescription:
+						"Something went wrong while replacing configmap '" +
+						resourceName +
+						"' of '" +
+						namespace +
+						"' namespace!",
+					errorSuggestions: [
+						"Make sure the backend service is up and running.",
+						"Make sure the endpoint being accessed is valid.",
+						"Make sure target resource name and namespace is valid.",
+						"Make sure the updated configmap body is valid."
+					]
+				})
+			);
+	});
+}
+
 // Makes a call to the backend and patches the target resource.
 export function patchConfigMap(namespace, resourceName, body) {
 	return new Promise((resolve, reject) => {

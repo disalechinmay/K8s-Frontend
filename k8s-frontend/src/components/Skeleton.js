@@ -9,8 +9,10 @@ import { PodEditPage } from "./PodEditPage";
 import { DeploymentsPage } from "./DeploymentsPage";
 import { ConfigMapsPage } from "./ConfigMapsPage";
 import { ConfigMapAddPage } from "./ConfigMapAddPage";
+import { ConfigMapEditPage } from "./ConfigMapEditPage";
 import { DeploymentEditPage } from "./DeploymentEditPage";
 import { ServicesPage } from "./ServicesPage";
+import { ServiceEditPage } from "./ServiceEditPage";
 import { JobsPage } from "./JobsPage";
 import { SecretsPage } from "./SecretsPage";
 import { SecretAddPage } from "./SecretAddPage";
@@ -133,6 +135,18 @@ class Skeleton extends Component {
 				...this.state,
 				editResourceName: resourceName,
 				sidebarOptionSelected: 12
+			});
+		} else if (resourceType === "CONFIG_MAP") {
+			this.setState({
+				...this.state,
+				editResourceName: resourceName,
+				sidebarOptionSelected: 17
+			});
+		} else if (resourceType === "SERVICE") {
+			this.setState({
+				...this.state,
+				editResourceName: resourceName,
+				sidebarOptionSelected: 14
 			});
 		}
 	}
@@ -286,6 +300,12 @@ class Skeleton extends Component {
 
 						{this.state.sidebarOptionSelected === 4 && (
 							<ServicesPage
+								renderEditPage={(resourceType, resourceName) =>
+									this.renderResourceEditPage(
+										resourceType,
+										resourceName
+									)
+								}
 								namespace={this.state.namespaceSelected}
 							/>
 						)}
@@ -297,6 +317,12 @@ class Skeleton extends Component {
 
 						{this.state.sidebarOptionSelected === 7 && (
 							<ConfigMapsPage
+								renderEditPage={(resourceType, resourceName) =>
+									this.renderResourceEditPage(
+										resourceType,
+										resourceName
+									)
+								}
 								namespace={this.state.namespaceSelected}
 								renderAddPage={resourceType =>
 									this.renderResourceAddPage(resourceType)
@@ -335,6 +361,19 @@ class Skeleton extends Component {
 
 						{this.state.sidebarOptionSelected === 13 && (
 							<DeploymentEditPage
+								namespace={this.state.namespaceSelected}
+								resourceName={this.state.editResourceName}
+							/>
+						)}
+
+						{this.state.sidebarOptionSelected === 14 && (
+							<ServiceEditPage
+								namespace={this.state.namespaceSelected}
+								resourceName={this.state.editResourceName}
+							/>
+						)}
+						{this.state.sidebarOptionSelected === 17 && (
+							<ConfigMapEditPage
 								namespace={this.state.namespaceSelected}
 								resourceName={this.state.editResourceName}
 							/>

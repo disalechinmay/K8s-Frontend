@@ -296,7 +296,10 @@ class SearchPage extends Component {
 		return (
 			<React.Fragment>
 				{this.state.cards.length === 0 && (
-					<span className="not-found">No results Found</span>
+					<span className="not-found-card">
+						<span className="fa fa-exclamation-triangle" />
+						&emsp; No results found
+					</span>
 				)}
 				{this.state.cards.length !== 0 &&
 					this.state.cards.map((card, index) => {

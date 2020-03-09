@@ -88,7 +88,10 @@ class DeploymentsPage extends Component {
 		)
 			return (
 				<React.Fragment>
-					No deployments present in this namespace.
+					<span className="not-found-card">
+						<span className="fa fa-exclamation-triangle" />
+						&emsp; No deployments present in this namespace.
+					</span>
 				</React.Fragment>
 			);
 
