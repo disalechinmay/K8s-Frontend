@@ -32,7 +32,6 @@ exports[`NodesPage Tests Resolve getNodes service call with non empty payload. 1
         "nodeName": "minikube",
       }
     }
-    refreshState={[Function]}
   >
     <div
       className="card flex flex-column"

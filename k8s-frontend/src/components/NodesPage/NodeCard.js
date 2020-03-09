@@ -4,8 +4,6 @@ import React, { Component } from "react";
 	Compulsory props:
 		1. nodeInfo (object)
 			- Information about the node to be displayed.
-		2. refreshState (method) [NON-TESTABLE]
-			- Used to refresh parent's state.
 
 	Optional props:
 		1. showResourceType (boolean)

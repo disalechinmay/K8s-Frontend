@@ -89,18 +89,25 @@ class SecretsPage extends Component {
 		)
 			return (
 				<React.Fragment>
-					No deployments present in this namespace.
+					No secrets present in this namespace.
 				</React.Fragment>
 			);
 
 		return (
 			<React.Fragment>
-				<button
-					className="add-resource-button"
-					onClick={() => this.props.renderAddPage("SECRET")}
-				>
-					+ Create new secret
-				</button>
+				<div className="add-resource-section">
+					<span className="message">
+						<span className="logo fa fa-info" />
+						Secrets allow you to store sensitive environment
+						variables in an encrypted format.
+					</span>
+					<button
+						className="add-resource-button"
+						onClick={() => this.props.renderAddPage("SECRET")}
+					>
+						+ Create new secret
+					</button>
+				</div>
 
 				{/* Map secretsList if it is set. */}
 				{this.state.secretsListSet &&

@@ -1,16 +1,50 @@
-.add-resource-button {
+@keyframes slideInFromLeft {
+	0% {
+		transform: translateX(-100%);
+	}
+	100% {
+		transform: translateX(0);
+	}
+}
+
+.add-resource-section {
+	color: white;
+	display: flex;
+	flex-direction: row;
+	max-width: 90%;
 	margin: 2% 0% 0% 3%;
+	justify-content: space-between;
+
+	animation: 0.25s ease-out 0s 1 slideInFromLeft;
+}
+
+.add-resource-button {
+	/*margin: 2% 0% 0% 3%;*/
 	padding: 0.5% 1% 0.5% 1%;
 	background-color: transparent;
 	border-radius: 15px;
 	border: 1px solid #2ecc71;
 	color: white;
-	max-width: 15%;
 	transition: 0.25s;
+	font-size: 1.2vw;
+	font-variant-caps: all-small-caps;
+	font-weight: bold;
 }
 
 .add-resource-button:hover {
 	background-color: #2ecc71;
 	transition: 0.25s;
 	cursor: pointer;
+	/*border: 1px solid #212322;*/
+	box-shadow: 0 0 20px 1px #2ecc71;
+}
+
+.add-resource-section .message {
+	padding: 0.5% 1% 0.5% 1%;
+	/*min-width: 80%;*/
+}
+
+.add-resource-section .message .logo {
+	font-size: 1.5vw;
+	margin-right: 10px;
 }

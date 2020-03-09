@@ -199,3 +199,101 @@ export function createPod(namespace, resourceName, podImage, podVars) {
 			);
 	});
 }
+
+// Makes a call to the backend and patches the target resource.
+export function patchPod(namespace, resourceName, body) {
+	return new Promise((resolve, reject) => {
+		axios
+			.patch(API_LOCATION + "/pod", {
+				namespace,
+				podName: resourceName,
+				body
+			})
+			.then(result => result.data)
+			.then(result => {
+				if (result.status === "FAILURE")
+					reject({
+						rawError: result.payLoad,
+						errorDescription:
+							"Something went wrong while patching pod '" +
+							resourceName +
+							"'' of '" +
+							namespace +
+							"' namespace!",
+						errorSuggestions: [
+							"Make sure the backend service is up and running.",
+							"Make sure the endpoint being accessed is valid.",
+							"Make sure target resource name and namespace is valid.",
+							"Make sure the updated pod body is valid."
+						]
+					});
+				resolve(result);
+			})
+			.catch(error =>
+				reject({
+					rawError: error,
+					errorDescription:
+						"Something went wrong while patching pod '" +
+						resourceName +
+						"' of '" +
+						namespace +
+						"' namespace!",
+					errorSuggestions: [
+						"Make sure the backend service is up and running.",
+						"Make sure the endpoint being accessed is valid.",
+						"Make sure target resource name and namespace is valid.",
+						"Make sure the updated pod body is valid."
+					]
+				})
+			);
+	});
+}
+
+// Makes a call to the backend and replaces the target resource.
+export function replacePod(namespace, resourceName, body) {
+	return new Promise((resolve, reject) => {
+		axios
+			.put(API_LOCATION + "/pod", {
+				namespace,
+				podName: resourceName,
+				body
+			})
+			.then(result => result.data)
+			.then(result => {
+				if (result.status === "FAILURE")
+					reject({
+						rawError: result.payLoad,
+						errorDescription:
+							"Something went wrong while replacing pod '" +
+							resourceName +
+							"'' of '" +
+							namespace +
+							"' namespace!",
+						errorSuggestions: [
+							"Make sure the backend service is up and running.",
+							"Make sure the endpoint being accessed is valid.",
+							"Make sure target resource name and namespace is valid.",
+							"Make sure the updated pod body is valid."
+						]
+					});
+				resolve(result);
+			})
+			.catch(error =>
+				reject({
+					rawError: error,
+					errorDescription:
+						"Something went wrong while replacing pod '" +
+						resourceName +
+						"' of '" +
+						namespace +
+						"' namespace!",
+					errorSuggestions: [
+						"Make sure the backend service is up and running.",
+						"Make sure the endpoint being accessed is valid.",
+						"Make sure target resource name and namespace is valid.",
+						"Make sure the updated pod body is valid."
+					]
+				})
+			);
+	});
+}

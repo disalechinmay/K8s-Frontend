@@ -6,10 +6,11 @@
 	color: white;
 	cursor: pointer;
 	transition: 0.25s;
-	padding: 5px 5px 5px 5px;
+	padding: 5px 1px 5px 1px;
 	border-radius: 15px 15px 15px 15px;
 	cursor: pointer;
 	color: rgba(139, 137, 137, 0.95);
+	text-align: center;
 }
 
 .floaty-button:hover {
