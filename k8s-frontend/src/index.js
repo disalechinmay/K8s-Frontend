@@ -19,6 +19,7 @@ import "./assets/styles/common/Buttons.css";
 import "./assets/styles/common/Forms.css";
 import "./assets/styles/SearchPage/SearchPage.css";
 import "./assets/styles/HomePage/HomePage.css";
+import "./assets/styles/common/menu.css";
 
 ReactDOM.render(
 	<SnackbarProvider maxSnack={3}>

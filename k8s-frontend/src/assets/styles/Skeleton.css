@@ -71,12 +71,26 @@ body {
 	display: flex;
 	flex-direction: column;
 }
+.sidebar-namespace-picker .fa {
+	color: white;
+	margin-left: 50%;
+	font-size: 1.5vw;
+}
 
+.namespace-settings {
+	/* cursor: pointer; */
+	min-width: 20%;
+}
+
+.sidebar-namespace-picker .fa:hover {
+	cursor: pointer;
+}
 .sidebar-namespace-picker .namespace-picker-title {
 	color: #bdc3c7;
 	font-size: 1.2vw;
 	font-variant-caps: all-petite-caps;
 	align-self: center;
+
 	justify-content: center;
 	margin: 1% 1% 3% 1%;
 }
@@ -84,15 +98,16 @@ body {
 .sidebar-namespace-picker .namespace-picker {
 	color: #656565;
 	align-self: center;
+	text-align: center;
 	justify-content: center;
-	margin: 2% 1% 2% 1%;
+	margin: 2% 0% 2% 1%;
 }
 
 .sidebar-namespace-picker .namespace-picker select {
 	background-color: #212322;
 	text-align-last: center;
 	color: #2ecc71;
-	width: 100%;
+	max-width: 80%;
 	border: none;
 	font-size: 1.2vw;
 	-webkit-appearance: button;

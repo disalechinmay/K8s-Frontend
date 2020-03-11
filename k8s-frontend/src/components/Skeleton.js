@@ -195,36 +195,46 @@ class Skeleton extends Component {
 
 						{/* Sidebar Namespace Picker*/}
 						<div className="sidebar-namespace-picker">
-							<div className="namespace-picker">
-								<select
-									className="namespace-selector"
-									onChange={event =>
-										this.handleNamespaceChange(event)
-									}
-								>
-									{/* Populates options of namespaces */}
-									{this.state.namespacesListSet &&
-										this.state.namespacesList.map(
-											namespace => {
-												return (
-													<option
-														value={namespace}
-														key={
-															namespace +
-															"_NAMESPACE"
-														}
-													>
-														{namespace}
-													</option>
-												);
-											}
-										)}
-								</select>
-							</div>
+							<span className="flex flex-row">
+								<span className="flex flex-column justify-content-center namespace-settings">
+									<span className="fa fa-cog">
+										<span className="menu">
+											<span onClick="">Add</span>
+											<span>Delete</span>
+										</span>
+									</span>
+								</span>
 
-							<div className="namespace-picker-title">
-								Namespace
-							</div>
+								<div className="namespace-picker">
+									<select
+										className="namespace-selector"
+										onChange={event =>
+											this.handleNamespaceChange(event)
+										}
+									>
+										{/* Populates options of namespaces */}
+										{this.state.namespacesListSet &&
+											this.state.namespacesList.map(
+												namespace => {
+													return (
+														<option
+															value={namespace}
+															key={
+																namespace +
+																"_NAMESPACE"
+															}
+														>
+															{namespace}
+														</option>
+													);
+												}
+											)}
+									</select>
+									<div className="namespace-picker-title">
+										Namespace
+									</div>
+								</div>
+							</span>
 						</div>
 
 						{/* Sidebar Buttons*/}

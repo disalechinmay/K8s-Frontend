@@ -37,3 +37,34 @@ export function getJobs(namespace) {
 			);
 	});
 }
+
+// Makes a call to the backend and deletes a job in a namespace.
+export function deleteJob(namespace, jobName) {
+	console.log(namespace);
+	return new Promise((resolve, reject) => {
+		axios
+			.delete(API_LOCATION + "/job", {
+				data: {
+					namespace,
+					jobName
+				}
+			})
+			.then(result => result.data)
+			.then(result => resolve(result))
+			.catch(error =>
+				reject({
+					errorDescription:
+						"Something went wrong while deleting job with name " +
+						jobName +
+						" in '" +
+						namespace +
+						"' namespace!",
+					errorSuggestions: [
+						"Make sure the backend service is up and running.",
+						"Make sure the namespace is correct.",
+						"Make sure the job name is correct."
+					]
+				})
+			);
+	});
+}
