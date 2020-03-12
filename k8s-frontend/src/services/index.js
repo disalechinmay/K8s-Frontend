@@ -1,4 +1,4 @@
-export { getNamespaces } from "./namespaces";
+export { getNamespaces, createNamespace, deleteNamespace } from "./namespaces";
 export { getNodes } from "./nodes";
 export {
 	getPods,

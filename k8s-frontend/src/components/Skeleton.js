@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getNamespaces } from "../services";
+import { getNamespaces, createNamespace, deleteNamespace } from "../services";
 import { LoadingPage, ErrorPage } from "./common";
 import { HomePage } from "./HomePage";
 import { NodesPage } from "./NodesPage";
@@ -19,6 +19,8 @@ import { SecretAddPage } from "./SecretAddPage";
 import { SecretEditPage } from "./SecretEditPage";
 import { SearchBar, SearchPage } from "./SearchPage";
 import { SIDEBAR_OPTIONS } from "../configs";
+import Popup from "reactjs-popup";
+import { withSnackbar } from "notistack";
 
 class Skeleton extends Component {
 	state = {
@@ -37,6 +39,8 @@ class Skeleton extends Component {
 	// Sets namespacesList using a service call.
 	constructor(props) {
 		super(props);
+
+		this.newNamespace = React.createRef();
 
 		// List of buttons which will appear on sidebar.
 		this.sidebarOptions = SIDEBAR_OPTIONS;
@@ -199,8 +203,114 @@ class Skeleton extends Component {
 								<span className="flex flex-column justify-content-center namespace-settings">
 									<span className="fa fa-cog">
 										<span className="menu">
-											<span onClick="">Add</span>
-											<span>Delete</span>
+											<Popup
+												trigger={
+													<span className="flex">
+														{/* <span className="fa fa-plus" /> */}
+														Add
+													</span>
+												}
+												modal
+											>
+												{close => (
+													<div className="chimney">
+														NAMESPACE &emsp;
+														<input
+															type="text"
+															ref={
+																this
+																	.newNamespace
+															}
+														/>
+														<br />
+														<br />
+														<button
+															className="add-resource-button"
+															onClick={event => {
+																createNamespace(
+																	this
+																		.newNamespace
+																		.current
+																		.value
+																)
+																	.then(
+																		result =>
+																			this.props.enqueueSnackbar(
+																				"Namespace '" +
+																					this
+																						.newNamespace
+																						.current
+																						.value +
+																					"' is being created. Please refresh the page.",
+																				{
+																					variant:
+																						"success"
+																				}
+																			)
+																	)
+
+																	.catch(
+																		error =>
+																			this.props.enqueueSnackbar(
+																				"Something went wrong while creating a new namespace. Please refresh the page.",
+																				{
+																					variant:
+																						"error"
+																				}
+																			)
+																	);
+															}}
+														>
+															+ Create New
+															Namespace
+														</button>
+														<span
+															className="close"
+															onClick={close}
+														>
+															X
+														</span>
+													</div>
+												)}
+											</Popup>
+
+											<span
+												className="flex"
+												onClick={() => {
+													deleteNamespace(
+														this.state
+															.namespaceSelected
+													)
+														.then(result =>
+															this.props.enqueueSnackbar(
+																"Namespace '" +
+																	this.state
+																		.namespaceSelected +
+																	"' is being deleted. Refresh the page.",
+																{
+																	variant:
+																		"success"
+																}
+															)
+														)
+
+														.catch(error =>
+															this.props.enqueueSnackbar(
+																"Something went wrong while deleting namespace '" +
+																	this.state
+																		.namespaceSelected +
+																	"'. Refresh the page.",
+																{
+																	variant:
+																		"error"
+																}
+															)
+														);
+												}}
+											>
+												{/* <span className="fa fa-minus" /> */}
+												Delete
+											</span>
 										</span>
 									</span>
 								</span>
@@ -216,6 +326,21 @@ class Skeleton extends Component {
 										{this.state.namespacesListSet &&
 											this.state.namespacesList.map(
 												namespace => {
+													if (namespace === "default")
+														return (
+															<option
+																value={
+																	namespace
+																}
+																key={
+																	namespace +
+																	"_NAMESPACE"
+																}
+																selected
+															>
+																{namespace}
+															</option>
+														);
 													return (
 														<option
 															value={namespace}
@@ -270,7 +395,6 @@ class Skeleton extends Component {
 					{/* Main Content: Displays core pages.*/}
 					<div className="mainContent" id="mainContent">
 						{/* Depending upon sidebarOptionSelected, render respective page. */}
-
 						{this.state.sidebarOptionSelected === 0 && (
 							<HomePage
 								namespace={this.state.namespaceSelected}
@@ -418,4 +542,4 @@ class Skeleton extends Component {
 	}
 }
 
-export default Skeleton;
+export default withSnackbar(Skeleton);
