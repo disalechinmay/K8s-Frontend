@@ -99,6 +99,9 @@
 	align-items: center;
 }
 
+.justify-content-center {
+	justify-content: center;
+}
 .space-around {
 	justify-content: space-around;
 }
@@ -113,6 +116,9 @@
 	align-items: flex-start;
 }
 
+.align-center {
+	align-items: center;
+}
 .resource-manage-section {
 	float: right;
 	height: 1%;
@@ -259,4 +265,9 @@ hr {
 
 .not-found-card .fa {
 	color: rgba(236, 176, 12, 0.924);
+}
+
+.progress-bar {
+	min-width: 100px;
+	margin-top: 20px;
 }

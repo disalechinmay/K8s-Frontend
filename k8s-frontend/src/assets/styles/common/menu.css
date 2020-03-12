@@ -1,0 +1,30 @@
+.sidebar-namespace-picker .fa:hover > .menu {
+	display: flex;
+	position: absolute;
+	z-index: 1;
+	flex-direction: column;
+}
+.sidebar-namespace-picker .menu {
+	display: none;
+}
+
+.menu {
+	background-color: #212322 !important ;
+	display: flex;
+	color: white;
+	max-width: 100px;
+	border-radius: 5px;
+	box-shadow: 0px 0px 5px 1px #dd5135;
+}
+
+.menu span {
+	padding: 10px;
+}
+
+.menu span:hover {
+	cursor: pointer;
+	background-color: black;
+	color: #dd5135;
+
+	border-radius: 5px;
+}

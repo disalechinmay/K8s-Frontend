@@ -31,3 +31,35 @@ export function getNamespaces() {
 			);
 	});
 }
+
+export function createNamespace(namespace) {
+	return new Promise((resolve, reject) => {
+		axios
+			.post(API_LOCATION + "/namespace", {
+				namespace
+			})
+			.then(result => result.data)
+			.then(result => {
+				if (result.status === "FAILURE")
+					reject({
+						errorDescription:
+							"Something went wrong while retrieving namespaces!",
+						errorSuggestions: [
+							"Make sure the backend service is up and running.",
+							"Make sure the endpoint being accessed is valid."
+						]
+					});
+
+				resolve(result);
+			})
+			.catch(error =>
+				reject({
+					errorDescription:
+						"Something went wrong while retrieving namespaces!",
+					errorSuggestions: [
+						"Make sure the backend service is up and running."
+					]
+				})
+			);
+	});
+}

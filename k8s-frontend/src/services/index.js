@@ -10,7 +10,7 @@ export {
 } from "./pods";
 export { getDeployments, getDeployment, patchDeployment } from "./deployments";
 export { getServices, getService, patchService } from "./services";
-export { getJobs } from "./jobs";
+export { getJobs, deleteJob } from "./jobs";
 export {
 	getConfigMaps,
 	getConfigMap,

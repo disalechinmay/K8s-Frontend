@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { CardLabels, CardContainerList } from "../common";
 import ReactTooltip from "react-tooltip";
+import { deleteJob } from "../../services";
+import { Progress } from "react-sweet-progress";
+import "react-sweet-progress/lib/style.css";
 import { withSnackbar } from "notistack";
 import moment from "moment";
 
@@ -54,6 +57,39 @@ class JobsCard extends Component {
 								<span className="fa fa-bars floaty-button" />
 								<span className="buttons">
 									<span
+										data-tip="Delete resource"
+										data-for="deleteResourceTooltip"
+										className="resource-delete-button fa fa-trash"
+										onClick={() =>
+											deleteJob(
+												this.props.namespace,
+												this.props.jobInfo.jobName
+											)
+												.then(() =>
+													this.props.enqueueSnackbar(
+														"Job '" +
+															this.props.jobInfo
+																.jobName +
+															"' is scheduled to be deleted. Refresh the page to check if deletion has completed.",
+														{
+															variant: "success"
+														}
+													)
+												)
+												.catch(error =>
+													this.props.enqueueSnackbar(
+														"Something went wrong while deleting job '" +
+															this.props.jobInfo
+																.jobName +
+															"'.",
+														{
+															variant: "error"
+														}
+													)
+												)
+										}
+									/>
+									<span
 										data-tip="Edit resource"
 										data-for="editResourceTooltip"
 										className="resource-edit-button fa fa-pencil"
@@ -86,13 +122,50 @@ class JobsCard extends Component {
 								</span>
 								<br />
 							</span>
-
+							<ReactTooltip
+								id="progressStatus"
+								effect="solid"
+								border={true}
+							/>
+							<span
+								className="progress-bar"
+								data-tip={
+									this.props.jobInfo.jobCurrentCompletions +
+									"/" +
+									this.props.jobInfo.jobTargetCompletions +
+									" completed"
+								}
+								data-for="progressStatus"
+							>
+								<Progress
+									percent={
+										(this.props.jobInfo
+											.jobCurrentCompletions /
+											this.props.jobInfo
+												.jobTargetCompletions) *
+										100
+									}
+									status="success"
+								/>
+							</span>
 							<span>
-								<span className="timestamp flex flex-column">
-									<span className="time">{this.timeEnd}</span>
-									<span className="date">{this.dateEnd}</span>
-									COMPLETION TIME
-								</span>
+								{(this.props.jobInfo.jobCompletionTime !==
+									null && (
+									<span className="timestamp flex flex-column">
+										<span className="time">
+											{this.timeEnd}
+										</span>
+										<span className="date">
+											{this.dateEnd}
+										</span>
+										COMPLETION TIME
+									</span>
+								)) || (
+									<span className="timestamp flex flex-column">
+										<span className="time">-</span>
+										COMPLETION TIME
+									</span>
+								)}
 								<br />
 							</span>
 						</div>
@@ -123,4 +196,4 @@ class JobsCard extends Component {
 	}
 }
 
-export default JobsCard;
+export default withSnackbar(JobsCard);

@@ -100,6 +100,7 @@ class JobsPage extends Component {
 								<JobsCard
 									key={index + "_JOBS_CARD"}
 									index={index}
+									namespace={this.props.namespace}
 									jobInfo={jobInfo}
 									refreshState={() =>
 										this.props.refreshState()
