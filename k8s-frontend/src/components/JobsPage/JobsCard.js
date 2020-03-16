@@ -93,6 +93,12 @@ class JobsCard extends Component {
 										data-tip="Edit resource"
 										data-for="editResourceTooltip"
 										className="resource-edit-button fa fa-pencil"
+										onClick={() =>
+											this.props.renderEditPage(
+												"JOB",
+												this.props.jobInfo.jobName
+											)
+										}
 									/>
 								</span>
 							</span>

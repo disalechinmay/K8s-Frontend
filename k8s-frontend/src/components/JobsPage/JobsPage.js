@@ -105,6 +105,15 @@ class JobsPage extends Component {
 									refreshState={() =>
 										this.props.refreshState()
 									}
+									renderEditPage={(
+										resourceType,
+										resourceName
+									) =>
+										this.props.renderEditPage(
+											resourceType,
+											resourceName
+										)
+									}
 								/>
 							</React.Fragment>
 						);

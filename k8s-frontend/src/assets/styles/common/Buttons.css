@@ -24,7 +24,7 @@
 	background-color: transparent;
 	border-radius: 15px;
 	border: 1px solid #2ecc71;
-	color: white;
+	color: white !important;
 	transition: 0.25s;
 	font-size: 1.2vw;
 	font-variant-caps: all-small-caps;

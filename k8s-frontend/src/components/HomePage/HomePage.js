@@ -17,6 +17,7 @@ class HomePage extends Component {
 		pageLoading: true,
 		podsListSet: false,
 		podsList: [],
+		deploymentList: [],
 		errorSet: false,
 		errorDescription: ""
 	};
@@ -249,7 +250,40 @@ class HomePage extends Component {
 					</span>
 				</div>
 
-				<div>Yeet</div>
+				<br />
+				<div className="flex mw-80">
+					<div className="home-page-list">
+						<span className="title">Pods</span>
+						<hr />
+						{this.state.podsList.map((pod, index) => {
+							return (
+								<span
+									key={index + "_POD_LIST_ITEM"}
+									className="list-item"
+								>
+									{pod.podName}
+									<br />
+								</span>
+							);
+						})}
+					</div>
+
+					<div className="home-page-list">
+						<span className="title">Deployments</span>
+						<hr />
+						{this.state.deploymentList.map((deploy, index) => {
+							return (
+								<span
+									key={index + "_DEPLOYMENT_LIST_ITEM"}
+									className="list-item"
+								>
+									{deploy.deploymentName}
+									<br />
+								</span>
+							);
+						})}
+					</div>
+				</div>
 			</React.Fragment>
 		);
 	}

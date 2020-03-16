@@ -1,11 +1,11 @@
 import { API_LOCATION } from "../configs";
 import axios from "axios";
 
-// Makes a call to the backend and returns a list of jobs in a namespace.
-export function getJobs(namespace) {
+// Makes a call to the backend and returns a list of cronJobs in a namespace.
+export function getCronJobs(namespace) {
 	return new Promise((resolve, reject) => {
 		axios
-			.get(API_LOCATION + "/jobs", {
+			.get(API_LOCATION + "/cronjobs", {
 				params: { namespace }
 			})
 			.then(result => result.data)
@@ -13,7 +13,7 @@ export function getJobs(namespace) {
 				if (result.status === "FAILURE")
 					reject({
 						errorDescription:
-							"Something went wrong while retrieving jobs for '" +
+							"Something went wrong while retrieving cron cronJobs for '" +
 							namespace +
 							"' namespace!",
 						errorSuggestions: [
@@ -26,7 +26,7 @@ export function getJobs(namespace) {
 			.catch(error =>
 				reject({
 					errorDescription:
-						"Something went wrong while retrieving jobs for '" +
+						"Something went wrong while retrieving cron cronJobs for '" +
 						namespace +
 						"' namespace!",
 					errorSuggestions: [
@@ -38,19 +38,19 @@ export function getJobs(namespace) {
 	});
 }
 
-// Makes a call to the backend and returns a list of  job in a namespace.
-export function getJob(namespace, jobName) {
+// Makes a call to the backend and returns a list of cron job in a namespace.
+export function getCronJob(namespace, cronJobName) {
 	return new Promise((resolve, reject) => {
 		axios
-			.get(API_LOCATION + "/job", {
-				params: { namespace, jobName }
+			.get(API_LOCATION + "/cronjob", {
+				params: { namespace, cronJobName }
 			})
 			.then(result => result.data)
 			.then(result => {
 				if (result.status === "FAILURE")
 					reject({
 						errorDescription:
-							"Something went wrong while retrieving  job for '" +
+							"Something went wrong while retrieving cron job for '" +
 							namespace +
 							"' namespace!",
 						errorSuggestions: [
@@ -64,12 +64,43 @@ export function getJob(namespace, jobName) {
 			.catch(error =>
 				reject({
 					errorDescription:
-						"Something went wrong while retrieving  job for '" +
+						"Something went wrong while retrieving cron job for '" +
 						namespace +
 						"' namespace!",
 					errorSuggestions: [
 						"Make sure the backend service is up and running.",
 						"Make sure the namespace is correct."
+					]
+				})
+			);
+	});
+}
+
+// Makes a call to the backend and deletes a cron cronJob in a namespace.
+export function deleteCronJob(namespace, cronJobName) {
+	console.log(namespace);
+	return new Promise((resolve, reject) => {
+		axios
+			.delete(API_LOCATION + "/cronjob", {
+				data: {
+					namespace,
+					cronJobName
+				}
+			})
+			.then(result => result.data)
+			.then(result => resolve(result))
+			.catch(error =>
+				reject({
+					errorDescription:
+						"Something went wrong while deleting cron cronJob with name " +
+						cronJobName +
+						" in '" +
+						namespace +
+						"' namespace!",
+					errorSuggestions: [
+						"Make sure the backend service is up and running.",
+						"Make sure the namespace is correct.",
+						"Make sure the cron Job name is correct."
 					]
 				})
 			);
@@ -77,12 +108,12 @@ export function getJob(namespace, jobName) {
 }
 
 // Makes a call to the backend and patches the target resource.
-export function patchJob(namespace, resourceName, body) {
+export function patchCronJob(namespace, resourceName, body) {
 	return new Promise((resolve, reject) => {
 		axios
-			.patch(API_LOCATION + "/job", {
+			.patch(API_LOCATION + "/cronjob", {
 				namespace,
-				jobName: resourceName,
+				cronJobName: resourceName,
 				body
 			})
 			.then(result => result.data)
@@ -91,7 +122,7 @@ export function patchJob(namespace, resourceName, body) {
 					reject({
 						rawError: result.payLoad,
 						errorDescription:
-							"Something went wrong while patching Job '" +
+							"Something went wrong while patching cronJob '" +
 							resourceName +
 							"'' of '" +
 							namespace +
@@ -100,7 +131,7 @@ export function patchJob(namespace, resourceName, body) {
 							"Make sure the backend service is up and running.",
 							"Make sure the endpoint being accessed is valid.",
 							"Make sure target resource name and namespace is valid.",
-							"Make sure the updated Job body is valid."
+							"Make sure the updated cronJob body is valid."
 						]
 					});
 				resolve(result);
@@ -109,7 +140,7 @@ export function patchJob(namespace, resourceName, body) {
 				reject({
 					rawError: error,
 					errorDescription:
-						"Something went wrong while patching Job '" +
+						"Something went wrong while patching cronJob '" +
 						resourceName +
 						"' of '" +
 						namespace +
@@ -118,38 +149,7 @@ export function patchJob(namespace, resourceName, body) {
 						"Make sure the backend service is up and running.",
 						"Make sure the endpoint being accessed is valid.",
 						"Make sure target resource name and namespace is valid.",
-						"Make sure the updated Job body is valid."
-					]
-				})
-			);
-	});
-}
-
-// Makes a call to the backend and deletes a job in a namespace.
-export function deleteJob(namespace, jobName) {
-	console.log(namespace);
-	return new Promise((resolve, reject) => {
-		axios
-			.delete(API_LOCATION + "/job", {
-				data: {
-					namespace,
-					jobName
-				}
-			})
-			.then(result => result.data)
-			.then(result => resolve(result))
-			.catch(error =>
-				reject({
-					errorDescription:
-						"Something went wrong while deleting job with name " +
-						jobName +
-						" in '" +
-						namespace +
-						"' namespace!",
-					errorSuggestions: [
-						"Make sure the backend service is up and running.",
-						"Make sure the namespace is correct.",
-						"Make sure the job name is correct."
+						"Make sure the updated cronJob body is valid."
 					]
 				})
 			);

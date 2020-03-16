@@ -14,6 +14,9 @@ import { DeploymentEditPage } from "./DeploymentEditPage";
 import { ServicesPage } from "./ServicesPage";
 import { ServiceEditPage } from "./ServiceEditPage";
 import { JobsPage } from "./JobsPage";
+import { JobEditPage } from "./JobEditPage";
+import { CronJobsPage } from "./CronJobsPage";
+import { CronJobEditPage } from "./CronJobEditPage";
 import { SecretsPage } from "./SecretsPage";
 import { SecretAddPage } from "./SecretAddPage";
 import { SecretEditPage } from "./SecretEditPage";
@@ -152,6 +155,18 @@ class Skeleton extends Component {
 				editResourceName: resourceName,
 				sidebarOptionSelected: 14
 			});
+		} else if (resourceType === "CRON_JOB") {
+			this.setState({
+				...this.state,
+				editResourceName: resourceName,
+				sidebarOptionSelected: 16
+			});
+		} else if (resourceType === "JOB") {
+			this.setState({
+				...this.state,
+				editResourceName: resourceName,
+				sidebarOptionSelected: 15
+			});
 		}
 	}
 
@@ -265,11 +280,9 @@ class Skeleton extends Component {
 															Namespace
 														</button>
 														<span
-															className="close"
+															className="close fa fa-times"
 															onClick={close}
-														>
-															X
-														</span>
+														></span>
 													</div>
 												)}
 											</Popup>
@@ -321,26 +334,12 @@ class Skeleton extends Component {
 										onChange={event =>
 											this.handleNamespaceChange(event)
 										}
+										defaultValue="default"
 									>
 										{/* Populates options of namespaces */}
 										{this.state.namespacesListSet &&
 											this.state.namespacesList.map(
 												namespace => {
-													if (namespace === "default")
-														return (
-															<option
-																value={
-																	namespace
-																}
-																key={
-																	namespace +
-																	"_NAMESPACE"
-																}
-																selected
-															>
-																{namespace}
-															</option>
-														);
 													return (
 														<option
 															value={namespace}
@@ -446,6 +445,24 @@ class Skeleton extends Component {
 						{this.state.sidebarOptionSelected === 5 && (
 							<JobsPage
 								namespace={this.state.namespaceSelected}
+								renderEditPage={(resourceType, resourceName) =>
+									this.renderResourceEditPage(
+										resourceType,
+										resourceName
+									)
+								}
+							/>
+						)}
+
+						{this.state.sidebarOptionSelected === 6 && (
+							<CronJobsPage
+								namespace={this.state.namespaceSelected}
+								renderEditPage={(resourceType, resourceName) =>
+									this.renderResourceEditPage(
+										resourceType,
+										resourceName
+									)
+								}
 							/>
 						)}
 
@@ -506,6 +523,21 @@ class Skeleton extends Component {
 								resourceName={this.state.editResourceName}
 							/>
 						)}
+
+						{this.state.sidebarOptionSelected === 15 && (
+							<JobEditPage
+								namespace={this.state.namespaceSelected}
+								resourceName={this.state.editResourceName}
+							/>
+						)}
+
+						{this.state.sidebarOptionSelected === 16 && (
+							<CronJobEditPage
+								namespace={this.state.namespaceSelected}
+								resourceName={this.state.editResourceName}
+							/>
+						)}
+
 						{this.state.sidebarOptionSelected === 17 && (
 							<ConfigMapEditPage
 								namespace={this.state.namespaceSelected}
