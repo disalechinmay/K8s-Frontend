@@ -68,7 +68,15 @@ class PodCard extends Component {
 							<span className="flex flex-row title mw-80 flex-start">
 								<span className="fa fa-lastfm" />
 								&emsp;
-								<span>{this.props.podInfo.podName}</span>
+								{(this.props.podInfo.podStatus !==
+									"Running" && (
+									<div>
+										<span className="not-running">
+											{this.props.podInfo.podName}
+										</span>
+										<span className="fa fa-exclamation-triangle fa-xs" />
+									</div>
+								)) || <span>{this.props.podInfo.podName}</span>}
 								{this.state.exposures &&
 									this.state.exposures.length !== 0 && (
 										<span className="live-icon">
