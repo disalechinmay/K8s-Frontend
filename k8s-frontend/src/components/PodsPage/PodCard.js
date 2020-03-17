@@ -59,6 +59,11 @@ class PodCard extends Component {
 					effect="solid"
 					border={true}
 				/>
+				<ReactTooltip
+					id="notRunningPodTooltip"
+					effect="solid"
+					border={true}
+				/>
 
 				<div className="card flex flex-column">
 					{/* Card Header */}
@@ -70,7 +75,10 @@ class PodCard extends Component {
 								&emsp;
 								{(this.props.podInfo.podStatus !==
 									"Running" && (
-									<div>
+									<div
+										data-tip="Not running"
+										data-for="notRunningPodTooltip"
+									>
 										<span className="not-running">
 											{this.props.podInfo.podName}
 										</span>
