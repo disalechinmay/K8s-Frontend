@@ -8,7 +8,13 @@ export {
 	createPod,
 	patchPod
 } from "./pods";
-export { getDeployments, getDeployment, patchDeployment } from "./deployments";
+export {
+	getDeployments,
+	getDeployment,
+	patchDeployment,
+	createDeployment,
+	deleteDeployment
+} from "./deployments";
 export { getServices, getService, patchService } from "./services";
 export {
 	getCronJobs,

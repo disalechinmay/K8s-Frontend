@@ -117,6 +117,7 @@ class DeploymentsPage extends Component {
 						return (
 							<React.Fragment key={index + "_FRAG"}>
 								<DeploymentCard
+									namespace={this.props.namespace}
 									key={index + "_DEPLOYMENT_CARD"}
 									index={index}
 									deploymentInfo={deploymentInfo}

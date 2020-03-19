@@ -97,6 +97,19 @@ class ServicesPage extends Component {
 
 		return (
 			<React.Fragment>
+				<div className="add-resource-section">
+					<span className="message">
+						<span className="logo fa fa-info" />
+						Services connect workloads with each other.
+					</span>
+					<button
+						className="add-resource-button"
+						onClick={() => this.props.renderAddPage("SERVICE")}
+					>
+						+ Create new service
+					</button>
+				</div>
+
 				{/* Map servicesList if it is set. */}
 				{this.state.servicesListSet &&
 					this.state.servicesList.map((serviceInfo, index) => {

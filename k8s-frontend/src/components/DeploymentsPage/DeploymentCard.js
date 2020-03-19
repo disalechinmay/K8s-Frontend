@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { CardLabels, CardContainerList } from "../common";
 import ReactTooltip from "react-tooltip";
+import { deleteDeployment } from "../../services";
+import { withSnackbar } from "notistack";
 
 /* 
 	Compulsory props:
@@ -74,6 +76,37 @@ class DeploymentCard extends Component {
 										data-tip="Delete resource"
 										data-for="deleteResourceTooltip"
 										className="resource-delete-button fa fa-trash"
+										onClick={() =>
+											deleteDeployment(
+												this.props.namespace,
+												this.props.deploymentInfo
+													.deploymentName
+											)
+												.then(() =>
+													this.props.enqueueSnackbar(
+														"Deployment '" +
+															this.props
+																.deploymentInfo
+																.deploymentName +
+															"' is scheduled to be deleted. Refresh the page to check if deletion has completed.",
+														{
+															variant: "success"
+														}
+													)
+												)
+												.catch(error =>
+													this.props.enqueueSnackbar(
+														"Something went wrong while deleting deployment '" +
+															this.props
+																.deploymentInfo
+																.deploymentName +
+															"'.",
+														{
+															variant: "error"
+														}
+													)
+												)
+										}
 									/>
 									<span
 										data-tip="Edit resource"
@@ -207,4 +240,4 @@ class DeploymentCard extends Component {
 	}
 }
 
-export default DeploymentCard;
+export default withSnackbar(DeploymentCard);

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 
 class ExpandableComponent extends Component {
+	state = {};
+
 	setStyle(key) {
 		let res = this.props.resourceVars.some(
 			element =>

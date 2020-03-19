@@ -123,3 +123,90 @@ export function patchDeployment(namespace, resourceName, body) {
 			);
 	});
 }
+
+// Makes a call to the backend and creates the target resource.
+export function createDeployment(
+	namespace,
+	resourceName,
+	deploymentImage,
+	deploymentVars,
+	deploymentReplicas
+) {
+	return new Promise((resolve, reject) => {
+		axios
+			.post(API_LOCATION + "/deployment", {
+				namespace,
+				deploymentName: resourceName,
+				deploymentImage,
+				deploymentVars,
+				deploymentReplicas
+			})
+			.then(result => result.data)
+			.then(result => {
+				if (result.status === "FAILURE")
+					reject({
+						rawError: result.payLoad,
+						errorDescription:
+							"Something went wrong while creating deployment '" +
+							resourceName +
+							"'' of '" +
+							namespace +
+							"' namespace!",
+						errorSuggestions: [
+							"Make sure the backend service is up and running.",
+							"Make sure the endpoint being accessed is valid.",
+							"Make sure target resource name and namespace is valid.",
+							"Make sure the deployment body is valid."
+						]
+					});
+				resolve(result);
+			})
+			.catch(error =>
+				reject({
+					rawError: error,
+					errorDescription:
+						"Something went wrong while creating deployment '" +
+						resourceName +
+						"' of '" +
+						namespace +
+						"' namespace!",
+					errorSuggestions: [
+						"Make sure the backend service is up and running.",
+						"Make sure the endpoint being accessed is valid.",
+						"Make sure target resource name and namespace is valid.",
+						"Make sure the deployment body is valid."
+					]
+				})
+			);
+	});
+}
+
+// Makes a call to the backend and deletes a deployment in a namespace.
+export function deleteDeployment(namespace, deploymentName) {
+	return new Promise((resolve, reject) => {
+		axios
+			.delete(API_LOCATION + "/deployment", {
+				data: {
+					namespace,
+					deploymentName
+				}
+			})
+			.then(result => result.data)
+			.then(result => resolve(result))
+			.catch(error =>
+				reject({
+					errorDescription:
+						"Something went wrong while deleting deployment with name " +
+						deploymentName +
+						" in '" +
+						namespace +
+						"' namespace!",
+					errorSuggestions: [
+						"Make sure the backend service is up and running.",
+						"Make sure the namespace is correct.",
+						"Make sure the deployment name is correct."
+					]
+				})
+			);
+	});
+}
