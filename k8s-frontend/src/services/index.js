@@ -15,7 +15,13 @@ export {
 	createDeployment,
 	deleteDeployment
 } from "./deployments";
-export { getServices, getService, patchService } from "./services";
+export {
+	getServices,
+	getService,
+	patchService,
+	createService,
+	deleteService
+} from "./services";
 export {
 	getCronJobs,
 	getCronJob,

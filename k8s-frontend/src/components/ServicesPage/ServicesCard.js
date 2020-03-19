@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { CardLabels } from "../common";
 import ReactTooltip from "react-tooltip";
+import { deleteService } from "../../services";
+import { withSnackbar } from "notistack";
 
 /* 
 	Compulsory props:
@@ -70,6 +72,37 @@ class ServiceCard extends Component {
 										data-tip="Delete resource"
 										data-for="deleteResourceTooltip"
 										className="resource-delete-button fa fa-trash"
+										onClick={() =>
+											deleteService(
+												this.props.namespace,
+												this.props.serviceInfo
+													.serviceName
+											)
+												.then(() =>
+													this.props.enqueueSnackbar(
+														"Service '" +
+															this.props
+																.serviceInfo
+																.serviceName +
+															"' is scheduled to be deleted. Refresh the page to check if deletion has completed.",
+														{
+															variant: "success"
+														}
+													)
+												)
+												.catch(error =>
+													this.props.enqueueSnackbar(
+														"Something went wrong while deleting service '" +
+															this.props
+																.serviceInfo
+																.serviceName +
+															"'.",
+														{
+															variant: "error"
+														}
+													)
+												)
+										}
 									/>
 									<span
 										data-tip="Edit resource"
@@ -205,4 +238,4 @@ class ServiceCard extends Component {
 	}
 }
 
-export default ServiceCard;
+export default withSnackbar(ServiceCard);

@@ -126,6 +126,7 @@ class DeploymentSelectPage extends Component {
 					}}
 					selectableRowSelected={row => {
 						if (
+							this.props.targetDeployments &&
 							this.props.targetDeployments.includes(
 								row.deployment
 							)

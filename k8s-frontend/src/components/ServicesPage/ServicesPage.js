@@ -116,6 +116,7 @@ class ServicesPage extends Component {
 						return (
 							<React.Fragment key={index + "_FRAG"}>
 								<ServiceCard
+									namespace={this.props.namespace}
 									key={index + "_SERVICE_CARD"}
 									index={index}
 									serviceInfo={serviceInfo}

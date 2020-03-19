@@ -4,6 +4,7 @@ import ResourceNamePage from "./ResourceNamePage";
 import KeyValPage from "./KeyValPage";
 import DeploymentSelectPage from "./DeploymentSelectPage";
 import ApplyPage from "./Apply";
+import ServiceTypePage from "./ServiceTypePage";
 /*
 	What should this component do?
 		1. Accept resource name
@@ -21,10 +22,11 @@ import ApplyPage from "./Apply";
 class ServiceAddPage extends Component {
 	state = {
 		currentPage: 1,
-		totalPages: 5,
+		totalPages: 6,
 		resourceName: "",
 		resourceData: [],
-		targetDeployments: []
+		targetDeployments: [],
+		serviceType: ""
 	};
 	_isMounted = false;
 
@@ -69,6 +71,11 @@ class ServiceAddPage extends Component {
 			this.setState({ ...this.state, targetDeployments: deployments });
 	}
 
+	setServiceType(type) {
+		if (this._isMounted)
+			this.setState({ ...this.state, serviceType: type });
+	}
+
 	render() {
 		return (
 			<React.Fragment>
@@ -111,10 +118,21 @@ class ServiceAddPage extends Component {
 					)}
 
 					{this.state.currentPage === 5 && (
+						<ServiceTypePage
+							serviceType={this.state.serviceType}
+							renderNextPage={() => this.renderNextPage()}
+							renderPreviousPage={() => this.renderPreviousPage()}
+							setServiceType={type => this.setServiceType(type)}
+						/>
+					)}
+
+					{this.state.currentPage === 6 && (
 						<ApplyPage
 							namespace={this.props.namespace}
 							resourceName={this.state.resourceName}
 							resourceData={this.state.resourceData}
+							targetDeployments={this.state.targetDeployments}
+							serviceType={this.state.serviceType}
 							renderPreviousPage={() => this.renderPreviousPage()}
 						/>
 					)}

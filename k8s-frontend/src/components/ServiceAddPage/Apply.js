@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { createSecret } from "../../services";
+import { createService } from "../../services";
 
 class ApplyPage extends Component {
 	state = { informationPane: "", errorSet: false, successSet: false };
@@ -84,10 +84,12 @@ class ApplyPage extends Component {
 					<span
 						className="button-positive"
 						onClick={() => {
-							createSecret(
+							createService(
 								this.props.namespace,
 								this.props.resourceName,
-								this.props.resourceData
+								this.props.resourceData,
+								this.props.targetDeployments,
+								this.props.serviceType
 							)
 								.then(result => {
 									this.setState({
