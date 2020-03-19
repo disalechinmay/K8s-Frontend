@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import SmallLoadingPage from "../common/SmallLoadingPage";
-import { getCronJobs, getCronjob, deleteCronJob } from "../../services";
+import { getCronJobs } from "../../services";
 import CronJobCard from "./CronJobCard";
 
 class CronJobsPage extends Component {

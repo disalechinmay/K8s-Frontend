@@ -79,7 +79,7 @@ class PodCard extends Component {
 									&emsp;
 									{(this.props.podInfo.podStatus !==
 										"Running" && (
-										<div
+										<span
 											data-tip="Not running"
 											data-for="notRunningPodTooltip"
 										>
@@ -87,7 +87,7 @@ class PodCard extends Component {
 												{this.props.podInfo.podName}
 											</span>
 											<span className="fa fa-exclamation-triangle fa-xs" />
-										</div>
+										</span>
 									)) || (
 										<span>
 											{this.props.podInfo.podName}
@@ -179,47 +179,42 @@ class PodCard extends Component {
 								<span className="resource-manage-section">
 									<span className="fa fa-bars floaty-button" />
 									<span className="buttons">
-										{this.props.podInfo.podStatus ===
-											"Running" && (
-											<span
-												data-tip="Delete resource"
-												data-for="deleteResourceTooltip"
-												className="resource-delete-button fa fa-trash"
-												onClick={() =>
-													deletePod(
-														this.props.namespace,
-														this.props.podInfo
-															.podName
+										<span
+											data-tip="Delete resource"
+											data-for="deleteResourceTooltip"
+											className="resource-delete-button fa fa-trash"
+											onClick={() =>
+												deletePod(
+													this.props.namespace,
+													this.props.podInfo.podName
+												)
+													.then(() =>
+														this.props.enqueueSnackbar(
+															"Pod '" +
+																this.props
+																	.podInfo
+																	.podName +
+																"' is scheduled to be deleted. Refresh the page to check if deletion has completed.",
+															{
+																variant:
+																	"success"
+															}
+														)
 													)
-														.then(() =>
-															this.props.enqueueSnackbar(
-																"Pod '" +
-																	this.props
-																		.podInfo
-																		.podName +
-																	"' is scheduled to be deleted. Refresh the page to check if deletion has completed.",
-																{
-																	variant:
-																		"success"
-																}
-															)
+													.catch(error =>
+														this.props.enqueueSnackbar(
+															"Something went wrong while deleting pod '" +
+																this.props
+																	.podInfo
+																	.podName +
+																"'.",
+															{
+																variant: "error"
+															}
 														)
-														.catch(error =>
-															this.props.enqueueSnackbar(
-																"Something went wrong while deleting pod '" +
-																	this.props
-																		.podInfo
-																		.podName +
-																	"'.",
-																{
-																	variant:
-																		"error"
-																}
-															)
-														)
-												}
-											/>
-										)}
+													)
+											}
+										/>
 
 										<span
 											data-tip="Edit resource"

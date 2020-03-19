@@ -123,3 +123,90 @@ export function patchService(namespace, resourceName, body) {
 			);
 	});
 }
+
+// Makes a call to the backend and creates the target resource.
+export function createService(
+	namespace,
+	resourceName,
+	portMappings,
+	targetDeployments,
+	serviceType
+) {
+	return new Promise((resolve, reject) => {
+		axios
+			.post(API_LOCATION + "/service", {
+				namespace,
+				serviceName: resourceName,
+				portMappings,
+				targetDeployments,
+				serviceType
+			})
+			.then(result => result.data)
+			.then(result => {
+				if (result.status === "FAILURE")
+					reject({
+						rawError: result.payLoad,
+						errorDescription:
+							"Something went wrong while creating service '" +
+							resourceName +
+							"'' of '" +
+							namespace +
+							"' namespace!",
+						errorSuggestions: [
+							"Make sure the backend service is up and running.",
+							"Make sure the endpoint being accessed is valid.",
+							"Make sure target resource name and namespace is valid.",
+							"Make sure the service body is valid."
+						]
+					});
+				resolve(result);
+			})
+			.catch(error =>
+				reject({
+					rawError: error,
+					errorDescription:
+						"Something went wrong while creating service '" +
+						resourceName +
+						"' of '" +
+						namespace +
+						"' namespace!",
+					errorSuggestions: [
+						"Make sure the backend service is up and running.",
+						"Make sure the endpoint being accessed is valid.",
+						"Make sure target resource name and namespace is valid.",
+						"Make sure the service body is valid."
+					]
+				})
+			);
+	});
+}
+
+// Makes a call to the backend and deletes a service in a namespace.
+export function deleteService(namespace, serviceName) {
+	return new Promise((resolve, reject) => {
+		axios
+			.delete(API_LOCATION + "/service", {
+				data: {
+					namespace,
+					serviceName
+				}
+			})
+			.then(result => result.data)
+			.then(result => resolve(result))
+			.catch(error =>
+				reject({
+					errorDescription:
+						"Something went wrong while service deployment with name " +
+						serviceName +
+						" in '" +
+						namespace +
+						"' namespace!",
+					errorSuggestions: [
+						"Make sure the backend service is up and running.",
+						"Make sure the namespace is correct.",
+						"Make sure the service name is correct."
+					]
+				})
+			);
+	});
+}

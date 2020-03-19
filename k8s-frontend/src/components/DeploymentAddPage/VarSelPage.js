@@ -91,12 +91,7 @@ class VarSelPage extends Component {
 				name: "Title",
 				selector: "title",
 				sortable: true,
-				expandOnRowClicked: false,
-				expandableRowExpanded: row => {
-					console.log("YEET");
-					console.log(row);
-					return true;
-				}
+				expandOnRowClicked: false
 			}
 		];
 	}
@@ -149,7 +144,7 @@ class VarSelPage extends Component {
 			<React.Fragment>
 				<span className="message">
 					Select the environment variables you wish to attach to this
-					pod:
+					deployment:
 				</span>
 				<br />
 
@@ -162,13 +157,9 @@ class VarSelPage extends Component {
 					expandableRowsComponent={
 						<ExpandableComponent
 							resourceVars={this.state.resourceVars}
-							setResourceVars={data => {
-								this.setState({
-									...this.state,
-									resourceVars: data
-								});
-								this.props.setResourceVars(data);
-							}}
+							setResourceVars={data =>
+								this.props.setResourceVars(data)
+							}
 						/>
 					}
 					expandableRowExpanded={row => {
@@ -243,10 +234,6 @@ class VarSelPage extends Component {
 					<span
 						className="button-negative"
 						onClick={async () => {
-							await this.props.setResourceVars(
-								this.state.resourceVars
-							);
-
 							this.props.renderPreviousPage();
 						}}
 					>
@@ -256,9 +243,6 @@ class VarSelPage extends Component {
 					<span
 						className="button-positive"
 						onClick={async () => {
-							await this.props.setResourceVars(
-								this.state.resourceVars
-							);
 							this.props.renderNextPage();
 						}}
 					>

@@ -110,3 +110,8 @@
 .chimney .add-resource-button {
 	color: black !important;
 }
+
+.crazy-big-no {
+	font-size: 4vw !important;
+	font-weight: bold;
+}

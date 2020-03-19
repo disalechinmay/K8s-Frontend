@@ -6,11 +6,13 @@ import { NodesPage } from "./NodesPage";
 import { PodsPage } from "./PodsPage";
 import { PodAddPage } from "./PodAddPage";
 import { PodEditPage } from "./PodEditPage";
+import { DeploymentAddPage } from "./DeploymentAddPage";
 import { DeploymentsPage } from "./DeploymentsPage";
 import { ConfigMapsPage } from "./ConfigMapsPage";
 import { ConfigMapAddPage } from "./ConfigMapAddPage";
 import { ConfigMapEditPage } from "./ConfigMapEditPage";
 import { DeploymentEditPage } from "./DeploymentEditPage";
+import { ServiceAddPage } from "./ServiceAddPage";
 import { ServicesPage } from "./ServicesPage";
 import { ServiceEditPage } from "./ServiceEditPage";
 import { JobsPage } from "./JobsPage";
@@ -185,7 +187,17 @@ class Skeleton extends Component {
 		} else if (resourceType === "POD") {
 			this.setState({
 				...this.state,
+				sidebarOptionSelected: 22
+			});
+		} else if (resourceType === "DEPLOYMENT") {
+			this.setState({
+				...this.state,
 				sidebarOptionSelected: 23
+			});
+		} else if (resourceType === "SERVICE") {
+			this.setState({
+				...this.state,
+				sidebarOptionSelected: 24
 			});
 		}
 	}
@@ -428,6 +440,9 @@ class Skeleton extends Component {
 									)
 								}
 								namespace={this.state.namespaceSelected}
+								renderAddPage={resourceType =>
+									this.renderResourceAddPage(resourceType)
+								}
 							/>
 						)}
 
@@ -440,6 +455,9 @@ class Skeleton extends Component {
 									)
 								}
 								namespace={this.state.namespaceSelected}
+								renderAddPage={resourceType =>
+									this.renderResourceAddPage(resourceType)
+								}
 							/>
 						)}
 						{this.state.sidebarOptionSelected === 5 && (
@@ -552,11 +570,24 @@ class Skeleton extends Component {
 							/>
 						)}
 
-						{this.state.sidebarOptionSelected === 23 && (
+						{this.state.sidebarOptionSelected === 22 && (
 							<PodAddPage
 								namespace={this.state.namespaceSelected}
 							/>
 						)}
+
+						{this.state.sidebarOptionSelected === 23 && (
+							<DeploymentAddPage
+								namespace={this.state.namespaceSelected}
+							/>
+						)}
+
+						{this.state.sidebarOptionSelected === 24 && (
+							<ServiceAddPage
+								namespace={this.state.namespaceSelected}
+							/>
+						)}
+
 						{this.state.sidebarOptionSelected === 27 && (
 							<ConfigMapAddPage
 								namespace={this.state.namespaceSelected}

@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { CardLabels, CardContainerList } from "../common";
 import ReactTooltip from "react-tooltip";
 import { deleteCronJob } from "../../services";
-import { Progress } from "react-sweet-progress";
 import "react-sweet-progress/lib/style.css";
 import { withSnackbar } from "notistack";
 import moment from "moment";
