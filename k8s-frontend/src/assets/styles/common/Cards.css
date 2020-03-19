@@ -254,6 +254,34 @@ hr {
 	}
 }
 
+.not-running {
+	color: red;
+}
+.lines {
+	/* width: 400px;
+	height: 200px;
+	margin: 100px auto;
+	border: 1px solid #ddd; */
+	align-content: center;
+	border-bottom: 1px solid rgba(127, 140, 141, 0.5);
+	color: #ecf0f1;
+	margin: 2% 1% 1% 2%;
+	padding: 1% 1% 2% 1%;
+	transition: 0.25s;
+	width: 90%;
+	max-width: 90%;
+	animation: 0.25s ease-out 0s 1 slideInFromLeft;
+	background-color: rgba(255, 255, 255, 0.04);
+	border-radius: 10px;
+
+	background-image: repeating-linear-gradient(
+		45deg,
+		#eee 10px,
+		#eee 12px,
+		transparent 12px,
+		transparent 20px
+	);
+}
 .not-found-card {
 	align-content: center;
 	border-bottom: 1px solid rgba(127, 140, 141, 0.5);
@@ -276,4 +304,9 @@ hr {
 .progress-bar {
 	min-width: 100px;
 	margin-top: 20px;
+}
+
+.title .fa-exclamation-triangle {
+	color: yellow;
+	padding: 7px;
 }
