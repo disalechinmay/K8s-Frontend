@@ -155,3 +155,58 @@ export function patchCronJob(namespace, resourceName, body) {
 			);
 	});
 }
+
+// Makes a call to the backend and creates the target resource.
+export function createCronJob(
+	namespace,
+	resourceName,
+	cronJobImage,
+	cronJobSchedule
+) {
+	return new Promise((resolve, reject) => {
+		axios
+			.post(API_LOCATION + "/cronjob", {
+				namespace,
+				cronJobName: resourceName,
+				cronJobImage,
+				cronJobSchedule
+			})
+			.then(result => result.data)
+			.then(result => {
+				if (result.status === "FAILURE")
+					reject({
+						rawError: result.payLoad,
+						errorDescription:
+							"Something went wrong while creating cron job '" +
+							resourceName +
+							"'' of '" +
+							namespace +
+							"' namespace!",
+						errorSuggestions: [
+							"Make sure the backend service is up and running.",
+							"Make sure the endpoint being accessed is valid.",
+							"Make sure target resource name and namespace is valid.",
+							"Make sure the cron job body is valid."
+						]
+					});
+				resolve(result);
+			})
+			.catch(error =>
+				reject({
+					rawError: error,
+					errorDescription:
+						"Something went wrong while creating cron job '" +
+						resourceName +
+						"' of '" +
+						namespace +
+						"' namespace!",
+					errorSuggestions: [
+						"Make sure the backend service is up and running.",
+						"Make sure the endpoint being accessed is valid.",
+						"Make sure target resource name and namespace is valid.",
+						"Make sure the cron job body is valid."
+					]
+				})
+			);
+	});
+}

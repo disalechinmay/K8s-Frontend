@@ -34,6 +34,7 @@ class VarSelPage extends Component {
 					let tempData = [];
 					for (let configMap of this.state.configMapsList) {
 						tempData.push({
+							type: "configMap",
 							title: configMap.configMapName,
 							description: configMap.configMapData
 						});
@@ -51,36 +52,35 @@ class VarSelPage extends Component {
 					});
 			});
 
-		// 	getSecrets(this.props.namespace)
-		// 		.then(result => {
-		// 			if (this._isMounted) {
-		// 				this.setState({
-		// 					...this.state,
-		// 					pageLoading: false,
-		// 					secretsListSet: true,
-		// 					secretsList: result.payLoad
-		// 				});
+		getSecrets(this.props.namespace)
+			.then(result => {
+				if (this._isMounted) {
+					this.setState({
+						...this.state,
+						pageLoading: false,
+						secretsListSet: true,
+						secretsList: result.payLoad
+					});
 
-		// 				let tempData = [...this.state.data];
-		// 				for (let secret of this.state.secretsList) {
-		// 					tempData.push({
-		// 						title: secret.secretName,
-		// 						description: secret.secretData
-		// 					});
-		// 				}
+					let tempData = [...this.state.data];
+					for (let secret of this.state.secretsList) {
+						tempData.push({
+							title: secret.secretName,
+							description: secret.secretData
+						});
+					}
 
-		// 				this.setState({ ...this.state, data: tempData });
-		// 			}
-		// 		})
-		// 		.catch(error => {
-		// 			if (this._isMounted)
-		// 				this.setState({
-		// 					...this.state,
-		// 					errorSet: true,
-		// 					errorDescription: error
-		// 				});
-		// 		});
-		//
+					this.setState({ ...this.state, data: tempData });
+				}
+			})
+			.catch(error => {
+				if (this._isMounted)
+					this.setState({
+						...this.state,
+						errorSet: true,
+						errorDescription: error
+					});
+			});
 	}
 
 	componentDidMount() {
@@ -174,6 +174,32 @@ class VarSelPage extends Component {
 					expandableRowExpanded={row => {
 						for (let obj of this.state.resourceVars)
 							if (row.title === obj.configMapName) return true;
+
+						return false;
+					}}
+				/>
+
+				<DataTable
+					title="Secrets"
+					columns={this.columns}
+					data={this.state.data}
+					theme="dark"
+					expandableRows
+					expandableRowsComponent={
+						<ExpandableComponent
+							resourceVars={this.state.resourceVars}
+							setResourceVars={data => {
+								this.setState({
+									...this.state,
+									resourceVars: data
+								});
+								this.props.setResourceVars(data);
+							}}
+						/>
+					}
+					expandableRowExpanded={row => {
+						for (let obj of this.state.resourceVars)
+							if (row.title === obj.secretName) return true;
 
 						return false;
 					}}

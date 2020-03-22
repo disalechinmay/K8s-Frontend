@@ -93,6 +93,18 @@ class CronJobsPage extends Component {
 
 		return (
 			<React.Fragment>
+				<div className="add-resource-section">
+					<span className="message">
+						<span className="logo fa fa-info" />
+						Cron Jobs are used to run Jobs on a time-based schedule.
+					</span>
+					<button
+						className="add-resource-button"
+						onClick={() => this.props.renderAddPage("CRON_JOB")}
+					>
+						+ Create new cron job
+					</button>
+				</div>
 				{this.state.jobsListSet &&
 					this.state.jobsList.map((jobInfo, index) => {
 						return (

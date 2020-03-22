@@ -104,6 +104,10 @@ class JobsCard extends Component {
 							</span>
 						</span>
 					</React.Fragment>
+					<span className="hidden">
+						{this.props.jobInfo.jobCurrentCompletions === null &&
+							(this.props.jobInfo.jobCurrentCompletions = 0)}
+					</span>
 
 					{/* Card Body */}
 					<div>
@@ -128,6 +132,7 @@ class JobsCard extends Component {
 								</span>
 								<br />
 							</span>
+
 							<ReactTooltip
 								id="progressStatus"
 								effect="solid"

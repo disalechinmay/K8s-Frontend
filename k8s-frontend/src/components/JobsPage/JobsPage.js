@@ -93,6 +93,19 @@ class JobsPage extends Component {
 
 		return (
 			<React.Fragment>
+				<div className="add-resource-section">
+					<span className="message">
+						<span className="logo fa fa-info" />
+						Jobs ensure that the specified number of pods are
+						completed successfully.
+					</span>
+					<button
+						className="add-resource-button"
+						onClick={() => this.props.renderAddPage("JOB")}
+					>
+						+ Create new job
+					</button>
+				</div>
 				{this.state.jobsListSet &&
 					this.state.jobsList.map((jobInfo, index) => {
 						return (

@@ -26,6 +26,8 @@ import { SearchBar, SearchPage } from "./SearchPage";
 import { SIDEBAR_OPTIONS } from "../configs";
 import Popup from "reactjs-popup";
 import { withSnackbar } from "notistack";
+import { JobAddPage } from "./JobAddPage";
+import { CronJobAddPage } from "./CronJobAddPage";
 
 class Skeleton extends Component {
 	state = {
@@ -198,6 +200,16 @@ class Skeleton extends Component {
 			this.setState({
 				...this.state,
 				sidebarOptionSelected: 24
+			});
+		} else if (resourceType === "JOB") {
+			this.setState({
+				...this.state,
+				sidebarOptionSelected: 25
+			});
+		} else if (resourceType === "CRON_JOB") {
+			this.setState({
+				...this.state,
+				sidebarOptionSelected: 26
 			});
 		}
 	}
@@ -469,6 +481,9 @@ class Skeleton extends Component {
 										resourceName
 									)
 								}
+								renderAddPage={resourceType =>
+									this.renderResourceAddPage(resourceType)
+								}
 							/>
 						)}
 
@@ -480,6 +495,9 @@ class Skeleton extends Component {
 										resourceType,
 										resourceName
 									)
+								}
+								renderAddPage={resourceType =>
+									this.renderResourceAddPage(resourceType)
 								}
 							/>
 						)}
@@ -587,7 +605,16 @@ class Skeleton extends Component {
 								namespace={this.state.namespaceSelected}
 							/>
 						)}
-
+						{this.state.sidebarOptionSelected === 25 && (
+							<JobAddPage
+								namespace={this.state.namespaceSelected}
+							/>
+						)}
+						{this.state.sidebarOptionSelected === 26 && (
+							<CronJobAddPage
+								namespace={this.state.namespaceSelected}
+							/>
+						)}
 						{this.state.sidebarOptionSelected === 27 && (
 							<ConfigMapAddPage
 								namespace={this.state.namespaceSelected}

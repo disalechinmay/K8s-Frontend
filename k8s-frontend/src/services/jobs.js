@@ -155,3 +155,53 @@ export function deleteJob(namespace, jobName) {
 			);
 	});
 }
+
+// Makes a call to the backend and creates the target resource.
+export function createJob(namespace, resourceName, jobImage, jobCompletions) {
+	return new Promise((resolve, reject) => {
+		axios
+			.post(API_LOCATION + "/job", {
+				namespace,
+				jobName: resourceName,
+				jobImage,
+				jobCompletions
+			})
+			.then(result => result.data)
+			.then(result => {
+				if (result.status === "FAILURE")
+					reject({
+						rawError: result.payLoad,
+						errorDescription:
+							"Something went wrong while creating job '" +
+							resourceName +
+							"'' of '" +
+							namespace +
+							"' namespace!",
+						errorSuggestions: [
+							"Make sure the backend service is up and running.",
+							"Make sure the endpoint being accessed is valid.",
+							"Make sure target resource name and namespace is valid.",
+							"Make sure the job body is valid."
+						]
+					});
+				resolve(result);
+			})
+			.catch(error =>
+				reject({
+					rawError: error,
+					errorDescription:
+						"Something went wrong while creating job '" +
+						resourceName +
+						"' of '" +
+						namespace +
+						"' namespace!",
+					errorSuggestions: [
+						"Make sure the backend service is up and running.",
+						"Make sure the endpoint being accessed is valid.",
+						"Make sure target resource name and namespace is valid.",
+						"Make sure the job body is valid."
+					]
+				})
+			);
+	});
+}
