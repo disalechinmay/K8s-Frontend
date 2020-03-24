@@ -310,3 +310,7 @@ hr {
 	color: yellow;
 	padding-left: 7px;
 }
+
+.hidden {
+	visibility: hidden;
+}

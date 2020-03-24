@@ -26,9 +26,10 @@ export {
 	getCronJobs,
 	getCronJob,
 	deleteCronJob,
-	patchCronJob
+	patchCronJob,
+	createCronJob
 } from "./cronjobs";
-export { getJobs, deleteJob, getJob, patchJob } from "./jobs";
+export { getJobs, deleteJob, getJob, patchJob, createJob } from "./jobs";
 export {
 	getConfigMaps,
 	getConfigMap,
