@@ -13,7 +13,8 @@ class VarSelPage extends Component {
 		resourceVars: [],
 		errorSet: false,
 		errorDescription: "",
-		data: []
+		data: [],
+		secretsData: []
 	};
 
 	_isMounted = false;
@@ -34,6 +35,7 @@ class VarSelPage extends Component {
 					let tempData = [];
 					for (let configMap of this.state.configMapsList) {
 						tempData.push({
+							type: "configMap",
 							title: configMap.configMapName,
 							description: configMap.configMapData
 						});
@@ -51,47 +53,53 @@ class VarSelPage extends Component {
 					});
 			});
 
-		// 	getSecrets(this.props.namespace)
-		// 		.then(result => {
-		// 			if (this._isMounted) {
-		// 				this.setState({
-		// 					...this.state,
-		// 					pageLoading: false,
-		// 					secretsListSet: true,
-		// 					secretsList: result.payLoad
-		// 				});
+		getSecrets(this.props.namespace)
+			.then(result => {
+				if (this._isMounted) {
+					this.setState({
+						...this.state,
+						pageLoading: false,
+						secretsListSet: true,
+						secretsList: result.payLoad
+					});
 
-		// 				let tempData = [...this.state.data];
-		// 				for (let secret of this.state.secretsList) {
-		// 					tempData.push({
-		// 						title: secret.secretName,
-		// 						description: secret.secretData
-		// 					});
-		// 				}
+					let tempData = [];
+					for (let secret of this.state.secretsList) {
+						tempData.push({
+							type: "secret",
+							title: secret.secretName,
+							description: secret.secretData
+						});
+					}
 
-		// 				this.setState({ ...this.state, data: tempData });
-		// 			}
-		// 		})
-		// 		.catch(error => {
-		// 			if (this._isMounted)
-		// 				this.setState({
-		// 					...this.state,
-		// 					errorSet: true,
-		// 					errorDescription: error
-		// 				});
-		// 		});
-		//
+					this.setState({ ...this.state, secretsData: tempData });
+				}
+			})
+			.catch(error => {
+				if (this._isMounted)
+					this.setState({
+						...this.state,
+						errorSet: true,
+						errorDescription: error
+					});
+			});
 	}
 
 	componentDidMount() {
 		this._isMounted = true;
 		this.getNewData();
+
 		this.columns = [
 			{
 				name: "Title",
 				selector: "title",
 				sortable: true,
-				expandOnRowClicked: false
+				expandOnRowClicked: false,
+				expandableRowExpanded: row => {
+					console.log("YEET");
+					console.log(row);
+					return true;
+				}
 			}
 		];
 	}
@@ -144,7 +152,7 @@ class VarSelPage extends Component {
 			<React.Fragment>
 				<span className="message">
 					Select the environment variables you wish to attach to this
-					deployment:
+					pod:
 				</span>
 				<br />
 
@@ -157,14 +165,44 @@ class VarSelPage extends Component {
 					expandableRowsComponent={
 						<ExpandableComponent
 							resourceVars={this.state.resourceVars}
-							setResourceVars={data =>
-								this.props.setResourceVars(data)
-							}
+							setResourceVars={data => {
+								this.setState({
+									...this.state,
+									resourceVars: data
+								});
+								this.props.setResourceVars(data);
+							}}
 						/>
 					}
 					expandableRowExpanded={row => {
 						for (let obj of this.state.resourceVars)
 							if (row.title === obj.configMapName) return true;
+
+						return false;
+					}}
+				/>
+
+				<DataTable
+					title="Secrets"
+					columns={this.columns}
+					data={this.state.secretsData}
+					theme="dark"
+					expandableRows
+					expandableRowsComponent={
+						<ExpandableComponent
+							resourceVars={this.state.resourceVars}
+							setResourceVars={data => {
+								this.setState({
+									...this.state,
+									resourceVars: data
+								});
+								this.props.setResourceVars(data);
+							}}
+						/>
+					}
+					expandableRowExpanded={row => {
+						for (let obj of this.state.resourceVars)
+							if (row.title === obj.secretName) return true;
 
 						return false;
 					}}
@@ -234,6 +272,10 @@ class VarSelPage extends Component {
 					<span
 						className="button-negative"
 						onClick={async () => {
+							await this.props.setResourceVars(
+								this.state.resourceVars
+							);
+
 							this.props.renderPreviousPage();
 						}}
 					>
@@ -243,6 +285,9 @@ class VarSelPage extends Component {
 					<span
 						className="button-positive"
 						onClick={async () => {
+							await this.props.setResourceVars(
+								this.state.resourceVars
+							);
 							this.props.renderNextPage();
 						}}
 					>
