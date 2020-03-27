@@ -88,6 +88,18 @@ class ServicesPage extends Component {
 		)
 			return (
 				<React.Fragment>
+					<div className="add-resource-section">
+						<span className="message">
+							<span className="logo fa fa-info" />
+							Services connect workloads with each other.
+						</span>
+						<button
+							className="add-resource-button"
+							onClick={() => this.props.renderAddPage("SERVICE")}
+						>
+							+ Create new service
+						</button>
+					</div>
 					<span className="not-found-card">
 						<span className="fa fa-exclamation-triangle" />
 						&emsp; No services present in this namespace.

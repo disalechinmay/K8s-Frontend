@@ -84,6 +84,19 @@ class JobsPage extends Component {
 		)
 			return (
 				<React.Fragment>
+					<div className="add-resource-section">
+						<span className="message">
+							<span className="logo fa fa-info" />
+							Jobs ensure that the specified number of pods are
+							completed successfully.
+						</span>
+						<button
+							className="add-resource-button"
+							onClick={() => this.props.renderAddPage("JOB")}
+						>
+							+ Create new job
+						</button>
+					</div>
 					<span className="not-found-card">
 						<span className="fa fa-exclamation-triangle" />
 						&emsp; No jobs present in this namespace.

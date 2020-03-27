@@ -153,6 +153,7 @@ export function getPodExposure(namespace, podName) {
 // Makes a call to the backend and creates the target resource.
 export function createPod(namespace, resourceName, podImage, podVars) {
 	return new Promise((resolve, reject) => {
+		console.log(podVars);
 		axios
 			.post(API_LOCATION + "/pod", {
 				namespace,

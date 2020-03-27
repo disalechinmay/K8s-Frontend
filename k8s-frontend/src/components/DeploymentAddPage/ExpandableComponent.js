@@ -1,17 +1,26 @@
 import React, { Component } from "react";
 
 class ExpandableComponent extends Component {
-	state = {};
-
 	setStyle(key) {
-		let res = this.props.resourceVars.some(
-			element =>
-				element.configMapName === this.props.data.title &&
-				key === element.variable
-		);
+		if (this.props.data.type === "configMap") {
+			let res = this.props.resourceVars.some(
+				element =>
+					element.configMapName === this.props.data.title &&
+					key === element.variable
+			);
 
-		if (res) return "key selected";
-		return "key";
+			if (res) return "key selected";
+			return "key";
+		} else if (this.props.data.type === "secret") {
+			let res = this.props.resourceVars.some(
+				element =>
+					element.secretName === this.props.data.title &&
+					key === element.variable
+			);
+
+			if (res) return "key selected";
+			return "key";
+		}
 	}
 
 	render() {
@@ -35,11 +44,26 @@ class ExpandableComponent extends Component {
 
 											let resourceVars = this.props
 												.resourceVars;
-											resourceVars.push({
-												configMapName: this.props.data
-													.title,
-												variable: key
-											});
+
+											if (
+												this.props.data.type ===
+												"configMap"
+											) {
+												resourceVars.push({
+													configMapName: this.props
+														.data.title,
+													variable: key
+												});
+											} else if (
+												this.props.data.type ===
+												"secret"
+											) {
+												resourceVars.push({
+													secretName: this.props.data
+														.title,
+													variable: key
+												});
+											}
 											// this.setState({
 											// 	...this.state,
 											// 	resourceVars

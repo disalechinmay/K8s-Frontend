@@ -89,6 +89,19 @@ class SecretsPage extends Component {
 		)
 			return (
 				<React.Fragment>
+					<div className="add-resource-section">
+						<span className="message">
+							<span className="logo fa fa-info" />
+							Secrets allow you to store sensitive environment
+							variables in an encrypted format.
+						</span>
+						<button
+							className="add-resource-button"
+							onClick={() => this.props.renderAddPage("SECRET")}
+						>
+							+ Create new secret
+						</button>
+					</div>
 					<span className="not-found-card">
 						<span className="fa fa-exclamation-triangle" />
 						&emsp; No secrets present in this namespace.

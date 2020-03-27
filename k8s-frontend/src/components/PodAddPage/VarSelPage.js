@@ -13,7 +13,8 @@ class VarSelPage extends Component {
 		resourceVars: [],
 		errorSet: false,
 		errorDescription: "",
-		data: []
+		data: [],
+		secretsData: []
 	};
 
 	_isMounted = false;
@@ -62,15 +63,16 @@ class VarSelPage extends Component {
 						secretsList: result.payLoad
 					});
 
-					let tempData = [...this.state.data];
+					let tempData = [];
 					for (let secret of this.state.secretsList) {
 						tempData.push({
+							type: "secret",
 							title: secret.secretName,
 							description: secret.secretData
 						});
 					}
 
-					this.setState({ ...this.state, data: tempData });
+					this.setState({ ...this.state, secretsData: tempData });
 				}
 			})
 			.catch(error => {
@@ -86,6 +88,7 @@ class VarSelPage extends Component {
 	componentDidMount() {
 		this._isMounted = true;
 		this.getNewData();
+
 		this.columns = [
 			{
 				name: "Title",
@@ -182,7 +185,7 @@ class VarSelPage extends Component {
 				<DataTable
 					title="Secrets"
 					columns={this.columns}
-					data={this.state.data}
+					data={this.state.secretsData}
 					theme="dark"
 					expandableRows
 					expandableRowsComponent={
