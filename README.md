@@ -1,2 +1,3 @@
-# K8s-Frontend
-A ReactJS frontend for K8s project.
+## A simple GUI for Kubernetes
+
+The backend repo is 👉 https://github.com/disalechinmay/K8s-Backend
